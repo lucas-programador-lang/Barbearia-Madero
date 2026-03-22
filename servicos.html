@@ -44,7 +44,7 @@
                         <span class="price">R$ 155,00</span>
                         <span class="time"><i class="far fa-clock"></i> 120 min</span>
                     </div>
-                    <button class="btn-book" onclick="openBooking('Corte + Barba + Selagem + Sobrancelha')">Agendar</button>
+                    <button class="btn-book" onclick="openBooking('Combo Master Madero')">Agendar</button>
                 </div>
                 
                 <div class="service-card">
@@ -53,8 +53,9 @@
                         <span class="price">R$ 40,00</span>
                         <span class="time"><i class="far fa-clock"></i> 45 min</span>
                     </div>
-                    <button class="btn-book" onclick="openBooking('Corte')">Agendar</button>
+                    <button class="btn-book" onclick="openBooking('Corte (Degradê/Social)')">Agendar</button>
                 </div>
+
                 </div>
         </div>
     </section>
@@ -64,24 +65,22 @@
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
             <div class="booking-header">
-                <h3 id="selectedServiceName">Serviço</h3>
-                <p id="currentMonthYear">Março/Abril 2026</p>
+                <h3 id="selectedServiceName" style="color: var(--gold); font-family: 'Cinzel', serif;">Serviço</h3>
+                <p id="currentMonthYear" style="font-size: 0.8rem; opacity: 0.7; text-transform: uppercase;">Março 2026</p>
             </div>
 
             <div class="calendar-strip">
-                <button class="cal-nav"><i class="fas fa-chevron-left"></i></button>
                 <div class="days-container">
-                    <div class="day-item"><span>Dom</span><strong>29</strong></div>
-                    <div class="day-item active"><span>Seg</span><strong>30</strong></div>
-                    <div class="day-item"><span>Ter</span><strong>31</strong></div>
-                    <div class="day-item"><span>Qua</span><strong>01</strong></div>
-                    <div class="day-item"><span>Qui</span><strong>02</strong></div>
+                    <div class="day-item"><span>Dom</span><strong>22</strong></div>
+                    <div class="day-item active"><span>Seg</span><strong>23</strong></div>
+                    <div class="day-item"><span>Ter</span><strong>24</strong></div>
+                    <div class="day-item"><span>Qua</span><strong>25</strong></div>
+                    <div class="day-item"><span>Qui</span><strong>26</strong></div>
                 </div>
-                <button class="cal-nav"><i class="fas fa-chevron-right"></i></button>
             </div>
 
             <div class="prof-selection">
-                <h4>Selecione um profissional</h4>
+                <h4 style="text-align: center; font-size: 0.8rem; margin-bottom: 20px; opacity: 0.8;">Selecione um profissional</h4>
                 <div class="prof-circles">
                     <div class="prof-item" onclick="selectProf(this)">
                         <img src="joao.jpg" alt="João">
@@ -94,33 +93,48 @@
                 </div>
             </div>
 
-            <div class="booking-footer">
-                <p><i class="far fa-clock"></i> Escolha um profissional para ver horários</p>
+            <div class="booking-footer" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p id="statusMessage"><i class="far fa-clock"></i> Escolha um profissional para ver horários</p>
             </div>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            <div class="social-icons">
+            <div class="social-icons" style="margin-bottom: 20px;">
                 <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p>© 2026 Barbearia Madero | Porto Velho - RO</p>
+            <p style="opacity: 0.6; font-size: 0.8rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
         </div>
     </footer>
 
     <script>
+        const modal = document.getElementById('bookingModal');
+
         function openBooking(serviceName) {
             document.getElementById('selectedServiceName').innerText = serviceName;
-            document.getElementById('bookingModal').style.display = 'flex';
+            modal.style.display = 'flex';
         }
+
         function closeBooking() {
-            document.getElementById('bookingModal').style.display = 'none';
+            modal.style.display = 'none';
         }
+
         function selectProf(element) {
             document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
             element.classList.add('active');
+            
+            // Simulação de mudança de status
+            const nome = element.querySelector('span').innerText;
+            document.getElementById('statusMessage').innerHTML = `<i class="fas fa-check-circle" style="color: var(--gold)"></i> Horários disponíveis para ${nome}`;
+        }
+
+        // Fechar ao clicar fora do modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeBooking();
+            }
         }
     </script>
 </body>
