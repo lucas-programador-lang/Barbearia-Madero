@@ -53,6 +53,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 5px;
+            max-width: 300px;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -103,19 +104,12 @@
 
         .prof-item.active span { color: var(--gold); }
 
-        /* --- MODAL E CARDS --- */
         .modal-content {
             max-width: 450px;
             max-height: 90vh;
             overflow-y: auto;
             background: #0a0c0b;
             border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .service-card.highlight {
-            border: 2px solid var(--gold);
-            background: linear-gradient(145deg, var(--bg-card), #1a1f1d);
-            transform: scale(1.02);
         }
 
         @media (max-width: 480px) {
@@ -149,7 +143,7 @@
 
     <section class="page-header">
         <div class="container">
-            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.8rem; letter-spacing: 2px;">Serviços</h2>
+            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.8rem; letter-spacing: 2px;">Nossos Serviços</h2>
             <div style="width: 60px; height: 3px; background: var(--gold); margin: 15px auto;"></div>
             <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">Técnicas clássicas com um toque moderno para o homem que não abre mão da excelência.</p>
         </div>
@@ -166,7 +160,7 @@
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
             <div class="booking-header" style="text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 15px; margin-bottom: 20px;">
-                <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem;">Serviço</h3>
+                <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem;">AGENDAMENTO</h3>
                 <p style="font-size: 0.65rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Porto Velho | RO</p>
             </div>
 
@@ -175,13 +169,7 @@
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <div class="days-container" id="daysContainer">
-                    <div class="day-item active" onclick="selectDay(this, '23/03')"><span>Seg</span><strong>23</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '24/03')"><span>Ter</span><strong>24</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '25/03')"><span>Qua</span><strong>25</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '26/03')"><span>Qui</span><strong>26</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '27/03')"><span>Sex</span><strong>27</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '28/03')"><span>Sáb</span><strong>28</strong></div>
-                </div>
+                    </div>
                 <button class="nav-arrow" onclick="scrollDays('right')">
                     <i class="fas fa-chevron-right"></i>
                 </button>
@@ -191,15 +179,15 @@
             
             <div class="prof-circles">
                 <div class="prof-item" onclick="selectProf(this, 'João')">
-                    <img src="joao.jpg" alt="João">
+                    <img src="joao.jpg" alt="João" onerror="this.src='https://via.placeholder.com/80/222/d4af37?text=J'">
                     <span>João</span>
                 </div>
                 <div class="prof-item" onclick="selectProf(this, 'Ruan')">
-                    <img src="ruan.jpg" alt="Ruan">
+                    <img src="ruan.jpg" alt="Ruan" onerror="this.src='https://via.placeholder.com/80/222/d4af37?text=R'">
                     <span>Ruan</span>
                 </div>
                 <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
-                    <img src="vanclei.jpg" alt="Vanclei">
+                    <img src="vanclei.jpg" alt="Vanclei" onerror="this.src='https://via.placeholder.com/80/222/d4af37?text=V'">
                     <span>Vanclei</span>
                 </div>
             </div>
@@ -215,11 +203,12 @@
                     <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
                     <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
                     <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
+                    <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
                 </div>
             </div>
 
             <div class="booking-footer" id="bookingInstruction" style="margin-top: 20px; text-align: center;">
-                <p style="font-size: 0.75rem; opacity: 0.6;"><i class="fas fa-user-check" style="color: var(--gold);"></i> Toque em um profissional para ver a agenda</p>
+                <p style="font-size: 0.75rem; opacity: 0.6;"><i class="fas fa-user-check" style="color: var(--gold);"></i> Selecione um profissional para continuar</p>
             </div>
         </div>
     </div>
