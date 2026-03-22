@@ -81,11 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Navegação dos dias (SETAS CORRIGIDAS)
+    // Navegação dos dias
     window.scrollDays = function(direction) {
         const container = document.getElementById('daysContainer');
         if (container) {
-            const scrollAmount = 180; // Ajustado para rolar 2 a 3 itens por vez
+            const scrollAmount = 180;
             if (direction === 'left') {
                 container.scrollLeft -= scrollAmount;
             } else {
@@ -112,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (timeSelection) {
             timeSelection.style.display = 'block';
-            // Scroll suave para os horários no mobile
             setTimeout(() => {
                 timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 100);
@@ -125,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dadosAgendamento.hora = hora;
         const telefone = "5569993609069";
         
-        const texto = `Olá! Gostaria de realizar um agendamento:
+        const texto = `Olá! Gostaria de realizar um agendamento na Barbearia Madero:
         
 ✂️ *Serviço:* ${dadosAgendamento.servico}
 👤 *Profissional:* ${dadosAgendamento.prof}
@@ -148,7 +147,6 @@ _Aguardo confirmação da disponibilidade._`;
         if (instruction) instruction.style.display = 'block';
         document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
         
-        // Resetar para o primeiro dia por padrão se desejar
         const days = document.querySelectorAll('.day-item');
         days.forEach(d => d.classList.remove('active'));
         if(days[0]) days[0].classList.add('active');
