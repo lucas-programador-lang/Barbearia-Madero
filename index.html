@@ -6,41 +6,17 @@
     <title>Barbearia Madero | Porto Velho</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Ajustes específicos para garantir o visual Premium na Home */
         .location-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+            align-items: center; background: rgba(255, 255, 255, 0.03);
+            padding: 40px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.1);
         }
-        
-        .map-box {
-            height: 350px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid var(--gold);
-        }
-
-        /* Estilo do Menu Mobile */
-        .mobile-menu-icon {
-            display: none;
-            color: var(--gold);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        .map-box { height: 350px; border-radius: 15px; overflow: hidden; border: 2px solid var(--gold); }
         @media (max-width: 768px) {
-            .mobile-menu-icon { display: block; }
+            .nav-desktop { display: none; }
             .location-wrapper { grid-template-columns: 1fr; padding: 20px; }
-            .location-text { text-align: center; }
-            .location-item { justify-content: center; }
-            .payment-icons { justify-content: center; }
         }
     </style>
 </head>
@@ -49,8 +25,11 @@
     <header>
         <div class="container header-flex">
             <a href="index.html" class="logo-container">
-                <img src="logo.png" alt="Madero Logo" class="logo-img"> 
-                <span class="logo-text">MADERO</span>
+                <i class="fas fa-cut logo-icon"></i>
+                <div style="display: flex; flex-direction: column;">
+                    <span class="logo-madero">MADERO</span>
+                    <span class="logo-barbearia">Barbearia Premium</span>
+                </div>
             </a>
             
             <nav class="nav-desktop">
@@ -60,69 +39,44 @@
             </nav>
 
             <div class="social-top">
-                <i class="fas fa-bars mobile-menu-icon"></i>
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </header>
 
-    <section class="hero" style="padding-top: 150px; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('hero-bg.jpg'); background-size: cover; min-height: 80vh; display: flex; align-items: center;">
-        <div class="container">
-            <h1 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 3.5rem; margin-bottom: 20px; animation: fadeInUp 1s ease-out;">ESTILO & TRADIÇÃO</h1>
-            <p style="animation: fadeInUp 1.2s ease-out; max-width: 600px; margin: 0 auto 40px; font-size: 1.1rem; opacity: 0.9;">A experiência premium que o homem de Porto Velho merece. Cortes precisos, ambiente exclusivo e navalha afiada.</p>
-            <div class="hero-btns" style="animation: fadeInUp 1.4s ease-out; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="servicos.html" style="background: var(--gold); color: #000; padding: 15px 35px; border-radius: 5px; font-weight: 800; transition: 0.3s;">AGENDAR SERVIÇO</a>
-                <a href="profissionais.html" style="border: 1px solid var(--gold); color: var(--gold); padding: 15px 35px; border-radius: 5px; font-weight: 800; transition: 0.3s;">NOSSA EQUIPE</a>
+    <section class="hero" style="padding-top: 150px; text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('hero-bg.jpg'); background-size: cover; min-height: 85vh; display: flex; align-items: center;">
+        <div class="container" style="animation: fadeInUp 1s ease-out;">
+            <h1 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 20px;">ESTILO & TRADIÇÃO</h1>
+            <p style="max-width: 600px; margin: 0 auto 40px; font-size: 1.1rem; opacity: 0.9;">A experiência premium que Porto Velho merece. Cortes precisos e ambiente exclusivo.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="servicos.html" style="background: var(--gold); color: #000 !important; padding: 15px 35px; border-radius: 5px; font-weight: 800;">AGENDAR SERVIÇO</a>
+                <a href="profissionais.html" style="border: 1px solid var(--gold); color: var(--gold) !important; padding: 15px 35px; border-radius: 5px; font-weight: 800;">NOSSA EQUIPE</a>
             </div>
         </div>
     </section>
 
-    <section class="location" style="padding: 100px 0; background: var(--bg-black);">
+    <section class="location" style="padding: 80px 0;">
         <div class="container">
             <div class="location-wrapper">
                 <div class="location-text">
-                    <h2 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; font-size: 2.5rem;">Visite-nos</h2>
-                    <p style="opacity: 0.7; margin-bottom: 30px;">Estamos localizados no coração de Porto Velho para sua conveniência.</p>
-                    
-                    <div class="location-item" style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 40px;">
-                        <i class="fas fa-map-marker-alt" style="color: var(--gold); font-size: 1.5rem; margin-top: 5px;"></i>
-                        <div>
-                            <strong style="display: block; font-size: 1.1rem; color: #fff;">Endereço Madero:</strong>
-                            <p style="opacity: 0.9;">Rua Alexandre Guimarães, 1189<br>Areal - Porto Velho, RO</p>
-                        </div>
-                    </div>
-                    
-                    <div class="payment-methods">
-                        <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold);">Aceitamos</h3>
-                        <div class="payment-icons" style="font-size: 1.8rem; gap: 25px; display: flex; margin-bottom: 20px; color: var(--text-light);">
-                            <i class="fas fa-money-bill-wave" title="Dinheiro"></i>
-                            <i class="fab fa-pix" title="PIX" style="color: #32BCAD;"></i>
-                            <i class="fab fa-cc-visa" title="Visa"></i>
-                            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
-                        </div>
-                        <p style="font-size: 0.8rem; opacity: 0.5;">*Cartão de Débito, Crédito e PIX disponível.</p>
+                    <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; margin-bottom: 20px;">Visite-nos</h2>
+                    <p style="margin-bottom: 30px; opacity: 0.8;">Localizada na Rua Alexandre Guimarães, 1189 - Porto Velho.</p>
+                    <div style="font-size: 2rem; display: flex; gap: 20px; color: var(--text-light);">
+                        <i class="fab fa-pix" style="color: #32BCAD;"></i>
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
                     </div>
                 </div>
-
                 <div class="map-box">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.923456789!2d-63.899!3d-8.765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDUnNTQuMCJTIDYzwrA1Myc1Ni40Ilc!5e0!3m2!1spt-BR!2sbr!4v123456789" 
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                    </iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.8719875440623!2d-63.8932!3d-8.7667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDYnMDAuMSJTIDYzwrA1MyczNS41Ilc!5e0!3m2!1spt-BR!2sbr!4v1620000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container" style="text-align: center; padding: 40px 0;">
-            <div class="social-icons" style="margin-bottom: 20px; display: flex; justify-content: center; gap: 20px; font-size: 1.5rem;">
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p style="opacity: 0.6; font-size: 0.8rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
-        </div>
+    <footer style="text-align: center; padding: 40px 0; opacity: 0.6; font-size: 0.8rem;">
+        <p>© 2026 Barbearia Madero | Porto Velho - RO</p>
     </footer>
 
 </body>
