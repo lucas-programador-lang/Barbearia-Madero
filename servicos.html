@@ -17,7 +17,48 @@
             background-position: center;
         }
 
-        /* --- CORREÇÃO DAS FOTOS DOS BARBEIROS --- */
+        /* --- CALENDÁRIO E SETAS --- */
+        .calendar-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .nav-arrow {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .nav-arrow:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        .days-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .days-container::-webkit-scrollbar { display: none; }
+
+        /* --- FOTOS DOS BARBEIROS --- */
         .prof-circles {
             display: flex;
             justify-content: center;
@@ -31,19 +72,19 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            transition: var(--transition);
-            width: 80px; /* Largura fixa do conjunto */
+            width: 80px;
+            transition: 0.3s;
         }
 
         .prof-item img {
-            width: 70px;      /* Tamanho da foto corrigido */
-            height: 70px;     /* Altura da foto corrigida */
-            border-radius: 50%; /* Foto redonda */
-            object-fit: cover;  /* Não distorce a imagem */
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
             border: 2px solid transparent;
             margin-bottom: 8px;
             transition: 0.3s;
-            filter: grayscale(100%); /* Efeito elegante */
+            filter: grayscale(100%);
         }
 
         .prof-item span {
@@ -53,7 +94,6 @@
             text-transform: uppercase;
         }
 
-        /* Efeito quando seleciona o barbeiro */
         .prof-item.active img {
             border-color: var(--gold);
             filter: grayscale(0%);
@@ -61,18 +101,16 @@
             box-shadow: 0 0 15px var(--gold-glow);
         }
 
-        .prof-item.active span {
-            color: var(--gold);
-        }
+        .prof-item.active span { color: var(--gold); }
 
-        /* Ajuste do Modal para não ficar gigante */
+        /* --- MODAL E CARDS --- */
         .modal-content {
             max-width: 450px;
             max-height: 90vh;
             overflow-y: auto;
+            background: #0a0c0b;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
-
-        /* --------------------------------------- */
 
         .service-card.highlight {
             border: 2px solid var(--gold);
@@ -80,48 +118,8 @@
             transform: scale(1.02);
         }
 
-        .service-card.highlight::after {
-            content: 'MAIS PROCURADO';
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--gold);
-            color: #000;
-            font-size: 0.6rem;
-            font-weight: 900;
-            padding: 3px 8px;
-            border-radius: 4px;
-        }
-
-        .service-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            min-height: 2.4em;
-            display: flex;
-            align-items: center;
-        }
-
-        .price {
-            color: var(--text-gold);
-            font-size: 1.4rem;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .time {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 20px;
-        }
-
         @media (max-width: 480px) {
             .modal-content { padding: 20px 15px; width: 95%; }
-            .time-grid { grid-template-columns: repeat(2, 1fr); }
-            .day-item { min-width: 55px; height: 70px; }
             .prof-item img { width: 60px; height: 60px; }
         }
     </style>
@@ -137,13 +135,11 @@
                     <span class="logo-barbearia">Barbearia Premium</span>
                 </div>
             </a>
-            
             <nav class="nav-desktop">
                 <a href="index.html">Início</a>
                 <a href="servicos.html" class="active">Serviços</a>
                 <a href="profissionais.html">Profissionais</a>
             </nav>
-
             <div class="social-top">
                 <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -175,7 +171,9 @@
             </div>
 
             <div class="calendar-wrapper">
-                <button class="nav-arrow" onclick="scrollDays('left')"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow" onclick="scrollDays('left')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
                 <div class="days-container" id="daysContainer">
                     <div class="day-item active" onclick="selectDay(this, '23/03')"><span>Seg</span><strong>23</strong></div>
                     <div class="day-item" onclick="selectDay(this, '24/03')"><span>Ter</span><strong>24</strong></div>
@@ -184,7 +182,9 @@
                     <div class="day-item" onclick="selectDay(this, '27/03')"><span>Sex</span><strong>27</strong></div>
                     <div class="day-item" onclick="selectDay(this, '28/03')"><span>Sáb</span><strong>28</strong></div>
                 </div>
-                <button class="nav-arrow" onclick="scrollDays('right')"><i class="fas fa-chevron-right"></i></button>
+                <button class="nav-arrow" onclick="scrollDays('right')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
 
             <h4 style="font-size: 0.75rem; text-align: center; margin: 25px 0 15px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px;">Selecione o Barbeiro</h4>
