@@ -1,18 +1,20 @@
 /**
  * Barbearia Madero - Core Script 2026
- * Responsável por: Renderização de serviços, Modal de Agendamento e Integração WhatsApp
+ * Responsável por: Renderização de serviços, Calendário Automático e WhatsApp
  */
 
-// 1. Estado Global do Agendamento (Acessível pelas funções de clique)
 let dadosAgendamento = {
     servico: '',
     prof: '',
-    data: '23/03', // Data padrão inicial
+    data: '',
     hora: ''
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 2. Lista Completa de Serviços
+    // 1. Gerador Automático de Datas (Próximos 7 dias)
+    renderizarCalendario();
+
+    // 2. Lista de Serviços
     const listaServicos = [
         { nome: "Barba", preco: "25,00", tempo: "30 min" },
         { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
@@ -38,10 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const grid = document.getElementById('servicesGrid');
-
-    // 3. Renderização Dinâmica dos Cards
     if (grid) {
-        grid.innerHTML = ''; // Limpa antes de renderizar
+        grid.innerHTML = '';
         listaServicos.forEach(s => {
             const card = document.createElement('div');
             card.className = `service-card ${s.destaque ? 'highlight' : ''}`;
@@ -58,15 +58,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- FUNÇÕES DO MODAL (Escopo Global) ---
+// --- FUNÇÃO DO CALENDÁRIO ---
+function renderizarCalendario() {
+    const container = document.getElementById('daysContainer');
+    if (!container) return;
 
+    container.innerHTML = '';
+    const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const hoje = new Date();
+
+    for (let i = 0; i < 7; i++) {
+        const dataCopia = new Date(hoje);
+        dataCopia.setDate(hoje.getDate() + i);
+
+        const diaNome = diasSemana[dataCopia.getDay()];
+        const diaMes = dataCopia.getDate();
+        const mes = (dataCopia.getMonth() + 1).toString().padStart(2, '0');
+        const dataFormatada = `${diaMes}/${mes}`;
+
+        // Cria o elemento do dia
+        const dayDiv = document.createElement('div');
+        dayDiv.className = `day-item ${i === 0 ? 'active' : ''}`;
+        if (i === 0) dadosAgendamento.data = dataFormatada; // Define hoje como padrão
+
+        dayDiv.onclick = function() { selectDay(this, dataFormatada); };
+        dayDiv.innerHTML = `<span>${diaNome}</span><strong>${diaMes}</strong>`;
+        
+        container.appendChild(dayDiv);
+    }
+}
+
+// --- FUNÇÕES GLOBAIS ---
 window.openBooking = function(serviceName) {
     const modal = document.getElementById('bookingModal');
     dadosAgendamento.servico = serviceName;
-    
     const titleEl = document.getElementById('selectedServiceName');
     if (titleEl) titleEl.innerText = serviceName.toUpperCase();
-    
     if (modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
@@ -82,17 +109,6 @@ window.closeBooking = function() {
     }
 };
 
-window.scrollDays = function(direction) {
-    const container = document.getElementById('daysContainer');
-    if (container) {
-        const scrollAmount = 180;
-        container.scrollBy({
-            left: direction === 'left' ? -scrollAmount : scrollAmount,
-            behavior: 'smooth'
-        });
-    }
-};
-
 window.selectDay = function(el, data) {
     document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
     el.classList.add('active');
@@ -105,20 +121,26 @@ window.selectProf = function(el, nome) {
     dadosAgendamento.prof = nome;
     
     const timeSelection = document.getElementById('timeSelection');
-    const instruction = document.getElementById('bookingInstruction');
-    
     if (timeSelection) {
         timeSelection.style.display = 'block';
         setTimeout(() => {
             timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 100);
     }
+    const instruction = document.getElementById('bookingInstruction');
     if (instruction) instruction.style.display = 'none';
+};
+
+window.scrollDays = function(direction) {
+    const container = document.getElementById('daysContainer');
+    if (container) {
+        container.scrollBy({ left: direction === 'left' ? -150 : 150, behavior: 'smooth' });
+    }
 };
 
 window.finishBooking = function(hora) {
     dadosAgendamento.hora = hora;
-    const telefone = "556993609069"; // Formato internacional correto (sem o 9 extra de DDD se for o caso)
+    const telefone = "5569993609069"; 
     
     const texto = `Olá! Gostaria de realizar um agendamento na Barbearia Madero:
 
@@ -129,31 +151,18 @@ window.finishBooking = function(hora) {
 
 _Aguardo confirmação da disponibilidade._`;
 
-    const wpUrl = `https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(texto)}`;
-    window.open(wpUrl, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(texto)}`, '_blank');
     closeBooking();
 };
 
 function resetModal() {
-    const timeSelection = document.getElementById('timeSelection');
-    const instruction = document.getElementById('bookingInstruction');
-    
-    if (timeSelection) timeSelection.style.display = 'none';
-    if (instruction) instruction.style.display = 'block';
+    document.getElementById('timeSelection').style.display = 'none';
+    document.getElementById('bookingInstruction').style.display = 'block';
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-    
-    const days = document.querySelectorAll('.day-item');
-    days.forEach(d => d.classList.remove('active'));
-    if(days[0]) {
-        days[0].classList.add('active');
-        dadosAgendamento.data = '23/03';
-    }
+    renderizarCalendario(); // Reinicia para o dia atual
 }
 
-// Fecha ao clicar fora do modal
 window.onclick = function(event) {
     const modal = document.getElementById('bookingModal');
-    if (event.target == modal) {
-        closeBooking();
-    }
+    if (event.target == modal) closeBooking();
 };
