@@ -86,39 +86,59 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* REINSERIDO: Bloco de Pagamentos */
+        /* PAGAMENTOS - VERSÃO CORRIGIDA E BONITA */
         .payment-section {
             margin-top: 35px;
             padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px dashed rgba(212,175,55,0.2);
         }
 
         .payment-label {
             color: var(--gold);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .payment-icons {
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .payment-item {
             display: flex;
-            gap: 20px;
-            font-size: 1.8rem;
-            color: rgba(255,255,255,0.4);
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.03);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
         }
 
-        .payment-icons i { transition: 0.3s; cursor: help; }
-        .payment-icons i:hover {
-            color: var(--gold);
-            transform: translateY(-3px);
+        .payment-item:hover {
+            border-color: var(--gold);
+            background: rgba(212,175,55,0.05);
+        }
+
+        .payment-item i {
+            font-size: 1.2rem;
+        }
+
+        .payment-item span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
         }
 
         @media (max-width: 992px) {
             .location-wrapper { grid-template-columns: 1fr; padding: 30px; gap: 40px; }
             .hero-content h1 { font-size: 3rem; }
+            .payment-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -169,7 +189,7 @@
                 <div class="location-text">
                     <span style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 700;">Onde estamos</span>
                     <h2 style="font-family: 'Cinzel', serif; color: #fff; font-size: 3rem; margin: 15px 0 25px;">Visite-nos</h2>
-                    <p style="margin-bottom: 20px; opacity: 0.8; font-size: 1.1rem; line-height: 1.8;">
+                    <p style="margin-bottom: 25px; opacity: 0.8; font-size: 1.1rem; line-height: 1.8;">
                         Rua Alexandre Guimarães, 1189<br>
                         Bairro Areal - Porto Velho, RO<br>
                         <strong>Segunda a Sábado: 09h às 20h</strong>
@@ -177,17 +197,29 @@
                     
                     <div class="payment-section">
                         <span class="payment-label">Aceitamos</span>
-                        <div class="payment-icons">
-                            <i class="fas fa-qrcode" title="Pix" style="color: #32BCAD; opacity: 1;"></i>
-                            <i class="fab fa-cc-visa" title="Visa"></i>
-                            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
-                            <i class="fas fa-credit-card" title="Cartões de Débito/Crédito"></i>
+                        <div class="payment-grid">
+                            <div class="payment-item">
+                                <i class="fas fa-qrcode" style="color: #32BCAD;"></i>
+                                <span>Pix</span>
+                            </div>
+                            <div class="payment-item">
+                                <i class="fas fa-money-bill-wave" style="color: #4caf50;"></i>
+                                <span>Dinheiro</span>
+                            </div>
+                            <div class="payment-item">
+                                <i class="fas fa-credit-card" style="color: #ff9800;"></i>
+                                <span>Crédito</span>
+                            </div>
+                            <div class="payment-item">
+                                <i class="fas fa-university" style="color: #2196f3;"></i>
+                                <span>Débito</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="map-box">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.080517586561!2d-63.8967!3d-8.7667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDYnMDAuMCJTIDYzwrA1MycwMC4wIlc!5e0!3m2!1spt-BR!2sbr!4v1650000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.8727196024344!2d-63.893121!3d-8.77583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDYnMzMuMCJTIDYzwrA1MyczNS4yIlc!5e0!3m2!1spt-BR!2sbr!4v1650000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
