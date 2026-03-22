@@ -4,7 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Lista Completa de Serviços (21 Itens conforme solicitado)
+    // 1. Lista Completa de Serviços
     const listaServicos = [
         { nome: "Barba", preco: "25,00", tempo: "30 min" },
         { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
@@ -63,13 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openBooking = function(serviceName) {
         dadosAgendamento.servico = serviceName;
         
-        // Atualiza o título do modal com o nome do serviço (conforme sua imagem)
         const titleEl = document.getElementById('selectedServiceName');
         if (titleEl) titleEl.innerText = serviceName.toUpperCase();
         
         if (modal) {
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+            document.body.style.overflow = 'hidden';
         }
     };
 
@@ -82,12 +81,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Navegação dos dias (setinhas)
+    // Navegação dos dias (SETAS CORRIGIDAS)
     window.scrollDays = function(direction) {
         const container = document.getElementById('daysContainer');
         if (container) {
-            const scrollAmount = direction === 'left' ? -150 : 150;
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            const scrollAmount = 180; // Ajustado para rolar 2 a 3 itens por vez
+            if (direction === 'left') {
+                container.scrollLeft -= scrollAmount;
+            } else {
+                container.scrollLeft += scrollAmount;
+            }
         }
     };
 
@@ -98,19 +101,21 @@ document.addEventListener('DOMContentLoaded', () => {
         dadosAgendamento.data = data;
     };
 
-    // Selecionar o Barbeiro (Garante que a foto e o nome fiquem marcados)
+    // Selecionar o Barbeiro
     window.selectProf = function(el, nome) {
         document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
         el.classList.add('active');
         dadosAgendamento.prof = nome;
         
-        // Libera a seleção de horários após escolher o barbeiro
         const timeSelection = document.getElementById('timeSelection');
         const instruction = document.getElementById('bookingInstruction');
         
         if (timeSelection) {
             timeSelection.style.display = 'block';
-            timeSelection.classList.add('fade-in');
+            // Scroll suave para os horários no mobile
+            setTimeout(() => {
+                timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
         }
         if (instruction) instruction.style.display = 'none';
     };
@@ -120,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dadosAgendamento.hora = hora;
         const telefone = "5569993609069";
         
-        // Mensagem formatada e profissional
         const texto = `Olá! Gostaria de realizar um agendamento:
         
 ✂️ *Serviço:* ${dadosAgendamento.servico}
@@ -135,7 +139,7 @@ _Aguardo confirmação da disponibilidade._`;
         closeBooking();
     };
 
-    // Reseta o modal para o estado inicial
+    // Reseta o modal
     function resetModal() {
         const timeSelection = document.getElementById('timeSelection');
         const instruction = document.getElementById('bookingInstruction');
@@ -143,10 +147,18 @@ _Aguardo confirmação da disponibilidade._`;
         if (timeSelection) timeSelection.style.display = 'none';
         if (instruction) instruction.style.display = 'block';
         document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
+        
+        // Resetar para o primeiro dia por padrão se desejar
+        const days = document.querySelectorAll('.day-item');
+        days.forEach(d => d.classList.remove('active'));
+        if(days[0]) days[0].classList.add('active');
+        dadosAgendamento.data = '23/03';
     }
 
-    // Fecha o modal se clicar fora da área branca
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) closeBooking();
-    });
+    // Fecha ao clicar fora
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeBooking();
+        }
+    };
 });
