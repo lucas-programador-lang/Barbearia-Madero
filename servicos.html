@@ -6,19 +6,68 @@
     <title>Serviços | Barbearia Madero</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.1">
+    <link rel="stylesheet" href="style.css?v=2026.final">
+    
     <style>
         .page-header {
-            padding: 140px 0 60px;
+            padding: 150px 0 70px;
             text-align: center;
-            background: linear-gradient(rgba(5,7,6,0.8), rgba(5,7,6,0.95)), url('hero-bg.jpg');
+            background: linear-gradient(rgba(5,7,6,0.85), rgba(5,7,6,1)), url('hero-bg.jpg');
             background-size: cover;
+            background-position: center;
         }
+
+        /* Efeito de destaque para combos premium */
+        .service-card.highlight {
+            border: 2px solid var(--gold);
+            background: linear-gradient(145deg, var(--bg-card), #1a1f1d);
+            transform: scale(1.02);
+        }
+
+        .service-card.highlight::after {
+            content: 'MAIS PROCURADO';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gold);
+            color: #000;
+            font-size: 0.6rem;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .service-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            min-height: 2.4em;
+            display: flex;
+            align-items: center;
+        }
+
+        .price {
+            color: var(--text-gold);
+            font-size: 1.4rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .time {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
         /* Ajuste fino para o modal no mobile */
         @media (max-width: 480px) {
-            .modal-content { padding: 15px; width: 98%; }
+            .modal-content { padding: 20px 15px; width: 95%; }
             .time-grid { grid-template-columns: repeat(2, 1fr); }
             .day-item { min-width: 55px; height: 70px; }
+            .prof-item img { width: 55px; height: 55px; }
         }
     </style>
 </head>
@@ -49,14 +98,16 @@
 
     <section class="page-header">
         <div class="container">
-            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 2px;">Cardápio de Serviços</h2>
-            <p style="opacity: 0.8; max-width: 600px; margin: 15px auto 0;">Excelência em cada detalhe. Escolha o cuidado que você merece.</p>
+            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.8rem; letter-spacing: 2px;">Serviços</h2>
+            <div style="width: 60px; height: 3px; background: var(--gold); margin: 15px auto;"></div>
+            <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">Técnicas clássicas com um toque moderno para o homem que não abre mão da excelência.</p>
         </div>
     </section>
 
-    <section class="services" style="padding: 40px 0 80px;">
+    <section class="services" style="padding: 60px 0 100px;">
         <div class="container">
-            <div class="services-grid" id="servicesGrid"></div>
+            <div class="services-grid" id="servicesGrid">
+                </div>
         </div>
     </section>
 
@@ -64,26 +115,25 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
-            <div class="booking-header" style="text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 15px;">
+            <div class="booking-header" style="text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 15px; margin-bottom: 20px;">
                 <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem;">Serviço</h3>
-                <p style="font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Porto Velho | Março 2026</p>
+                <p style="font-size: 0.65rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Porto Velho | RO</p>
             </div>
 
             <div class="calendar-wrapper">
                 <button class="nav-arrow" onclick="scrollDays('left')"><i class="fas fa-chevron-left"></i></button>
                 <div class="days-container" id="daysContainer">
-                    <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
-                    <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '31/03')"><span>Ter</span><strong>31</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '01/04')"><span>Qua</span><strong>01</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '02/04')"><span>Qui</span><strong>02</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '03/04')"><span>Sex</span><strong>03</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '04/04')"><span>Sáb</span><strong>04</strong></div>
+                    <div class="day-item active" onclick="selectDay(this, '23/03')"><span>Seg</span><strong>23</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '24/03')"><span>Ter</span><strong>24</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '25/03')"><span>Qua</span><strong>25</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '26/03')"><span>Qui</span><strong>26</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '27/03')"><span>Sex</span><strong>27</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '28/03')"><span>Sáb</span><strong>28</strong></div>
                 </div>
                 <button class="nav-arrow" onclick="scrollDays('right')"><i class="fas fa-chevron-right"></i></button>
             </div>
 
-            <h4 style="font-size: 0.8rem; text-align: center; margin: 20px 0 15px; color: var(--gold); text-transform: uppercase;">Escolha o Profissional</h4>
+            <h4 style="font-size: 0.75rem; text-align: center; margin: 25px 0 15px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px;">Selecione o Barbeiro</h4>
             
             <div class="prof-circles">
                 <div class="prof-item" onclick="selectProf(this, 'João')">
@@ -100,7 +150,7 @@
                 </div>
             </div>
 
-            <div id="timeSelection" style="display:none; margin-top: 20px; border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px;">
+            <div id="timeSelection" style="display:none; margin-top: 25px; border-top: 1px solid rgba(212,175,55,0.15); padding-top: 20px;">
                 <h4 style="font-size: 0.8rem; text-align: center; margin-bottom: 15px; color: #fff;">Horários Disponíveis</h4>
                 <div class="time-grid">
                     <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
@@ -115,43 +165,34 @@
             </div>
 
             <div class="booking-footer" id="bookingInstruction" style="margin-top: 20px; text-align: center;">
-                <p style="font-size: 0.8rem; opacity: 0.6;"><i class="fas fa-info-circle" style="color: var(--gold);"></i> Selecione um barbeiro para ver horários</p>
+                <p style="font-size: 0.75rem; opacity: 0.6;"><i class="fas fa-user-check" style="color: var(--gold);"></i> Toque em um profissional para ver a agenda</p>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05);">
-            <div style="margin-bottom: 20px; font-size: 1.5rem; display: flex; justify-content: center; gap: 20px;">
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p style="opacity: 0.5; font-size: 0.75rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
+    <footer style="text-align: center; padding: 60px 0; background: #000; border-top: 1px solid rgba(212,175,55,0.15);">
+        <div class="container">
+            <p style="opacity: 0.5; font-size: 0.8rem; letter-spacing: 1px;">© 2026 Barbearia Madero | Porto Velho - RO</p>
         </div>
     </footer>
 
     <script>
         const listaServicos = [
-            { nome: "Barba", preco: "25,00", tempo: "30 min" },
-            { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
-            { nome: "Black Mask (Limpeza)", preco: "25,00", tempo: "30 min" },
-            { nome: "Coloração", preco: "40,00", tempo: "45 min" },
-            { nome: "Corte (Degradê/Social)", preco: "40,00", tempo: "45 min" },
-            { nome: "Corte Máquina (2 pentes)", preco: "35,00", tempo: "30 min" },
-            { nome: "Corte + Barba", preco: "65,00", tempo: "60 min" },
-            { nome: "Corte + Barba + Selagem", preco: "145,00", tempo: "120 min", destaque: true },
-            { nome: "Corte + Barba + Selagem + Sobrancelha", preco: "155,00", tempo: "120 min", destaque: true },
-            { nome: "Corte + Barba + Sobrancelha", preco: "75,00", tempo: "60 min" },
-            { nome: "Corte + Hidratação", preco: "65,00", tempo: "75 min" },
+            { nome: "Corte (Degradê/Social)", preco: "40,00", tempo: "45 min", destaque: true },
+            { nome: "Barba + Toalha Quente", preco: "25,00", tempo: "30 min" },
+            { nome: "Corte + Barba", preco: "65,00", tempo: "60 min", destaque: true },
+            { nome: "Corte + Barba + Sobrancelha", preco: "75,00", tempo: "70 min" },
             { nome: "Corte + Sobrancelha", preco: "50,00", tempo: "45 min" },
-            { nome: "Hidratação", preco: "25,00", tempo: "30 min" },
-            { nome: "Penteado", preco: "25,00", tempo: "30 min" },
+            { nome: "Combo Madero (Completo)", preco: "155,00", tempo: "120 min", obs: "Corte, Barba, Selagem e Sobrancelha" },
+            { nome: "Selagem", preco: "80,00", tempo: "60 min", obs: "A partir de" },
+            { nome: "Hidratação Profunda", preco: "25,00", tempo: "30 min" },
             { nome: "Pezinho da Barba", preco: "15,00", tempo: "15 min" },
-            { nome: "Raspar na Lâmina", preco: "30,00", tempo: "30 min" },
-            { nome: "Selagem", preco: "80,00", tempo: "60 min", obs: "A partir de" }
+            { nome: "Limpeza de Pele (Black Mask)", preco: "25,00", tempo: "30 min" }
         ];
 
         const grid = document.getElementById('servicesGrid');
+        
+        // Renderizar Cards
         listaServicos.forEach(s => {
             const card = document.createElement('div');
             card.className = `service-card ${s.destaque ? 'highlight' : ''}`;
@@ -161,12 +202,12 @@
                     <span class="price">${s.obs ? '<small style="font-size:0.6rem; display:block; opacity:0.6">'+s.obs+'</small>' : ''} R$ ${s.preco}</span>
                     <span class="time"><i class="far fa-clock"></i> ${s.tempo}</span>
                 </div>
-                <button class="btn-book" onclick="openBooking('${s.nome}')">Agendar Horário</button>
+                <button class="btn-book" onclick="openBooking('${s.nome}')">Agendar</button>
             `;
             grid.appendChild(card);
         });
 
-        let agendamento = { servico: '', prof: '', data: '30/03', hora: '' };
+        let agendamento = { servico: '', prof: '', data: '23/03', hora: '' };
         const modal = document.getElementById('bookingModal');
 
         function openBooking(serviceName) {
@@ -184,8 +225,7 @@
 
         function scrollDays(direction) {
             const container = document.getElementById('daysContainer');
-            const scrollAmount = 150;
-            container.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+            container.scrollBy({ left: direction === 'left' ? -150 : 150, behavior: 'smooth' });
         }
 
         function selectDay(el, data) {
@@ -204,7 +244,7 @@
 
         function finishBooking(hora) {
             agendamento.hora = hora;
-            const msg = `Olá! Gostaria de agendar na Madero:%0A%0A✂️ *Serviço:* ${agendamento.servico}%0A👤 *Barbeiro:* ${agendamento.prof}%0A📅 *Data:* ${agendamento.data}%0A⏰ *Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
+            const msg = `Olá! Gostaria de agendar na Barbearia Madero:%0A%0A✂️ *Serviço:* ${agendamento.servico}%0A👤 *Barbeiro:* ${agendamento.prof}%0A📅 *Data:* ${agendamento.data}/2026%0A⏰ *Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
             window.open(`https://api.whatsapp.com/send?phone=5569993609069&text=${msg}`, '_blank');
             closeBooking();
         }
@@ -213,7 +253,6 @@
             document.getElementById('timeSelection').style.display = 'none';
             document.getElementById('bookingInstruction').style.display = 'block';
             document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-            agendamento.prof = '';
         }
 
         window.onclick = (e) => { if(e.target == modal) closeBooking(); }
