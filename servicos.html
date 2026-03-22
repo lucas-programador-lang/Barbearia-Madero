@@ -1,256 +1,172 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profissionais | Barbearia Madero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=2026.final">
-    
-    <style>
-        :root {
-            --gold: #d4af37;
-            --gold-glow: rgba(212, 175, 55, 0.3);
-            --dark-bg: #050706;
-            --card-bg: #0a0c0b;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços | Barbearia Madero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=2026.final">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+        }
 
-        body { 
-            background-color: var(--dark-bg); 
-            color: #fff; 
-            font-family: 'Montserrat', sans-serif; 
-            margin: 0; 
-        }
+        body { background-color: #050706; color: #fff; font-family: 'Montserrat', sans-serif; margin: 0; }
 
-        /* --- HEADER & NAV --- */
-        header {
-            background: rgba(5, 7, 6, 0.95);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        .page-header {
+            padding: 150px 0 70px;
+            text-align: center;
+            background: linear-gradient(rgba(5,7,6,0.85), rgba(5,7,6,1)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px 20px;
-        }
+        /* --- GRID DE SERVIÇOS CORRIGIDA --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
 
-        .logo {
-            text-decoration: none; 
-            color: #fff; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-        }
+        .service-card {
+            background: #0a0c0b;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column; /* Faz os itens ficarem em coluna */
+            justify-content: space-between; /* Empurra o botão para o fim */
+            transition: 0.3s;
+            min-height: 220px;
+        }
 
-        .nav-links a {
-            color: #fff; 
-            text-decoration: none; 
-            margin-left: 20px;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
+        .service-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--gold);
-        }
+        .service-info h3 { font-family: 'Cinzel', serif; color: var(--gold); margin: 0 0 10px; font-size: 1.2rem; }
+        .service-info .price { display: block; font-weight: 800; font-size: 1.3rem; margin-bottom: 5px; }
+        .service-info .time { font-size: 0.8rem; opacity: 0.6; display: block; margin-bottom: 20px; }
 
-        /* --- PAGE HEADER --- */
-        .page-header {
-            padding: 100px 0 50px;
-            text-align: center;
-            background: linear-gradient(rgba(5,7,6,0.85), rgba(5,7,6,1)), url('hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
+        .btn-main {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
 
-        /* --- GRID DE PROFISSIONAIS --- */
-        .prof-section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .btn-main:hover { background: #fff; box-shadow: 0 0 15px var(--gold-glow); }
 
-        .prof-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+        /* --- MODAL E CALENDÁRIO --- */
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+        .modal-content { background: #0a0c0b; border: 1px solid var(--gold); padding: 30px; border-radius: 15px; width: 100%; max-width: 450px; position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: var(--gold); cursor: pointer; }
 
-        .prof-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: 0.4s;
-            text-align: center;
-            padding-bottom: 30px;
-        }
+        .calendar-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; }
+        .days-container { display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; padding: 5px; }
+        .days-container::-webkit-scrollbar { display: none; }
+        
+        .day-item { min-width: 60px; text-align: center; padding: 10px; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px; cursor: pointer; }
+        .day-item.active { background: var(--gold); color: #000; border-color: var(--gold); }
+        .day-item span { display: block; font-size: 0.7rem; }
+        .day-item strong { font-size: 1.1rem; }
 
-        .prof-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
+        .prof-circles { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .prof-item { text-align: center; cursor: pointer; opacity: 0.5; transition: 0.3s; width: 70px; }
+        .prof-item.active { opacity: 1; transform: scale(1.1); }
+        .prof-item img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 5px; }
+        .prof-item span { font-size: 0.7rem; display: block; font-weight: 700; }
 
-        .prof-img-container {
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .prof-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(40%);
-            transition: 0.5s;
-        }
-
-        .prof-card:hover .prof-img-container img {
-            filter: grayscale(0%);
-            scale: 1.05;
-        }
-
-        .prof-info {
-            padding: 25px 20px;
-        }
-
-        .prof-info h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold);
-            font-size: 1.6rem;
-            margin: 0 0 5px;
-        }
-
-        .prof-info span {
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            opacity: 0.7;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-links a {
-            color: #fff;
-            font-size: 1.2rem;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--gold);
-        }
-
-        .btn-book {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 25px;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-
-        .btn-book:hover {
-            background: var(--gold);
-            color: #000;
-        }
-    </style>
+        .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .time-slot { background: rgba(255,255,255,0.05); border: 1px solid var(--gold); color: var(--gold); padding: 8px; border-radius: 5px; text-align: center; cursor: pointer; font-size: 0.9rem; }
+        .time-slot:hover { background: var(--gold); color: #000; }
+    </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-cut" style="color: var(--gold); font-size: 2rem;"></i>
-                <div>
-                    <span style="display: block; font-weight: 800; font-size: 1.2rem; letter-spacing: 2px;">MADERO</span>
-                    <span style="font-size: 0.6rem; text-transform: uppercase; opacity: 0.7;">Barbearia Premium</span>
-                </div>
-            </a>
-            <nav class="nav-links">
-                <a href="index.html">Início</a>
-                <a href="servicos.html">Serviços</a>
-                <a href="profissionais.html" class="active">Profissionais</a>
-            </nav>
-        </div>
-    </header>
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+            <a href="index.html" style="text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-cut" style="color: var(--gold); font-size: 2rem;"></i>
+                <div>
+                    <span style="display: block; font-weight: 800; font-size: 1.2rem; letter-spacing: 2px;">MADERO</span>
+                    <span style="font-size: 0.6rem; text-transform: uppercase; opacity: 0.7;">Barbearia Premium</span>
+                </div>
+            </a>
+            <nav>
+                <a href="index.html" style="color: #fff; text-decoration: none; margin-left: 20px;">Início</a>
+                <a href="servicos.html" style="color: var(--gold); text-decoration: none; margin-left: 20px; font-weight: 700;">Serviços</a>
+            </nav>
+        </div>
+    </header>
 
-    <section class="page-header">
-        <div class="container">
-            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; margin: 0;">Nossos Mestres</h2>
-            <p style="opacity: 0.7; margin-top: 10px;">Excelência e tradição em cada corte</p>
-        </div>
-    </section>
+    <section class="page-header">
+        <div class="container">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; margin: 0;">Nossos Serviços</h2>
+            <p style="opacity: 0.7; margin-top: 10px;">Porto Velho - RO</p>
+        </div>
+    </section>
 
-    <section class="prof-section">
-        <div class="prof-grid">
-            
-            <div class="prof-card">
-                <div class="prof-img-container">
-                    <img src="joao.jpg" onerror="this.src='https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800&auto=format&fit=crop'">
-                </div>
-                <div class="prof-info">
-                    <h3>João</h3>
-                    <span>Master Barber & Visagista</span>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <a href="servicos.html" class="btn-book">Agendar com João</a>
-                </div>
-            </div>
+    <section style="padding: 40px 0;">
+        <div class="container">
+            <div class="services-grid" id="servicesGrid">
+                </div>
+        </div>
+    </section>
 
-            <div class="prof-card">
-                <div class="prof-img-container">
-                    <img src="ruan.jpg" onerror="this.src='https://images.unsplash.com/photo-1503910368127-b19bb80eeae2?q=80&w=800&auto=format&fit=crop'">
-                </div>
-                <div class="prof-info">
-                    <h3>Ruan</h3>
-                    <span>Especialista em Barba & Relaxamento</span>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <a href="servicos.html" class="btn-book">Agendar com Ruan</a>
-                </div>
-            </div>
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeBooking()">&times;</span>
+            <h3 id="selectedServiceName" style="text-align: center; color: var(--gold); font-family: 'Cinzel'; margin-bottom: 20px;">SERVIÇO</h3>
 
-            <div class="prof-card">
-                <div class="prof-img-container">
-                    <img src="vanclei.jpg" onerror="this.src='https://images.unsplash.com/photo-1593702275677-f916c8c76045?q=80&w=800&auto=format&fit=crop'">
-                </div>
-                <div class="prof-info">
-                    <h3>Vanclei</h3>
-                    <span>Hair Design & Fade Classic</span>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <a href="servicos.html" class="btn-book">Agendar com Vanclei</a>
-                </div>
-            </div>
+            <div class="calendar-wrapper">
+                <button class="nav-arrow" onclick="scrollDays('left')"><i class="fas fa-chevron-left"></i></button>
+                <div class="days-container" id="daysContainer"></div>
+                <button class="nav-arrow" onclick="scrollDays('right')"><i class="fas fa-chevron-right"></i></button>
+            </div>
 
-        </div>
-    </section>
+            <h4 style="font-size: 0.7rem; text-align: center; color: var(--gold); margin-top: 20px;">ESCOLHA O PROFISSIONAL</h4>
+            <div class="prof-circles">
+                <div class="prof-item" onclick="selectProf(this, 'João')">
+                    <img src="joao.jpg" onerror="this.src='https://via.placeholder.com/60/222/d4af37?text=J'">
+                    <span>João</span>
+                </div>
+                <div class="prof-item" onclick="selectProf(this, 'Ruan')">
+                    <img src="ruan.jpg" onerror="this.src='https://via.placeholder.com/60/222/d4af37?text=R'">
+                    <span>Ruan</span>
+                </div>
+                <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
+                    <img src="vanclei.jpg" onerror="this.src='https://via.placeholder.com/60/222/d4af37?text=V'">
+                    <span>Vanclei</span>
+                </div>
+            </div>
 
-    <footer style="text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem; border-top: 1px solid rgba(212,175,55,0.1);">
-        &copy; 2026 Barbearia Madero - Porto Velho, RO. Todos os direitos reservados.
-    </footer>
+            <div id="timeSelection" style="display:none;">
+                <h4 style="font-size: 0.7rem; text-align: center; color: var(--gold); margin-top: 20px;">HORÁRIOS DISPONÍVEIS</h4>
+                <div class="time-grid">
+                    <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
+                    <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
+                    <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
+                    <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
+                    <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
+                    <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
