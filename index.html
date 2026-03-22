@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css?v=2026.final">
@@ -31,20 +32,20 @@
             </nav>
 
             <div class="social-top">
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </header>
 
     <main>
         <section class="hero">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
                 <h1 class="hero-title">ESTILO &<br>TRADIÇÃO</h1>
                 <div class="gold-divider"></div>
                 <p class="hero-subtitle">
                     A experiência premium que Porto Velho merece.<br>
-                    Cortes precisos, toalha quente e ambiente exclusivo.
+                    Cortes precisos e ambiente exclusivo.
                 </p>
                 <div class="hero-btns">
                     <a href="servicos.html" class="btn-main">Agendar Agora</a>
@@ -55,10 +56,10 @@
 
         <section class="location">
             <div class="container">
-                <div class="location-wrapper" data-aos="fade-up">
+                <div class="location-wrapper" data-aos="fade-up" data-aos-delay="200">
                     <div class="location-text">
-                        <span class="section-tag">Onde estamos</span>
-                        <h2 class="section-title">Localização Privilegiada</h2>
+                        <span class="section-tag">Localização</span>
+                        <h2 class="section-title">Onde estamos</h2>
                         
                         <div class="contact-info">
                             <p><i class="fas fa-map-marker-alt"></i> Rua Alexandre Guimarães, 1189<br>
@@ -71,19 +72,19 @@
                             <span class="payment-label">Métodos de Pagamento</span>
                             <div class="payment-grid">
                                 <div class="payment-item">
-                                    <i class="fas fa-qrcode" style="color: #26D367;"></i>
+                                    <i class="fas fa-qrcode" style="color: var(--gold); margin-right: 8px;"></i>
                                     <span>Pix</span>
                                 </div>
                                 <div class="payment-item">
-                                    <i class="fas fa-money-bill-wave" style="color: #4CAF50;"></i>
+                                    <i class="fas fa-money-bill-wave" style="color: var(--gold); margin-right: 8px;"></i>
                                     <span>Dinheiro</span>
                                 </div>
                                 <div class="payment-item">
-                                    <i class="fab fa-cc-mastercard" style="color: #EB001B;"></i>
+                                    <i class="fab fa-cc-mastercard" style="color: var(--gold); margin-right: 8px;"></i>
                                     <span>Crédito</span>
                                 </div>
                                 <div class="payment-item">
-                                    <i class="fas fa-credit-card" style="color: #2196F3;"></i>
+                                    <i class="fas fa-credit-card" style="color: var(--gold); margin-right: 8px;"></i>
                                     <span>Débito</span>
                                 </div>
                             </div>
@@ -92,7 +93,7 @@
 
                     <div class="map-box">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.923812735!2d-63.8966779!3d-8.7611084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325cd698285555%3A0x8f193798679f225e!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Areal%2C%20Porto%20Velho%20-%20RO!5e0!3m2!1spt-BR!2sbr!4v1710000000000" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.4646249764515!2d-63.893116!3d-8.761111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDUnNDAuMCJTIDYzwrA1MyczNS4yIlc!5e0!3m2!1spt-BR!2sbr!4v1640000000000" 
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                         </iframe>
                     </div>
@@ -116,9 +117,11 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Inicializa animações suaves que não quebram o layout
         AOS.init({
             duration: 1000,
-            once: true
+            once: true,
+            offset: 100
         });
     </script>
     <script src="script.js"></script>
