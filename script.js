@@ -10,10 +10,10 @@ let dadosAgendamento = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa o calendário assim que a página carregar
+    // Inicializa o calendário
     renderizarCalendario();
 
-    // Banco de Dados de Serviços
+    // Banco de Dados de Serviços Completo
     const listaServicos = [
         { nome: "Corte (Degradê/Social)", preco: "40,00", tempo: "45 min", destaque: true },
         { nome: "Corte + Barba", preco: "65,00", tempo: "60 min", destaque: true },
@@ -40,15 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const grid = document.getElementById('servicesGrid');
     
-    // Renderiza os cards na tela
     if (grid) {
         grid.innerHTML = '';
         listaServicos.forEach(s => {
             const card = document.createElement('div');
-            // Adiciona classe de destaque se houver
             card.className = `service-card ${s.destaque ? 'highlight' : ''}`;
             
-            // ESTRUTURA CORRIGIDA PARA O CSS SPACE-BETWEEN
+            // Estrutura otimizada para manter botões alinhados na base do card
             card.innerHTML = `
                 <div class="service-info">
                     <h3>${s.nome}</h3>
@@ -65,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// GERA OS DIAS DO CALENDÁRIO
+// GERA OS DIAS DO CALENDÁRIO (Pula domingos)
 function renderizarCalendario() {
     const container = document.getElementById('daysContainer');
     if (!container) return;
@@ -80,7 +78,7 @@ function renderizarCalendario() {
         const dataCopia = new Date(hoje);
         dataCopia.setDate(hoje.getDate() + i);
         
-        if (dataCopia.getDay() !== 0) { // Pula Domingos
+        if (dataCopia.getDay() !== 0) { 
             const diaNome = diasSemana[dataCopia.getDay()];
             const diaMes = dataCopia.getDate();
             const mesNum = (dataCopia.getMonth() + 1).toString().padStart(2, '0');
@@ -107,7 +105,7 @@ function renderizarCalendario() {
     }
 }
 
-// ABRE O MODAL
+// CONTROLE DO MODAL
 window.openBooking = function(serviceName) {
     const modal = document.getElementById('bookingModal');
     dadosAgendamento.servico = serviceName;
@@ -121,7 +119,6 @@ window.openBooking = function(serviceName) {
     }
 };
 
-// FECHA O MODAL
 window.closeBooking = function() {
     const modal = document.getElementById('bookingModal');
     if (modal) {
@@ -131,11 +128,10 @@ window.closeBooking = function() {
     }
 };
 
-// SELECIONA O PROFISSIONAL
+// SELEÇÃO DE PROFISSIONAL
 window.selectProf = function(el, nome) {
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
-    
     dadosAgendamento.prof = nome;
     
     const timeSelection = document.getElementById('timeSelection');
@@ -145,10 +141,10 @@ window.selectProf = function(el, nome) {
     }
 };
 
-// FINALIZA E ENVIA PARA O WHATSAPP
+// ENVIO PARA WHATSAPP
 window.finishBooking = function(hora) {
     if (!dadosAgendamento.prof) {
-        alert("Por favor, selecione um barbeiro primeiro!");
+        alert("Por favor, selecione um barbeiro!");
         return;
     }
 
