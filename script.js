@@ -11,10 +11,10 @@ let dadosAgendamento = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Gerador Automático de Datas (Próximos 7 dias)
+    // 1. Gerador Automático de Datas
     renderizarCalendario();
 
-    // 2. Lista de Serviços (Conforme imagem enviada)
+    // 2. Lista de Serviços Oficial
     const listaServicos = [
         { nome: "Barba", preco: "25,00", tempo: "30 min" },
         { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
@@ -66,31 +66,38 @@ function renderizarCalendario() {
     container.innerHTML = '';
     const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
     const hoje = new Date();
+    let diasRenderizados = 0;
+    let i = 0;
 
-    for (let i = 0; i < 7; i++) {
+    // Gera 7 dias úteis (Pula domingos)
+    while (diasRenderizados < 7) {
         const dataCopia = new Date(hoje);
         dataCopia.setDate(hoje.getDate() + i);
-
-        const diaNome = diasSemana[dataCopia.getDay()];
-        const diaMes = dataCopia.getDate();
-        const mes = (dataCopia.getMonth() + 1).toString().padStart(2, '0');
-        const dataFormatada = `${diaMes}/${mes}`;
-
-        // Cria o elemento do dia
-        const dayDiv = document.createElement('div');
-        dayDiv.className = `day-item ${i === 0 ? 'active' : ''}`;
         
-        // No momento da criação, o primeiro dia é o selecionado por padrão
-        if (i === 0) dadosAgendamento.data = dataFormatada;
+        const diaIndex = dataCopia.getDay();
+        
+        if (diaIndex !== 0) { // Se não for Domingo
+            const diaNome = diasSemana[diaIndex];
+            const diaMes = dataCopia.getDate();
+            const mes = (dataCopia.getMonth() + 1).toString().padStart(2, '0');
+            const dataFormatada = `${diaMes}/${mes}`;
 
-        dayDiv.onclick = function() { 
-            document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
-            this.classList.add('active');
-            dadosAgendamento.data = dataFormatada;
-        };
+            const dayDiv = document.createElement('div');
+            dayDiv.className = `day-item ${diasRenderizados === 0 ? 'active' : ''}`;
+            
+            if (diasRenderizados === 0) dadosAgendamento.data = dataFormatada;
 
-        dayDiv.innerHTML = `<span>${diaNome}</span><strong>${diaMes}</strong>`;
-        container.appendChild(dayDiv);
+            dayDiv.onclick = function() { 
+                document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+                dadosAgendamento.data = dataFormatada;
+            };
+
+            dayDiv.innerHTML = `<span>${diaNome}</span><strong>${diaMes}</strong>`;
+            container.appendChild(dayDiv);
+            diasRenderizados++;
+        }
+        i++;
     }
 }
 
@@ -121,14 +128,15 @@ window.selectProf = function(el, nome) {
     dadosAgendamento.prof = nome;
     
     const timeSelection = document.getElementById('timeSelection');
-    if (timeSelection) {
-        timeSelection.style.display = 'block';
-        setTimeout(() => {
-            timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-    }
     const instruction = document.getElementById('bookingInstruction');
+    
+    if (timeSelection) timeSelection.style.display = 'block';
     if (instruction) instruction.style.display = 'none';
+
+    // Scroll suave até os horários
+    setTimeout(() => {
+        timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
 };
 
 window.scrollDays = function(direction) {
@@ -164,7 +172,7 @@ function resetModal() {
     if (instruction) instruction.style.display = 'block';
     
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-    renderizarCalendario(); 
+    // Mantém a data mas reseta o estado visual se necessário
 }
 
 window.onclick = function(event) {
