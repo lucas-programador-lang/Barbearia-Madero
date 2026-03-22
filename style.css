@@ -110,7 +110,7 @@ header {
     color: var(--gold) !important;
 }
 
-/* --- BOTÕES DE AÇÃO (HERO & GERAL) --- */
+/* --- BOTÕES DE AÇÃO --- */
 .btn-main {
     display: inline-block;
     background: var(--gold);
@@ -133,28 +133,6 @@ header {
     box-shadow: 0 0 25px var(--gold-glow);
 }
 
-.btn-outline {
-    display: inline-block;
-    background: transparent;
-    color: #fff !important;
-    padding: 16px 45px;
-    border-radius: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-decoration: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-outline:hover {
-    border-color: var(--gold);
-    color: var(--gold) !important;
-    background: rgba(212, 175, 55, 0.05);
-}
-
 /* --- SERVICES & CARDS --- */
 .services-grid {
     display: grid;
@@ -168,7 +146,6 @@ header {
     padding: 30px 25px;
     border-radius: 15px;
     transition: var(--transition);
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -177,89 +154,27 @@ header {
 .service-card:hover {
     border-color: var(--gold);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .service-info h3 {
     font-family: 'Cinzel', serif;
     color: #fff;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.btn-book {
-    display: inline-block;
-    width: 100%;
-    background: var(--gold) !important;
-    color: #000 !important;
-    border: none;
-    padding: 14px;
-    border-radius: 8px;
-    font-weight: 800;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-align: center;
-    transition: 0.3s;
-    letter-spacing: 1px;
-    font-size: 0.85rem;
-    margin-top: 15px;
-}
-
-.btn-book:hover {
-    background: #fff !important;
-    transform: scale(1.02);
-}
-
-/* --- SEÇÃO DE PAGAMENTOS --- */
-.payment-section {
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(212,175,55,0.15);
-}
-
-.payment-label {
+.service-info .price {
     color: var(--gold);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 700;
+    font-weight: 800;
     display: block;
-    margin-bottom: 25px;
-    opacity: 0.8;
+    margin-bottom: 5px;
 }
 
-.payment-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+.service-info .time {
+    font-size: 0.8rem;
+    opacity: 0.6;
 }
 
-.payment-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 12px 18px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: var(--transition);
-}
-
-.payment-item:hover {
-    background: rgba(212, 175, 55, 0.08);
-    border-color: rgba(212, 175, 55, 0.3);
-    transform: translateY(-5px);
-}
-
-.payment-icon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 2px rgba(255,255,255,0.1));
-    transition: transform 0.3s ease;
-}
-
-/* --- MODAL DE AGENDAMENTO --- */
+/* --- MODAL & CALENDÁRIO --- */
 .modal {
     display: none; 
     position: fixed; 
@@ -272,70 +187,77 @@ header {
     backdrop-filter: blur(10px);
 }
 
-.modal-content {
-    background: #0f1412; 
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    width: 95%; 
-    max-width: 450px; 
-    padding: 30px 25px; 
-    border-radius: 20px;
-    position: relative;
-    max-height: 90vh;
-    overflow-y: auto;
+.day-item {
+    min-width: 60px;
+    height: 75px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.close-modal {
-    position: absolute;
-    right: 20px; top: 15px;
-    font-size: 1.8rem;
-    color: var(--gold);
-    cursor: pointer;
-    z-index: 10;
-}
+.day-item span { font-size: 0.65rem; text-transform: uppercase; opacity: 0.6; }
+.day-item strong { font-size: 1.2rem; }
 
 .day-item.active { 
     background: var(--gold) !important; 
     color: #000 !important;
-    border-color: var(--gold);
     box-shadow: 0 5px 15px var(--gold-glow);
 }
 
-/* --- FOOTER --- */
-footer {
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
-    padding: 40px 0;
+/* --- GRID DE HORÁRIOS --- */
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
+
+.time-slot {
+    background: rgba(255,255,255,0.05);
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.time-slot:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+/* --- PAGAMENTOS --- */
+.payment-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.payment-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.03);
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.payment-icon { width: 24px; height: 24px; }
 
 /* --- RESPONSIVIDADE --- */
-@media (max-width: 992px) {
-    .location-wrapper { 
-        grid-template-columns: 1fr; 
-        padding: 30px; 
-        gap: 40px;
-        border-radius: 0;
-    }
-}
-
 @media (max-width: 768px) {
-    header { height: 75px; }
     .nav-desktop { display: none; }
-    .logo-madero { font-size: 1.4rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .payment-grid { grid-template-columns: repeat(2, 1fr); }
+    .time-grid { grid-template-columns: repeat(2, 1fr); }
 }
-
-@media (max-width: 480px) {
-    .payment-grid { grid-template-columns: 1fr; }
-    
-    .btn-main, .btn-outline {
-        width: 100%;
-        margin-bottom: 12px;
-        padding: 14px 20px;
-    }
-}
-
-/* Animações */
-.fade-in { animation: fadeInUp 0.5s ease forwards; }
 
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(15px); } 
