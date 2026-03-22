@@ -7,12 +7,12 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="style.css?v=2026.final">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="services-page">
 
-    <header class="header-minimal">
+    <header id="navbar" class="header-minimal">
         <div class="container header-flex">
             <a href="index.html" class="logo-container">
                 <i class="fas fa-cut logo-icon"></i>
@@ -24,62 +24,77 @@
             <nav class="nav-desktop">
                 <a href="index.html">Início</a>
                 <a href="servicos.html" class="active">Serviços</a>
+                <a href="profissionais.html">Profissionais</a>
             </nav>
         </div>
     </header>
 
-    <section class="page-header">
-        <div class="container">
-            <h2 class="section-title">Nossos Serviços</h2>
-            <div class="gold-divider" style="margin: 10px auto;"></div>
-            <p class="section-tag">Porto Velho - RO</p>
-        </div>
-    </section>
+    <main>
+        <section class="page-header" style="padding-top: 150px; text-align: center;">
+            <div class="container" data-aos="fade-down">
+                <span class="section-tag">Nossos Serviços</span>
+                <h2 class="section-title">Menu de Experiências</h2>
+                <div class="gold-divider"></div>
+                <p class="section-desc">Cuidado impecável para o homem moderno em Porto Velho.</p>
+            </div>
+        </section>
 
-    <section class="services-content">
-        <div class="container">
-            <div class="services-grid" id="servicesGrid">
-                </div>
-        </div>
-    </section>
+        <section class="services-content">
+            <div class="container">
+                <div class="services-grid" id="servicesGrid">
+                    </div>
+            </div>
+        </section>
+    </main>
 
     <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeBooking()">&times;</span>
-            <h3 id="selectedServiceName">SERVIÇO</h3>
-
-            <div class="calendar-wrapper">
-                <div class="days-container" id="daysContainer"></div>
+        <div class="modal-content" data-aos="zoom-in">
+            <div class="modal-header">
+                <h3 id="selectedServiceName">AGENDAR SERVIÇO</h3>
+                <span class="close-modal" onclick="closeBooking()">&times;</span>
             </div>
 
             <div class="booking-steps">
-                <h4>1. ESCOLHA O PROFISSIONAL</h4>
-                <div class="prof-circles">
-                    <div class="prof-item" onclick="selectProf(this, 'João')">
-                        <img src="https://via.placeholder.com/60/111/d4af37?text=J" alt="João">
-                        <span>João</span>
-                    </div>
-                    <div class="prof-item" onclick="selectProf(this, 'Ruan')">
-                        <img src="https://via.placeholder.com/60/111/d4af37?text=R" alt="Ruan">
-                        <span>Ruan</span>
-                    </div>
-                    <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
-                        <img src="https://via.placeholder.com/60/111/d4af37?text=V" alt="Vanclei">
-                        <span>Vanclei</span>
+                <div class="step">
+                    <h4><i class="fas fa-calendar-day"></i> 1. ESCOLHA O DIA</h4>
+                    <div class="calendar-wrapper">
+                        <div class="days-container" id="daysContainer"></div>
                     </div>
                 </div>
 
-                <div id="timeSelection" style="display:none;">
-                    <h4>2. HORÁRIOS DISPONÍVEIS</h4>
+                <div class="step">
+                    <h4><i class="fas fa-user-tie"></i> 2. SELECIONE O ESPECIALISTA</h4>
+                    <div class="prof-circles">
+                        <div class="prof-item" onclick="selectProf(this, 'João')">
+                            <div class="prof-img-wrapper">
+                                <img src="joao.jpg" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=J'" alt="João">
+                            </div>
+                            <span>João</span>
+                        </div>
+                        <div class="prof-item" onclick="selectProf(this, 'Ruan')">
+                            <div class="prof-img-wrapper">
+                                <img src="ruan.jpg" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=R'" alt="Ruan">
+                            </div>
+                            <span>Ruan</span>
+                        </div>
+                        <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
+                            <div class="prof-img-wrapper">
+                                <img src="vanclei.jpg" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=V'" alt="Vanclei">
+                            </div>
+                            <span>Vanclei</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="timeSelection" class="step" style="display:none;">
+                    <h4><i class="far fa-clock"></i> 3. HORÁRIOS DISPONÍVEIS</h4>
                     <div class="time-grid">
                         <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
                         <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
                         <div class="time-slot" onclick="finishBooking('11:00')">11:00</div>
                         <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
                         <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
-                        <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
                         <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
-                        <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
                         <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
                     </div>
                 </div>
@@ -87,6 +102,8 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800, once: true });</script>
     <script src="script.js"></script>
 </body>
 </html>
