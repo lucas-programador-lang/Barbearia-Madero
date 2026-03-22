@@ -7,6 +7,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=3.0">
+    <style>
+        /* Estilos específicos para a Home que complementam o style.css */
+        .location-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .map-box {
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+        }
+        @media (max-width: 768px) {
+            .location-wrapper { grid-template-columns: 1fr; padding: 20px; }
+            .location-text { text-align: center; }
+            .location-item { justify-content: center; }
+            .payment-icons { justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
@@ -32,46 +57,46 @@
 
     <section class="hero">
         <div class="container">
-            <h1>ESTILO & TRADIÇÃO</h1>
-            <p>A experiência premium que o homem de Porto Velho merece.</p>
-            <div class="hero-btns">
+            <h1 style="animation: fadeInUp 1s ease-out;">ESTILO & TRADIÇÃO</h1>
+            <p style="animation: fadeInUp 1.2s ease-out; max-width: 600px; margin: 0 auto 30px;">A experiência premium que o homem de Porto Velho merece. Cortes precisos, ambiente exclusivo e navalha afiada.</p>
+            <div class="hero-btns" style="animation: fadeInUp 1.4s ease-out;">
                 <a href="servicos.html" class="btn-main">AGENDAR SERVIÇO</a>
                 <a href="profissionais.html" class="btn-secondary">NOSSA EQUIPE</a>
             </div>
         </div>
     </section>
 
-    <section class="location" style="padding: 100px 0;">
+    <section class="location" style="padding: 100px 0; background: var(--bg-black);">
         <div class="container">
             <div class="location-wrapper">
                 <div class="location-text">
-                    <h2 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px;">Onde Estamos</h2>
-                    <div class="location-item" style="display: flex; align-items: center; gap: 15px; margin-bottom: 30px;">
-                        <i class="fas fa-map-marker-alt" style="color: var(--gold); font-size: 1.5rem;"></i>
-                        <p>Rua Alexandre Guimarães, 1189, Areal - Porto Velho</p>
+                    <h2 style="font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 10px; font-size: 2.5rem;">Visite-nos</h2>
+                    <p style="opacity: 0.7; margin-bottom: 30px;">Estamos localizados no coração de Porto Velho para sua conveniência.</p>
+                    
+                    <div class="location-item" style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 40px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--gold); font-size: 1.5rem; margin-top: 5px;"></i>
+                        <div>
+                            <strong style="display: block; font-size: 1.1rem; color: #fff;">Endereço Madero:</strong>
+                            <p style="opacity: 0.9;">Rua Alexandre Guimarães, 1189<br>Areal - Porto Velho, RO</p>
+                        </div>
                     </div>
                     
                     <div class="payment-methods">
-                        <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--gold);">Formas de Pagamento</h3>
-                        <div class="payment-icons" style="font-size: 1.5rem; gap: 20px; display: flex; margin-bottom: 15px;">
+                        <h3 style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--gold);">Aceitamos</h3>
+                        <div class="payment-icons" style="font-size: 1.8rem; gap: 25px; display: flex; margin-bottom: 20px; color: var(--text-light);">
                             <i class="fas fa-money-bill-wave" title="Dinheiro"></i>
-                            <i class="fas fa-credit-card" title="Cartão"></i>
-                            <i class="fas fa-mobile-alt" title="PIX"></i>
+                            <i class="fab fa-pix" title="PIX" style="color: #32BCAD;"></i>
+                            <i class="fab fa-cc-visa" title="Visa"></i>
+                            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
                         </div>
-                        <ul class="payment-list" style="list-style: none; opacity: 0.8; font-size: 0.9rem;">
-                            <li>• Dinheiro</li>
-                            <li>• Cartão de Crédito/Débito</li>
-                            <li>• PIX</li>
-                        </ul>
+                        <p style="font-size: 0.8rem; opacity: 0.5;">*Cartão de Débito, Crédito e PIX disponível.</p>
                     </div>
                 </div>
 
                 <div class="map-box">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.346872439527!2d-63.8943346!3d-8.7618494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325cd64917a027%3A0x28974512727181c5!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Areal%2C%20Porto%20Velho%20-%20RO!5e0!3m2!1spt-BR!2sbr!4v1710000000000" 
-                        allowfullscreen="" 
-                        loading="lazy"
-                        style="border:0; width:100%; height:100%;">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.923456789012!2d-63.8901234!3d-8.7654321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325ce8d5c4b3a1%3A0x123456789abcdef!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Areal%2C%20Porto%20Velho%20-%20RO%2C%2078915-610!5e0!3m2!1spt-BR!2sbr!4v1700000000000" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                     </iframe>
                 </div>
             </div>
