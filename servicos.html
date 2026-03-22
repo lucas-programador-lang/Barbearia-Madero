@@ -1,172 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serviços | Barbearia Madero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=2026.final">
-    
-    <style>
-        :root {
-            --gold: #d4af37;
-            --gold-glow: rgba(212, 175, 55, 0.3);
-        }
-
-        body { background-color: #050706; color: #fff; font-family: 'Montserrat', sans-serif; margin: 0; }
-
-        .page-header {
-            padding: 150px 0 70px;
-            text-align: center;
-            background: linear-gradient(rgba(5,7,6,0.85), rgba(5,7,6,1)), url('hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* --- GRID DE SERVIÇOS CORRIGIDA --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 20px;
-        }
-
-        .service-card {
-            background: #0a0c0b;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column; /* Faz os itens ficarem em coluna */
-            justify-content: space-between; /* Empurra o botão para o fim */
-            transition: 0.3s;
-            min-height: 220px;
-        }
-
-        .service-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .service-info h3 { font-family: 'Cinzel', serif; color: var(--gold); margin: 0 0 10px; font-size: 1.2rem; }
-        .service-info .price { display: block; font-weight: 800; font-size: 1.3rem; margin-bottom: 5px; }
-        .service-info .time { font-size: 0.8rem; opacity: 0.6; display: block; margin-bottom: 20px; }
-
-        .btn-main {
-            background: var(--gold);
-            color: #000;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-        }
-
-        .btn-main:hover { background: #fff; box-shadow: 0 0 15px var(--gold-glow); }
-
-        /* --- MODAL E CALENDÁRIO --- */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
-        .modal-content { background: #0a0c0b; border: 1px solid var(--gold); padding: 30px; border-radius: 15px; width: 100%; max-width: 450px; position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: var(--gold); cursor: pointer; }
-
-        .calendar-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0; }
-        .days-container { display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; padding: 5px; }
-        .days-container::-webkit-scrollbar { display: none; }
-        
-        .day-item { min-width: 60px; text-align: center; padding: 10px; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px; cursor: pointer; }
-        .day-item.active { background: var(--gold); color: #000; border-color: var(--gold); }
-        .day-item span { display: block; font-size: 0.7rem; }
-        .day-item strong { font-size: 1.1rem; }
-
-        .prof-circles { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-        .prof-item { text-align: center; cursor: pointer; opacity: 0.5; transition: 0.3s; width: 70px; }
-        .prof-item.active { opacity: 1; transform: scale(1.1); }
-        .prof-item img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 5px; }
-        .prof-item span { font-size: 0.7rem; display: block; font-weight: 700; }
-
-        .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .time-slot { background: rgba(255,255,255,0.05); border: 1px solid var(--gold); color: var(--gold); padding: 8px; border-radius: 5px; text-align: center; cursor: pointer; font-size: 0.9rem; }
-        .time-slot:hover { background: var(--gold); color: #000; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços | Barbearia Madero</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css?v=2026.final">
 </head>
-<body>
+<body class="services-page">
 
-    <header>
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
-            <a href="index.html" style="text-decoration: none; color: #fff; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-cut" style="color: var(--gold); font-size: 2rem;"></i>
-                <div>
-                    <span style="display: block; font-weight: 800; font-size: 1.2rem; letter-spacing: 2px;">MADERO</span>
-                    <span style="font-size: 0.6rem; text-transform: uppercase; opacity: 0.7;">Barbearia Premium</span>
-                </div>
-            </a>
-            <nav>
-                <a href="index.html" style="color: #fff; text-decoration: none; margin-left: 20px;">Início</a>
-                <a href="servicos.html" style="color: var(--gold); text-decoration: none; margin-left: 20px; font-weight: 700;">Serviços</a>
-            </nav>
-        </div>
-    </header>
+    <header class="header-minimal">
+        <div class="container header-flex">
+            <a href="index.html" class="logo-container">
+                <i class="fas fa-cut logo-icon"></i>
+                <div class="logo-text">
+                    <span class="logo-madero">MADERO</span>
+                    <span class="logo-barbearia">Barbearia Premium</span>
+                </div>
+            </a>
+            <nav class="nav-desktop">
+                <a href="index.html">Início</a>
+                <a href="servicos.html" class="active">Serviços</a>
+            </nav>
+        </div>
+    </header>
 
-    <section class="page-header">
-        <div class="container">
-            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; margin: 0;">Nossos Serviços</h2>
-            <p style="opacity: 0.7; margin-top: 10px;">Porto Velho - RO</p>
-        </div>
-    </section>
+    <section class="page-header">
+        <div class="container">
+            <h2 class="section-title">Nossos Serviços</h2>
+            <div class="gold-divider" style="margin: 10px auto;"></div>
+            <p class="section-tag">Porto Velho - RO</p>
+        </div>
+    </section>
 
-    <section style="padding: 40px 0;">
-        <div class="container">
-            <div class="services-grid" id="servicesGrid">
-                </div>
-        </div>
-    </section>
+    <section class="services-content">
+        <div class="container">
+            <div class="services-grid" id="servicesGrid">
+                </div>
+        </div>
+    </section>
 
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeBooking()">&times;</span>
-            <h3 id="selectedServiceName" style="text-align: center; color: var(--gold); font-family: 'Cinzel'; margin-bottom: 20px;">SERVIÇO</h3>
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeBooking()">&times;</span>
+            <h3 id="selectedServiceName">SERVIÇO</h3>
 
-            <div class="calendar-wrapper">
-                <button class="nav-arrow" onclick="scrollDays('left')"><i class="fas fa-chevron-left"></i></button>
-                <div class="days-container" id="daysContainer"></div>
-                <button class="nav-arrow" onclick="scrollDays('right')"><i class="fas fa-chevron-right"></i></button>
-            </div>
+            <div class="calendar-wrapper">
+                <div class="days-container" id="daysContainer"></div>
+            </div>
 
-            <h4 style="font-size: 0.7rem; text-align: center; color: var(--gold); margin-top: 20px;">ESCOLHA O PROFISSIONAL</h4>
-            <div class="prof-circles">
-                <div class="prof-item" onclick="selectProf(this, 'João')">
-                    <img src="joao.jpg" onerror="this.src='https://via.placeholder.com/60/222/d4af37?text=J'">
-                    <span>João</span>
-                </div>
-                <div class="prof-item" onclick="selectProf(this, 'Ruan')">
-                    <img src="ruan.jpg" onerror="this.src='https://via.placeholder.com/60/222/d4af37?text=R'">
-                    <span>Ruan</span>
-                </div>
-                <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
-                    <img src="vanclei.jpg" onerror="this.src='https://via.placeholder.com/60/222/d4af37?text=V'">
-                    <span>Vanclei</span>
-                </div>
-            </div>
+            <div class="booking-steps">
+                <h4>1. ESCOLHA O PROFISSIONAL</h4>
+                <div class="prof-circles">
+                    <div class="prof-item" onclick="selectProf(this, 'João')">
+                        <img src="https://via.placeholder.com/60/111/d4af37?text=J" alt="João">
+                        <span>João</span>
+                    </div>
+                    <div class="prof-item" onclick="selectProf(this, 'Ruan')">
+                        <img src="https://via.placeholder.com/60/111/d4af37?text=R" alt="Ruan">
+                        <span>Ruan</span>
+                    </div>
+                    <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
+                        <img src="https://via.placeholder.com/60/111/d4af37?text=V" alt="Vanclei">
+                        <span>Vanclei</span>
+                    </div>
+                </div>
 
-            <div id="timeSelection" style="display:none;">
-                <h4 style="font-size: 0.7rem; text-align: center; color: var(--gold); margin-top: 20px;">HORÁRIOS DISPONÍVEIS</h4>
-                <div class="time-grid">
-                    <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
-                    <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
-                    <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
-                    <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
-                    <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
-                    <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <div id="timeSelection" style="display:none;">
+                    <h4>2. HORÁRIOS DISPONÍVEIS</h4>
+                    <div class="time-grid">
+                        <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
+                        <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
+                        <div class="time-slot" onclick="finishBooking('11:00')">11:00</div>
+                        <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
+                        <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
+                        <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
+                        <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
+                        <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
+                        <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
