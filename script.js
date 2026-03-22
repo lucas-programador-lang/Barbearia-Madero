@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Gerador Automático de Datas (Próximos 7 dias)
     renderizarCalendario();
 
-    // 2. Lista de Serviços
+    // 2. Lista de Serviços (Conforme imagem enviada)
     const listaServicos = [
         { nome: "Barba", preco: "25,00", tempo: "30 min" },
         { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="price">${s.obs ? `<small style="font-size:0.6rem; display:block; opacity:0.6">${s.obs}</small>` : ''} R$ ${s.preco}</span>
                     <span class="time"><i class="far fa-clock"></i> ${s.tempo}</span>
                 </div>
-                <button class="btn-book" onclick="openBooking('${s.nome}')">Agendar Agora</button>
+                <button class="btn-main" onclick="openBooking('${s.nome}')">Agendar Agora</button>
             `;
             grid.appendChild(card);
         });
@@ -79,11 +79,17 @@ function renderizarCalendario() {
         // Cria o elemento do dia
         const dayDiv = document.createElement('div');
         dayDiv.className = `day-item ${i === 0 ? 'active' : ''}`;
-        if (i === 0) dadosAgendamento.data = dataFormatada; // Define hoje como padrão
-
-        dayDiv.onclick = function() { selectDay(this, dataFormatada); };
-        dayDiv.innerHTML = `<span>${diaNome}</span><strong>${diaMes}</strong>`;
         
+        // No momento da criação, o primeiro dia é o selecionado por padrão
+        if (i === 0) dadosAgendamento.data = dataFormatada;
+
+        dayDiv.onclick = function() { 
+            document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
+            this.classList.add('active');
+            dadosAgendamento.data = dataFormatada;
+        };
+
+        dayDiv.innerHTML = `<span>${diaNome}</span><strong>${diaMes}</strong>`;
         container.appendChild(dayDiv);
     }
 }
@@ -109,12 +115,6 @@ window.closeBooking = function() {
     }
 };
 
-window.selectDay = function(el, data) {
-    document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
-    el.classList.add('active');
-    dadosAgendamento.data = data;
-};
-
 window.selectProf = function(el, nome) {
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
@@ -134,7 +134,8 @@ window.selectProf = function(el, nome) {
 window.scrollDays = function(direction) {
     const container = document.getElementById('daysContainer');
     if (container) {
-        container.scrollBy({ left: direction === 'left' ? -150 : 150, behavior: 'smooth' });
+        const scrollAmount = direction === 'left' ? -150 : 150;
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
 };
 
@@ -156,10 +157,14 @@ _Aguardo confirmação da disponibilidade._`;
 };
 
 function resetModal() {
-    document.getElementById('timeSelection').style.display = 'none';
-    document.getElementById('bookingInstruction').style.display = 'block';
+    const timeSelection = document.getElementById('timeSelection');
+    const instruction = document.getElementById('bookingInstruction');
+    
+    if (timeSelection) timeSelection.style.display = 'none';
+    if (instruction) instruction.style.display = 'block';
+    
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-    renderizarCalendario(); // Reinicia para o dia atual
+    renderizarCalendario(); 
 }
 
 window.onclick = function(event) {
