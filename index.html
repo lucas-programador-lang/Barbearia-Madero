@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbearia Madero | Porto Velho</title>
+    
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <style>
         :root {
-            --primary: #c5a059; /* Dourado */
-            --secondary: #0a2a1e; /* Verde Escuro Madero */
-            --bg-dark: #050f0b; /* Fundo mais escuro */
-            --bg-card: #111a15; /* Fundo dos cartões */
+            --primary: #c5a059;
+            --secondary: #0a2a1e;
+            --bg-dark: #050f0b;
+            --bg-card: #111a15;
             --text-light: #f4f4f4;
             --text-muted: #888;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --header-height: 90px;
+            --header-height: 80px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
@@ -30,36 +33,50 @@
             color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: var(--header-height);
         }
 
-        /* --- Componentes Genéricos --- */
-        .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--primary); margin-bottom: 60px; position: relative; padding-bottom: 15px; }
-        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--primary); }
-        
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
+        /* --- Títulos --- */
+        .section-title { 
+            text-align: center; 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2rem, 5vw, 2.8rem); 
+            color: var(--primary); 
+            margin-bottom: 50px; 
+            position: relative; 
+            padding-bottom: 15px; 
+        }
+        .section-title::after { 
+            content: ''; position: absolute; bottom: 0; left: 50%; 
+            transform: translateX(-50%); width: 60px; height: 3px; background: var(--primary); 
+        }
+
+        /* --- Botões --- */
         .btn {
             background: var(--primary);
             color: var(--bg-dark);
-            padding: 15px 35px;
+            padding: 14px 30px;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: var(--transition);
             text-transform: uppercase;
-            border: none;
-            cursor: pointer;
             display: inline-block;
             letter-spacing: 1px;
+            border: 1px solid var(--primary);
         }
-        .btn:hover { transform: translateY(-3px); background: #e0bc7a; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3); }
+        .btn:hover { 
+            background: transparent; 
+            color: var(--primary);
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); 
+        }
 
         /* --- Header --- */
         header {
-            background: rgba(5, 15, 11, 0.95);
+            background: rgba(5, 15, 11, 0.98);
             backdrop-filter: blur(10px);
-            padding: 0 5%;
             height: var(--header-height);
             position: fixed;
             width: 100%;
@@ -68,87 +85,126 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+            padding: 0 5%;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
         }
 
-        .logo-img { height: 60px; width: auto; transition: var(--transition); }
-        .logo-img:hover { transform: scale(1.05); }
+        .logo-img { height: 50px; width: auto; }
 
-        .social-links-header a { color: var(--text-light); font-size: 1.4rem; margin-left: 20px; transition: var(--transition); }
+        .social-links-header a { 
+            color: var(--text-light); 
+            font-size: 1.3rem; 
+            margin-left: 15px; 
+            transition: var(--transition); 
+        }
         .social-links-header a:hover { color: var(--primary); }
 
         /* --- Hero Section --- */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(5, 15, 11, 0.7), rgba(5, 15, 11, 0.9)), url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop') center/cover;
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(5, 15, 11, 1)), 
+                        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=2070&auto=format&fit=crop') center/cover;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
+            padding-top: var(--header-height);
         }
 
-        .badge-kids { border: 1px solid var(--primary); color: var(--primary); padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; margin-bottom: 25px; display: inline-block; text-transform: uppercase; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--primary); margin-bottom: 20px; }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px auto; color: #ccc; }
+        .hero-content { max-width: 800px; padding: 20px; }
+        .badge-kids { 
+            border: 1px solid var(--primary); 
+            color: var(--primary); 
+            padding: 6px 16px; 
+            border-radius: 50px; 
+            font-size: 0.75rem; 
+            margin-bottom: 20px; 
+            display: inline-block; 
+        }
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            color: var(--primary); 
+            line-height: 1.1;
+            margin-bottom: 20px; 
+        }
+        .hero p { font-size: 1.2rem; margin-bottom: 35px; color: #ddd; }
 
         /* --- Profissionais --- */
         .professionals { padding: 100px 0; }
-        .prof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        
-        .prof-card { 
-            background: var(--bg-card); 
-            padding: 30px; 
-            border-radius: 15px; 
-            display: flex; 
-            align-items: center; 
+        .prof-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 25px; 
-            border: 1px solid rgba(255,255,255,0.03); 
-            transition: var(--transition); 
         }
-        .prof-card:hover { border-color: var(--primary); background: #16221c; }
-        
-        .prof-img-wrapper { width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 3px solid var(--primary); flex-shrink: 0; }
-        .prof-img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .prof-info h3 { font-size: 1.4rem; margin-bottom: 5px; color: var(--primary); }
-        .prof-info p { color: var(--text-muted); font-size: 0.9rem; }
-
-        /* --- Agendamento --- */
-        .booking { padding: 100px 0; background: var(--secondary); }
-        .booking-list { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
-        .booking-item { 
-            background: var(--bg-card); 
-            padding: 25px 35px; 
-            border-radius: 12px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+        .prof-card {
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
             transition: var(--transition);
-            border-left: 4px solid transparent;
         }
-        .booking-item:hover { transform: scale(1.02); border-left-color: var(--primary); }
-        
-        .book-service-title { font-size: 1.2rem; display: block; margin-bottom: 5px; }
-        .book-service-price { color: var(--primary); font-weight: bold; font-size: 1.1rem; margin-right: 15px; }
-        .book-service-time { color: var(--text-muted); font-size: 0.9rem; }
+        .prof-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .prof-img-wrapper { 
+            width: 120px; height: 120px; border-radius: 50%; 
+            margin: 0 auto 20px; overflow: hidden; border: 3px solid var(--primary); 
+        }
+        .prof-img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- Info Card --- */
-        .info-section { padding: 100px 0; background: var(--bg-dark); }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-        .info-card { background: var(--bg-card); padding: 40px; border-radius: 20px; border: 1px solid rgba(197, 160, 89, 0.1); }
-        .info-card h3 { color: var(--primary); margin-bottom: 30px; font-size: 1.6rem; display: flex; align-items: center; gap: 15px; }
-        .hours-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
-        .hours-row:last-child { border: none; }
+        /* --- Serviços --- */
+        .booking { padding: 100px 0; background: #08120e; }
+        .booking-list { max-width: 800px; margin: 0 auto; }
+        .booking-item {
+            background: var(--bg-card);
+            margin-bottom: 15px;
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--primary);
+        }
+        .service-info h4 { font-size: 1.1rem; color: var(--text-light); }
+        .service-info span { color: var(--primary); font-weight: bold; margin-right: 10px; }
+        .service-info small { color: var(--text-muted); }
 
-        footer { padding: 50px 0; text-align: center; background: #000; border-top: 1px solid var(--primary); }
-        .social-footer { margin-top: 20px; }
+        /* --- Avaliações --- */
+        .reviews { padding: 100px 0; background: var(--bg-dark); }
+        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .review-card { background: var(--bg-card); padding: 30px; border-radius: 10px; position: relative; }
+        .stars { color: #f1c40f; margin-bottom: 10px; }
+        .review-card p { font-style: italic; font-size: 0.95rem; }
+        .review-author { margin-top: 15px; display: block; font-weight: bold; color: var(--primary); }
+
+        /* --- Mapa e Contato --- */
+        .map-section { padding: 100px 0; }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .map-container iframe { width: 100%; height: 100%; min-height: 400px; border: none; }
+        .contact-info { padding: 40px; }
+        .info-item { margin-bottom: 25px; }
+        .info-item i { color: var(--primary); margin-right: 15px; font-size: 1.2rem; }
+
+        /* --- Footer --- */
+        footer { padding: 60px 0; text-align: center; background: #000; border-top: 1px solid var(--primary); }
+        .social-footer { margin-top: 25px; }
         .social-footer a { color: var(--text-light); font-size: 1.8rem; margin: 0 15px; transition: var(--transition); }
-        .social-footer a:hover { color: var(--primary); }
+        .social-footer a:hover { color: var(--primary); transform: scale(1.2); }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .booking-item { flex-direction: column; text-align: center; gap: 20px; }
-            .section-title { font-size: 2rem; }
+        /* --- Responsividade --- */
+        @media (max-width: 992px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .booking-item { flex-direction: column; text-align: center; gap: 15px; }
+            .header { padding: 0 20px; }
         }
     </style>
 </head>
@@ -163,11 +219,11 @@
     </header>
 
     <section class="hero">
-        <div class="container">
+        <div class="hero-content">
             <span class="badge-kids">✂️ Atendemos Crianças</span>
-            <h1>Barbearia Madero</h1>
-            <p>Onde a tradição encontra o estilo moderno. Agende sua experiência premium no coração de Porto Velho.</p>
-            <a href="#agendar" class="btn">Agendar Agora</a>
+            <h1>Corte de Respeito Estilo de Vida</h1>
+            <p>Experiência premium em barbearia clássica no coração de Porto Velho.</p>
+            <a href="#agendar" class="btn">Agendar Experiência</a>
         </div>
     </section>
 
@@ -176,31 +232,19 @@
             <h2 class="section-title">Nossos Mestres</h2>
             <div class="prof-grid">
                 <div class="prof-card">
-                    <div class="prof-img-wrapper">
-                        <img src="vanclei.jpg" alt="Vanclei" class="prof-img">
-                    </div>
-                    <div class="prof-info">
-                        <h3>Vanclei Santos</h3>
-                        <p>Especialista em Cortes Modernos</p>
-                    </div>
+                    <div class="prof-img-wrapper"><img src="vanclei.jpg" alt="Vanclei" class="prof-img"></div>
+                    <h3>Vanclei Santos</h3>
+                    <p>Especialista em Degradê</p>
                 </div>
                 <div class="prof-card">
-                    <div class="prof-img-wrapper">
-                        <img src="joao.jpg" alt="João" class="prof-img">
-                    </div>
-                    <div class="prof-info">
-                        <h3>João</h3>
-                        <p>Mestre Barbeiro</p>
-                    </div>
+                    <div class="prof-img-wrapper"><img src="joao.jpg" alt="João" class="prof-img"></div>
+                    <h3>João</h3>
+                    <p>Mestre da Navalha</p>
                 </div>
                 <div class="prof-card">
-                    <div class="prof-img-wrapper">
-                        <img src="ruan.jpg" alt="Ruan" class="prof-img">
-                    </div>
-                    <div class="prof-info">
-                        <h3>Ruan</h3>
-                        <p>Visagista e Especialista</p>
-                    </div>
+                    <div class="prof-img-wrapper"><img src="ruan.jpg" alt="Ruan" class="prof-img"></div>
+                    <h3>Ruan</h3>
+                    <p>Visagista</p>
                 </div>
             </div>
         </div>
@@ -208,61 +252,75 @@
 
     <section id="agendar" class="booking">
         <div class="container">
-            <h2 class="section-title">Serviços & Preços</h2>
+            <h2 class="section-title">Serviços e Preços</h2>
             <div class="booking-list">
                 <div class="booking-item">
-                    <div>
-                        <span class="book-service-title">Corte (Degradê/Social)</span>
-                        <span class="book-service-price">R$ 40,00</span>
-                        <span class="book-service-time"><i class="far fa-clock"></i> 45 min</span>
+                    <div class="service-info">
+                        <h4>Corte Social/Degradê</h4>
+                        <span>R$ 40,00</span> <small><i class="far fa-clock"></i> 45 min</small>
                     </div>
-                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Olá, quero agendar um Corte." class="btn btn-sm" target="_blank">Agendar</a>
+                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Agendar Corte" class="btn" target="_blank">Reservar</a>
                 </div>
-
-                <div class="booking-item" style="border: 1px solid var(--primary);">
-                    <div>
-                        <span class="book-service-title">Corte com Vanclei Santos</span>
-                        <span class="book-service-price">R$ 50,00</span>
-                        <span class="book-service-time"><i class="far fa-clock"></i> 45 min</span>
-                    </div>
-                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Olá, quero agendar com o Vanclei." class="btn btn-sm" target="_blank">Agendar</a>
-                </div>
-
                 <div class="booking-item">
-                    <div>
-                        <span class="book-service-title">Barba</span>
-                        <span class="book-service-price">R$ 25,00</span>
-                        <span class="book-service-time"><i class="far fa-clock"></i> 30 min</span>
+                    <div class="service-info">
+                        <h4>Barba Completa</h4>
+                        <span>R$ 25,00</span> <small><i class="far fa-clock"></i> 30 min</small>
                     </div>
-                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Olá, quero agendar Barba." class="btn btn-sm" target="_blank">Agendar</a>
+                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Agendar Barba" class="btn" target="_blank">Reservar</a>
                 </div>
-
                 <div class="booking-item">
-                    <div>
-                        <span class="book-service-title">Corte + Barba</span>
-                        <span class="book-service-price">R$ 65,00</span>
-                        <span class="book-service-time"><i class="far fa-clock"></i> 60 min</span>
+                    <div class="service-info">
+                        <h4>Combo Madero (Corte + Barba)</h4>
+                        <span>R$ 65,00</span> <small><i class="far fa-clock"></i> 1h 15min</small>
                     </div>
-                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Olá, quero agendar Combo Corte e Barba." class="btn btn-sm" target="_blank">Agendar</a>
+                    <a href="https://api.whatsapp.com/send?phone=5569993609069&text=Agendar Combo" class="btn" target="_blank">Reservar</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="info-section">
+    <section class="reviews">
         <div class="container">
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3><i class="fas fa-history"></i> Horários</h3>
-                    <div class="hours-row"><span>Segunda a Sexta</span> <span>09:00 - 19:00</span></div>
-                    <div class="hours-row"><span>Terça (Especial)</span> <span>09:00 - 20:00</span></div>
-                    <div class="hours-row"><span>Sábado</span> <span>09:00 - 19:00</span></div>
+            <h2 class="section-title">O que dizem os clientes</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Melhor atendimento de Porto Velho. O Vanclei é fera demais no degradê!"</p>
+                    <span class="review-author">- Ricardo Silva</span>
                 </div>
-                <div class="info-card">
-                    <h3><i class="fas fa-map-marked-alt"></i> Onde Estamos</h3>
-                    <p>Rua Alexandre Guimarães, 1189</p>
-                    <p>Areal - Porto Velho/RO</p>
-                    <p style="margin-top: 15px; color: var(--primary);"><strong>Pagamento:</strong> PIX, Cartões e Dinheiro</p>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Ambiente nota 10, café bom e o corte sempre impecável. Recomendo."</p>
+                    <span class="review-author">- Marcos Oliveira</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="map-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.4357287964436!2d-63.8904664!3d-8.7618994!2m3!1f0!2f0!3f0!3m2!1i1024!2i1024!2{8i64!4m5!3m4!1s0x92325ce68b42296d:0x644c9b9f71c1b123!8m2!3d-8.7618994!4d-63.8904664" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+                <div class="contact-info">
+                    <h2 style="color:var(--primary); margin-bottom: 20px;">Visite-nos</h2>
+                    <div class="info-item">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Rua Alexandre Guimarães, 1189, Areal<br>Porto Velho - RO</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Seg - Sáb: 09h às 19h</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(69) 99360-9069</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-credit-card"></i>
+                        <span>PIX, Crédito e Débito</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -270,8 +328,8 @@
 
     <footer>
         <div class="container">
-            <img src="logo.png" alt="Madero" style="height: 50px; margin-bottom: 20px;">
-            <p>&copy; 2026 Barbearia Madero. Porto Velho - RO.</p>
+            <img src="logo.png" alt="Madero" style="height: 60px;">
+            <p style="margin-top: 20px;">&copy; 2026 Barbearia Madero. Todos os direitos reservados.</p>
             <div class="social-footer">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-whatsapp"></i></a>
@@ -281,17 +339,18 @@
 
     <script>
         const sr = ScrollReveal({
-            origin: 'bottom',
-            distance: '50px',
-            duration: 1000,
+            origin: 'top',
+            distance: '60px',
+            duration: 1500,
+            delay: 200,
             reset: false
         });
 
-        sr.reveal('.hero h1', { delay: 200 });
-        sr.reveal('.hero p', { delay: 400 });
-        sr.reveal('.prof-card', { interval: 200 });
-        sr.reveal('.booking-item', { interval: 150 });
-        sr.reveal('.info-card', { interval: 200 });
+        sr.reveal('.hero-content, .section-title');
+        sr.reveal('.prof-card', { interval: 200, origin: 'bottom' });
+        sr.reveal('.booking-item', { interval: 100, origin: 'left' });
+        sr.reveal('.review-card', { interval: 200 });
+        sr.reveal('.contact-wrapper', { origin: 'bottom' });
     </script>
 </body>
 </html>
