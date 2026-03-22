@@ -13,16 +13,17 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="sua-logo.png" alt="Madero Logo" class="logo-img"> 
+                <img src="logo.png" alt="Madero Logo" class="logo-img"> 
                 <span>MADERO</span>
             </div>
             <nav class="nav-desktop">
-                <a href="index.html">Início</a>
+                <a href="index.html" class="active">Início</a>
                 <a href="servicos.html">Serviços</a>
                 <a href="profissionais.html">Profissionais</a>
             </nav>
             <div class="social-top">
                 <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </header>
@@ -38,15 +39,51 @@
         </div>
     </section>
 
-    <section class="location-summary">
+    <section class="location">
         <div class="container">
-            <div class="loc-card">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>Rua Alexandre Guimarães, 1189, Areal - Porto Velho</p>
-                <a href="https://maps.google.com" target="_blank">Como Chegar</a>
+            <div class="location-wrapper">
+                <div class="location-text">
+                    <h2>Onde Estamos</h2>
+                    <div class="location-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Rua Alexandre Guimarães, 1189, Areal - Porto Velho</p>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h3>Formas de Pagamento</h3>
+                        <div class="payment-icons">
+                            <i class="fas fa-money-bill-wave" title="Dinheiro"></i>
+                            <i class="fas fa-credit-card" title="Cartão"></i>
+                            <i class="fas fa-mobile-alt" title="PIX"></i>
+                        </div>
+                        <ul style="list-style: none; color: var(--text-gold); font-weight: 600;">
+                            <li>• Dinheiro</li>
+                            <li>• Cartão de Crédito/Débito</li>
+                            <li>• PIX</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="map-box">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.7554900742544!2d-63.8931105!3d-8.7619992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325cb973169f41%3A0xc665e3158f121df7!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Areal%2C%20Porto%20Velho%20-%20RO%2C%2076804-373!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>© 2026 Barbearia Madero | Rua Alexandre Guimarães, 1189 - Porto Velho</p>
+        </div>
+    </footer>
 
 </body>
 </html>
