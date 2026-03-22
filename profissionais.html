@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css?v=2026.final">
     
     <style>
-        /* Estilos específicos desta página */
         .page-header {
             padding: 160px 0 80px;
             text-align: center;
@@ -51,9 +50,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
-        .prof-card:hover::before {
-            transform: scaleX(1);
-        }
+        .prof-card:hover::before { transform: scaleX(1); }
 
         .prof-img {
             width: 150px;
@@ -78,7 +75,6 @@
             padding: 14px 30px;
             border-radius: 8px;
             font-weight: 800;
-            text-decoration: none !important;
             transition: 0.3s;
             text-transform: uppercase;
             font-size: 0.85rem;
@@ -90,6 +86,7 @@
         .btn-prof:hover {
             background: #fff !important;
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -122,7 +119,7 @@
         <div class="container">
             <h2 style="font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--gold);">Mestres da Navalha</h2>
             <div style="width: 80px; height: 3px; background: var(--gold); margin: 20px auto;"></div>
-            <p style="opacity: 0.9; max-width: 600px; margin: 0 auto; font-weight: 300;">Conheça os especialistas dedicados a transformar sua imagem com precisão e estilo clássico.</p>
+            <p style="opacity: 0.9; max-width: 600px; margin: 0 auto; font-weight: 300;">Especialistas de Porto Velho dedicados a transformar sua imagem com precisão.</p>
         </div>
     </section>
 
@@ -131,37 +128,32 @@
             <div class="prof-grid">
                 
                 <div class="prof-card">
-                    <img src="joao.jpg" alt="Barbeiro João" class="prof-img">
+                    <img src="joao.jpg" alt="Barbeiro João" class="prof-img" onerror="this.src='https://via.placeholder.com/150/222/d4af37?text=JOÃO'">
                     <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 8px; font-size: 1.5rem;">João</h3>
                     <p style="color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; font-weight: 600;">Barba & Toalha Quente</p>
-                    <a href="servicos.html" class="btn-prof">Ver Horários</a>
+                    <a href="servicos.html" class="btn-prof">Agendar com João</a>
                 </div>
 
                 <div class="prof-card">
-                    <img src="ruan.jpg" alt="Barbeiro Ruan" class="prof-img">
+                    <img src="ruan.jpg" alt="Barbeiro Ruan" class="prof-img" onerror="this.src='https://via.placeholder.com/150/222/d4af37?text=RUAN'">
                     <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 8px; font-size: 1.5rem;">Ruan</h3>
                     <p style="color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; font-weight: 600;">Degradê e Freestyle</p>
-                    <a href="servicos.html" class="btn-prof">Ver Horários</a>
+                    <a href="servicos.html" class="btn-prof">Agendar com Ruan</a>
                 </div>
 
                 <div class="prof-card">
-                    <img src="vanclei.jpg" alt="Barbeiro Vanclei" class="prof-img">
+                    <img src="vanclei.jpg" alt="Barbeiro Vanclei" class="prof-img" onerror="this.src='https://via.placeholder.com/150/222/d4af37?text=VANCLEI'">
                     <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 8px; font-size: 1.5rem;">Vanclei</h3>
                     <p style="color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; font-weight: 600;">Visagismo e Clássicos</p>
-                    <a href="servicos.html" class="btn-prof">Ver Horários</a>
+                    <a href="servicos.html" class="btn-prof">Agendar com Vanclei</a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 80px 0; background: #000; border-top: 1px solid rgba(212,175,55,0.15);">
+    <footer style="text-align: center; padding: 60px 0; background: #000; border-top: 1px solid rgba(212,175,55,0.15);">
         <div class="container">
-            <div class="logo-madero" style="font-size: 1.2rem; margin-bottom: 30px;">MADERO</div>
-            <div style="margin-bottom: 30px; font-size: 1.8rem; display: flex; justify-content: center; gap: 30px;">
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
             <p style="opacity: 0.5; font-size: 0.8rem; letter-spacing: 1px;">© 2026 Barbearia Madero | Porto Velho - RO</p>
         </div>
     </footer>
