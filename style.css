@@ -36,7 +36,7 @@ body {
     padding: 0 25px; 
 }
 
-/* ANTI-PURPLE FIX - Garante que links não fiquem roxos */
+/* ANTI-PURPLE FIX */
 a, a:visited, a:active, a:focus {
     text-decoration: none !important;
     color: inherit !important;
@@ -70,6 +70,11 @@ header {
     gap: 15px;
 }
 
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo-icon {
     font-size: 2rem;
     color: var(--gold) !important;
@@ -82,6 +87,7 @@ header {
     color: var(--gold) !important;
     font-weight: 700;
     letter-spacing: 3px;
+    line-height: 1;
 }
 
 .logo-barbearia {
@@ -111,12 +117,76 @@ header {
     color: var(--gold) !important;
 }
 
-/* --- BOTÕES DE AÇÃO --- */
+.social-top a {
+    color: #fff !important;
+    font-size: 1.2rem;
+    margin-left: 15px;
+    transition: 0.3s;
+}
+
+.social-top a:hover {
+    color: var(--gold) !important;
+}
+
+/* --- HERO SECTION (HOME) --- */
+.hero {
+    padding-top: 90px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(5,7,6,0.75), rgba(5,7,6,0.95)), url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 0 20px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.gold-divider {
+    width: 100px;
+    height: 3px;
+    background: var(--gold);
+    margin: 20px auto 30px;
+    opacity: 0.6;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 45px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    line-height: 1.6;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* --- BOTÕES --- */
 .btn-main {
     display: inline-block;
     background: var(--gold);
     color: #000 !important;
-    padding: 14px 30px;
+    padding: 14px 35px;
     border-radius: 8px;
     font-weight: 700;
     text-transform: uppercase;
@@ -124,9 +194,7 @@ header {
     transition: var(--transition);
     border: 2px solid var(--gold);
     cursor: pointer;
-    text-align: center;
     font-size: 0.85rem;
-    width: 100%; /* Ocupa o card todo se necessário */
 }
 
 .btn-main:hover {
@@ -139,7 +207,7 @@ header {
     display: inline-block;
     background: transparent;
     color: #fff !important;
-    padding: 14px 30px;
+    padding: 14px 35px;
     border-radius: 8px;
     font-weight: 600;
     text-transform: uppercase;
@@ -154,7 +222,62 @@ header {
     color: var(--gold) !important;
 }
 
-/* --- SERVICES & CARDS --- */
+/* --- LOCALIZAÇÃO (HOME) --- */
+.location {
+    padding: 100px 0;
+    background: var(--bg-black);
+}
+
+.location-wrapper {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 60px;
+    align-items: start; 
+    background: rgba(26, 31, 29, 0.6);
+    padding: 50px; 
+    border-radius: 30px; 
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.section-tag {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: block;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    font-size: 2.8rem;
+    margin: 10px 0 25px;
+}
+
+.contact-info p {
+    margin-bottom: 20px;
+    opacity: 0.7;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.contact-info i {
+    color: var(--gold);
+    margin-right: 12px;
+    width: 20px;
+}
+
+.map-box { 
+    height: 450px; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* --- SERVIÇOS & CARDS --- */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -173,11 +296,6 @@ header {
     min-height: 220px;
 }
 
-.service-card.highlight {
-    border-color: rgba(212, 175, 55, 0.4);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
 .service-card:hover {
     border-color: var(--gold);
     transform: translateY(-8px);
@@ -189,7 +307,6 @@ header {
     color: #fff;
     margin-bottom: 12px;
     font-size: 1.2rem;
-    letter-spacing: 1px;
 }
 
 .service-info .price {
@@ -200,93 +317,9 @@ header {
     margin-bottom: 8px;
 }
 
-.service-info .time {
-    font-size: 0.8rem;
-    opacity: 0.5;
-    display: block;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* --- MODAL & CALENDÁRIO --- */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000; 
-    left: 0; top: 0;
-    width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.95);
-    align-items: center; 
-    justify-content: center; 
-    backdrop-filter: blur(12px);
-}
-
-.close-modal {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-.close-modal:hover { opacity: 1; color: var(--gold); }
-
-.day-item {
-    min-width: 65px;
-    height: 80px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(212, 175, 55, 0.1);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.3s;
-    flex-shrink: 0;
-}
-
-.day-item span { font-size: 0.6rem; text-transform: uppercase; opacity: 0.6; margin-bottom: 5px; }
-.day-item strong { font-size: 1.3rem; color: #fff; }
-
-.day-item:hover { background: rgba(212, 175, 55, 0.1); }
-
-.day-item.active { 
-    background: var(--gold) !important; 
-    border-color: var(--gold);
-}
-.day-item.active strong, .day-item.active span { color: #000 !important; opacity: 1; }
-
-/* --- GRID DE HORÁRIOS --- */
-.time-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.time-slot {
-    background: rgba(255,255,255,0.04);
-    padding: 14px;
-    text-align: center;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    border: 1px solid rgba(212, 175, 55, 0.05);
-    transition: 0.3s;
-    font-size: 0.9rem;
-}
-
-.time-slot:hover {
-    background: var(--gold);
-    color: #000;
-    box-shadow: 0 0 15px var(--gold-glow);
-}
-
 /* --- PAGAMENTOS --- */
 .payment-section { margin-top: 40px; }
+
 .payment-label { 
     display: block; 
     font-size: 0.7rem; 
@@ -315,17 +348,64 @@ header {
 .payment-icon { width: 22px; height: 22px; object-fit: contain; }
 .payment-item span { font-size: 0.8rem; font-weight: 500; opacity: 0.8; }
 
+/* --- FOOTER --- */
+.footer-content {
+    text-align: center;
+    padding: 60px 0;
+    background: var(--bg-black);
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-logo {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    letter-spacing: 5px;
+}
+
+.social-links {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.5) !important;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--gold) !important;
+}
+
+.copyright {
+    opacity: 0.4;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes fadeInUp { 
+    from { opacity: 0; transform: translateY(30px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 992px) {
     .nav-desktop { display: none; }
+    .location-wrapper { 
+        grid-template-columns: 1fr; 
+        padding: 30px; 
+        gap: 40px;
+        border-radius: 0;
+    }
 }
 
 @media (max-width: 480px) {
-    .time-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-content h1 { font-size: 3rem !important; }
-}
-
-@keyframes fadeInUp { 
-    from { opacity: 0; transform: translateY(20px); } 
-    to { opacity: 1; transform: translateY(0); } 
+    .hero-title { font-size: 3rem !important; }
+    .payment-grid { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; }
+    .btn-main, .btn-outline { width: 100%; }
 }
