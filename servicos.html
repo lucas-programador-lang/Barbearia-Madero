@@ -30,32 +30,14 @@
 
     <section class="page-header">
         <div class="container">
-            <h2>Nossos Serviços</h2>
-            <p>Excelência em cada detalhe. Escolha seu serviço e agende agora.</p>
+            <h2>Cardápio de Serviços</h2>
+            <p>Selecione o serviço desejado para prosseguir com o agendamento.</p>
         </div>
     </section>
 
-    <section class="services" style="padding: 60px 0;">
+    <section class="services" style="padding: 40px 0 80px;">
         <div class="container">
-            <div class="services-grid">
-                <div class="service-card highlight">
-                    <div class="service-info">
-                        <h3>Corte + Barba + Selagem + Sobrancelha</h3>
-                        <span class="price">R$ 155,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 120 min</span>
-                    </div>
-                    <button class="btn-book" onclick="openBooking('Combo Master Madero')">Agendar</button>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Corte (Degradê/Social)</h3>
-                        <span class="price">R$ 40,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 45 min</span>
-                    </div>
-                    <button class="btn-book" onclick="openBooking('Corte (Degradê/Social)')">Agendar</button>
-                </div>
-
+            <div class="services-grid" id="servicesGrid">
                 </div>
         </div>
     </section>
@@ -65,36 +47,51 @@
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
             <div class="booking-header">
-                <h3 id="selectedServiceName" style="color: var(--gold); font-family: 'Cinzel', serif;">Serviço</h3>
-                <p id="currentMonthYear" style="font-size: 0.8rem; opacity: 0.7; text-transform: uppercase;">Março 2026</p>
+                <h3 id="selectedServiceName">Serviço</h3>
+                <p id="currentMonthYear">MARÇO / ABRIL 2026</p>
             </div>
 
             <div class="calendar-strip">
-                <div class="days-container">
-                    <div class="day-item"><span>Dom</span><strong>22</strong></div>
-                    <div class="day-item active"><span>Seg</span><strong>23</strong></div>
-                    <div class="day-item"><span>Ter</span><strong>24</strong></div>
-                    <div class="day-item"><span>Qua</span><strong>25</strong></div>
-                    <div class="day-item"><span>Qui</span><strong>26</strong></div>
+                <div class="days-container" id="daysContainer">
+                    <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
+                    <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '31/03')"><span>Ter</span><strong>31</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '01/04')"><span>Qua</span><strong>01</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '02/04')"><span>Qui</span><strong>02</strong></div>
                 </div>
             </div>
 
             <div class="prof-selection">
-                <h4 style="text-align: center; font-size: 0.8rem; margin-bottom: 20px; opacity: 0.8;">Selecione um profissional</h4>
                 <div class="prof-circles">
-                    <div class="prof-item" onclick="selectProf(this)">
+                    <div class="prof-item" onclick="selectProf(this, 'João')">
                         <img src="joao.jpg" alt="João">
                         <span>João</span>
                     </div>
-                    <div class="prof-item" onclick="selectProf(this)">
+                    <div class="prof-item" onclick="selectProf(this, 'Ruan')">
                         <img src="ruan.jpg" alt="Ruan">
                         <span>Ruan</span>
+                    </div>
+                    <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
+                        <img src="vanclei.jpg" alt="Vanclei">
+                        <span>Vanclei</span>
                     </div>
                 </div>
             </div>
 
-            <div class="booking-footer" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                <p id="statusMessage"><i class="far fa-clock"></i> Escolha um profissional para ver horários</p>
+            <div id="timeSelection" style="display:none; margin-top: 20px;">
+                <h4 style="font-size: 0.8rem; text-align: center; margin-bottom: 15px;">Horários Disponíveis</h4>
+                <div class="time-grid">
+                    <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
+                    <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
+                    <div class="time-slot" onclick="finishBooking('11:00')">11:00</div>
+                    <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
+                    <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
+                    <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
+                </div>
+            </div>
+
+            <div class="booking-footer" id="bookingInstruction">
+                <p><i class="far fa-user"></i> Selecione um profissional para ver horários</p>
             </div>
         </div>
     </div>
@@ -110,32 +107,90 @@
     </footer>
 
     <script>
+        // Banco de Dados de Serviços
+        const listaServicos = [
+            { nome: "Barba", preco: "25,00", tempo: "30 min" },
+            { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
+            { nome: "Black Mask (Limpeza)", preco: "25,00", tempo: "30 min" },
+            { nome: "Coloração", preco: "40,00", tempo: "45 min" },
+            { nome: "Corte (Degradê/Social)", preco: "40,00", tempo: "45 min" },
+            { nome: "Corte Máquina (2 pentes)", preco: "35,00", tempo: "30 min" },
+            { nome: "Corte + Barba", preco: "65,00", tempo: "60 min" },
+            { nome: "Corte + Barba + Selagem", preco: "145,00", tempo: "120 min", destaque: true },
+            { nome: "Corte + Barba + Selagem + Sobrancelha", preco: "155,00", tempo: "120 min", destaque: true },
+            { nome: "Corte + Barba + Sobrancelha", preco: "75,00", tempo: "60 min" },
+            { nome: "Corte + Hidratação", preco: "65,00", tempo: "75 min" },
+            { nome: "Corte + Sobrancelha", preco: "50,00", tempo: "45 min" },
+            { nome: "Hidratação", preco: "25,00", tempo: "30 min" },
+            { nome: "Pacote 165", preco: "165,00", tempo: "60 min", obs: "A partir de" },
+            { nome: "Penteado", preco: "25,00", tempo: "30 min" },
+            { nome: "Penteado + Pezinho", preco: "35,00", tempo: "30 min" },
+            { nome: "Pezinho da Barba", preco: "15,00", tempo: "15 min" },
+            { nome: "Pezinho do Cabelo", preco: "10,00", tempo: "15 min" },
+            { nome: "Raspar na Lâmina", preco: "30,00", tempo: "30 min" },
+            { nome: "Raspar na Máquina", preco: "20,00", tempo: "15 min" },
+            { nome: "Selagem", preco: "80,00", tempo: "60 min", obs: "A partir de" }
+        ];
+
+        // Renderizar Serviços
+        const grid = document.getElementById('servicesGrid');
+        listaServicos.forEach(s => {
+            const card = document.createElement('div');
+            card.className = `service-card ${s.destaque ? 'highlight' : ''}`;
+            card.innerHTML = `
+                <div class="service-info">
+                    <h3>${s.nome}</h3>
+                    <span class="price">${s.obs ? '<small style="font-size:0.6rem; display:block">'+s.obs+'</small>' : ''} R$ ${s.preco}</span>
+                    <span class="time"><i class="far fa-clock"></i> ${s.tempo}</span>
+                </div>
+                <button class="btn-book" onclick="openBooking('${s.nome}')">Agendar</button>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Lógica do Modal e Agendamento
+        let agendamento = { servico: '', prof: '', data: '30/03', hora: '' };
         const modal = document.getElementById('bookingModal');
 
         function openBooking(serviceName) {
+            agendamento.servico = serviceName;
             document.getElementById('selectedServiceName').innerText = serviceName;
             modal.style.display = 'flex';
         }
 
         function closeBooking() {
             modal.style.display = 'none';
+            resetModal();
         }
 
-        function selectProf(element) {
+        function selectDay(el, data) {
+            document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
+            el.classList.add('active');
+            agendamento.data = data;
+        }
+
+        function selectProf(el, nome) {
             document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-            element.classList.add('active');
-            
-            // Simulação de mudança de status
-            const nome = element.querySelector('span').innerText;
-            document.getElementById('statusMessage').innerHTML = `<i class="fas fa-check-circle" style="color: var(--gold)"></i> Horários disponíveis para ${nome}`;
+            el.classList.add('active');
+            agendamento.prof = nome;
+            document.getElementById('timeSelection').style.display = 'block';
+            document.getElementById('bookingInstruction').style.display = 'none';
         }
 
-        // Fechar ao clicar fora do modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeBooking();
-            }
+        function finishBooking(hora) {
+            agendamento.hora = hora;
+            const msg = `Olá! Gostaria de agendar:%0A%0A*Serviço:* ${agendamento.servico}%0A*Profissional:* ${agendamento.prof}%0A*Data:* ${agendamento.data}%0A*Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
+            window.open(`https://api.whatsapp.com/send?phone=5569993609069&text=${msg}`, '_blank');
+            closeBooking();
         }
+
+        function resetModal() {
+            document.getElementById('timeSelection').style.display = 'none';
+            document.getElementById('bookingInstruction').style.display = 'block';
+            document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
+        }
+
+        window.onclick = (e) => { if(e.target == modal) closeBooking(); }
     </script>
 </body>
 </html>
