@@ -59,6 +59,24 @@
 
         .days-container::-webkit-scrollbar { display: none; }
 
+        /* Estilo dos itens do dia gerados pelo JS */
+        .day-item {
+            min-width: 60px;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .day-item span { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
+        .day-item strong { font-size: 1.1rem; color: var(--gold); }
+        .day-item.active { background: var(--gold); border-color: var(--gold); }
+        .day-item.active span, .day-item.active strong { color: #000; }
+
         /* --- FOTOS DOS BARBEIROS --- */
         .prof-circles {
             display: flex;
@@ -104,12 +122,40 @@
 
         .prof-item.active span { color: var(--gold); }
 
+        /* Grade de Horários */
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .time-slot {
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .time-slot:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
         .modal-content {
             max-width: 450px;
             max-height: 90vh;
             overflow-y: auto;
             background: #0a0c0b;
             border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            padding: 30px;
+            border-radius: 15px;
         }
 
         @media (max-width: 480px) {
@@ -155,7 +201,7 @@
         </div>
     </section>
 
-    <div id="bookingModal" class="modal">
+    <div id="bookingModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
@@ -168,8 +214,7 @@
                 <button class="nav-arrow" onclick="scrollDays('left')">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <div class="days-container" id="daysContainer">
-                    </div>
+                <div class="days-container" id="daysContainer"></div>
                 <button class="nav-arrow" onclick="scrollDays('right')">
                     <i class="fas fa-chevron-right"></i>
                 </button>
