@@ -6,31 +6,18 @@
     <title>Equipe | Barbearia Madero</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=5.2">
     <style>
-        /* Ajuste para evitar o roxo nos links da equipe */
-        .btn-book, .btn-book:visited {
-            display: inline-block;
-            background: var(--gold);
-            color: #000 !important; /* Força o preto no fundo dourado */
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 800;
-            text-decoration: none;
-            transition: var(--transition);
-            text-transform: uppercase;
-            font-size: 0.8rem;
+        .page-header {
+            padding: 150px 0 60px;
+            text-align: center;
+            background: linear-gradient(rgba(5,7,6,0.85), rgba(5,7,6,1)), url('barber-bg.jpg');
+            background-size: cover;
         }
 
-        .btn-book:hover {
-            background: #fff;
-            transform: scale(1.05);
-        }
-
-        /* Layout Grid */
         .prof-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
@@ -38,7 +25,7 @@
         .prof-card {
             background: var(--bg-card);
             border: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 40px 30px;
+            padding: 40px 25px;
             text-align: center;
             border-radius: 15px;
             transition: var(--transition);
@@ -51,36 +38,34 @@
         }
 
         .prof-img {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 25px;
-            border: 3px solid var(--gold);
+            border: 2px solid var(--gold);
             padding: 5px;
             transition: var(--transition);
         }
 
-        .prof-card h3 {
-            font-family: 'Cinzel', serif;
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+        /* Botão específico para evitar link roxo/visitado */
+        .btn-prof, .btn-prof:visited {
+            display: inline-block;
+            background: var(--gold) !important;
+            color: #000 !important;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 800;
+            text-decoration: none !important;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border: none;
         }
 
-        /* Estilização do Header da Página */
-        .page-header {
-            padding: 150px 0 60px;
-            text-align: center;
-            background: linear-gradient(rgba(5,7,6,0.8), rgba(5,7,6,1)), url('barber-bg.jpg');
-            background-size: cover;
-        }
-
-        .page-header h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 15px;
+        .btn-prof:hover {
+            background: #fff !important;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -89,25 +74,30 @@
     <header>
         <div class="container header-flex">
             <a href="index.html" class="logo-container">
-                <img src="logo.png" alt="Madero Logo" class="logo-img"> 
-                <span class="logo-text">MADERO</span>
+                <i class="fas fa-cut logo-icon"></i>
+                <div style="display: flex; flex-direction: column;">
+                    <span class="logo-madero">MADERO</span>
+                    <span class="logo-barbearia">Barbearia Premium</span>
+                </div>
             </a>
+            
             <nav class="nav-desktop">
                 <a href="index.html">Início</a>
                 <a href="servicos.html">Serviços</a>
                 <a href="profissionais.html" class="active">Profissionais</a>
             </nav>
+
             <div class="social-top">
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </header>
 
     <section class="page-header">
         <div class="container">
-            <h2>Mestres da Navalha</h2>
-            <p style="opacity: 0.8;">Especialistas prontos para elevar o seu estilo em Porto Velho.</p>
+            <h2 style="font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold);">Mestres da Navalha</h2>
+            <p style="opacity: 0.8; max-width: 600px; margin: 10px auto 0;">Especialistas prontos para elevar o seu estilo no coração de Porto Velho.</p>
         </div>
     </section>
 
@@ -117,36 +107,36 @@
                 
                 <div class="prof-card">
                     <img src="joao.jpg" alt="Barbeiro João" class="prof-img">
-                    <h3>João</h3>
-                    <p style="color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; font-weight: 600;">Especialista em Barba & Toalha Quente</p>
-                    <a href="servicos.html" class="btn-book">Agendar com João</a>
+                    <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 5px;">João</h3>
+                    <p style="color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; font-weight: 600;">Barba & Toalha Quente</p>
+                    <a href="servicos.html" class="btn-prof">Ver Horários</a>
                 </div>
 
                 <div class="prof-card">
                     <img src="ruan.jpg" alt="Barbeiro Ruan" class="prof-img">
-                    <h3>Ruan</h3>
-                    <p style="color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; font-weight: 600;">Especialista em Degradê e Freestyle</p>
-                    <a href="servicos.html" class="btn-book">Agendar com Ruan</a>
+                    <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 5px;">Ruan</h3>
+                    <p style="color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; font-weight: 600;">Degradê e Freestyle</p>
+                    <a href="servicos.html" class="btn-prof">Ver Horários</a>
                 </div>
 
                 <div class="prof-card">
                     <img src="vanclei.jpg" alt="Barbeiro Vanclei" class="prof-img">
-                    <h3>Vanclei</h3>
-                    <p style="color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; font-weight: 600;">Visagismo e Cortes Clássicos</p>
-                    <a href="servicos.html" class="btn-book">Agendar com Vanclei</a>
+                    <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 5px;">Vanclei</h3>
+                    <p style="color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; font-weight: 600;">Visagismo e Clássicos</p>
+                    <a href="servicos.html" class="btn-prof">Ver Horários</a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 60px 0; background: #000;">
+    <footer style="text-align: center; padding: 60px 0; background: #000; border-top: 1px solid rgba(212,175,55,0.1);">
         <div class="container">
-            <div class="social-icons" style="margin-bottom: 20px; font-size: 1.5rem; display: flex; justify-content: center; gap: 20px;">
+            <div style="margin-bottom: 20px; font-size: 1.5rem; display: flex; justify-content: center; gap: 20px;">
                 <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p style="opacity: 0.5; font-size: 0.8rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
+            <p style="opacity: 0.5; font-size: 0.75rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
         </div>
     </footer>
 
