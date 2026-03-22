@@ -30,15 +30,14 @@
 
     <section class="page-header">
         <div class="container">
-            <h2>Cardápio de Serviços</h2>
+            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem;">Cardápio de Serviços</h2>
             <p>Selecione o serviço desejado para prosseguir com o agendamento.</p>
         </div>
     </section>
 
     <section class="services" style="padding: 40px 0 80px;">
         <div class="container">
-            <div class="services-grid" id="servicesGrid">
-                </div>
+            <div class="services-grid" id="servicesGrid"></div>
         </div>
     </section>
 
@@ -47,17 +46,24 @@
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
             <div class="booking-header">
-                <h3 id="selectedServiceName">Serviço</h3>
+                <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold);">Serviço</h3>
                 <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">MARÇO / ABRIL 2026</p>
             </div>
 
-            <div class="days-container" id="daysContainer">
-                <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
-                <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
-                <div class="day-item" onclick="selectDay(this, '31/03')"><span>Ter</span><strong>31</strong></div>
-                <div class="day-item" onclick="selectDay(this, '01/04')"><span>Qua</span><strong>01</strong></div>
-                <div class="day-item" onclick="selectDay(this, '02/04')"><span>Qui</span><strong>02</strong></div>
-                <div class="day-item" onclick="selectDay(this, '03/04')"><span>Sex</span><strong>03</strong></div>
+            <div class="calendar-wrapper" style="display: flex; align-items: center; gap: 8px; margin: 20px 0;">
+                <button class="nav-arrow" onclick="scrollDays('left')"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="days-container" id="daysContainer">
+                    <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
+                    <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '31/03')"><span>Ter</span><strong>31</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '01/04')"><span>Qua</span><strong>01</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '02/04')"><span>Qui</span><strong>02</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '03/04')"><span>Sex</span><strong>03</strong></div>
+                    <div class="day-item" onclick="selectDay(this, '04/04')"><span>Sáb</span><strong>04</strong></div>
+                </div>
+
+                <button class="nav-arrow" onclick="scrollDays('right')"><i class="fas fa-chevron-right"></i></button>
             </div>
 
             <h4 style="font-size: 0.8rem; text-align: center; margin: 15px 0 10px; opacity: 0.8;">Escolha o Profissional</h4>
@@ -155,13 +161,23 @@
             agendamento.servico = serviceName;
             document.getElementById('selectedServiceName').innerText = serviceName;
             modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Impede scroll no fundo
+            document.body.style.overflow = 'hidden';
         }
 
         function closeBooking() {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
             resetModal();
+        }
+
+        function scrollDays(direction) {
+            const container = document.getElementById('daysContainer');
+            const scrollAmount = 150;
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
         }
 
         function selectDay(el, data) {
