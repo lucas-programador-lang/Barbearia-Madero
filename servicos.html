@@ -17,7 +17,63 @@
             background-position: center;
         }
 
-        /* Efeito de destaque para combos premium */
+        /* --- CORREÇÃO DAS FOTOS DOS BARBEIROS --- */
+        .prof-circles {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .prof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 80px; /* Largura fixa do conjunto */
+        }
+
+        .prof-item img {
+            width: 70px;      /* Tamanho da foto corrigido */
+            height: 70px;     /* Altura da foto corrigida */
+            border-radius: 50%; /* Foto redonda */
+            object-fit: cover;  /* Não distorce a imagem */
+            border: 2px solid transparent;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            filter: grayscale(100%); /* Efeito elegante */
+        }
+
+        .prof-item span {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+        }
+
+        /* Efeito quando seleciona o barbeiro */
+        .prof-item.active img {
+            border-color: var(--gold);
+            filter: grayscale(0%);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .prof-item.active span {
+            color: var(--gold);
+        }
+
+        /* Ajuste do Modal para não ficar gigante */
+        .modal-content {
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* --------------------------------------- */
+
         .service-card.highlight {
             border: 2px solid var(--gold);
             background: linear-gradient(145deg, var(--bg-card), #1a1f1d);
@@ -62,12 +118,11 @@
             margin-bottom: 20px;
         }
 
-        /* Ajuste fino para o modal no mobile */
         @media (max-width: 480px) {
             .modal-content { padding: 20px 15px; width: 95%; }
             .time-grid { grid-template-columns: repeat(2, 1fr); }
             .day-item { min-width: 55px; height: 70px; }
-            .prof-item img { width: 55px; height: 55px; }
+            .prof-item img { width: 60px; height: 60px; }
         }
     </style>
 </head>
@@ -106,8 +161,7 @@
 
     <section class="services" style="padding: 60px 0 100px;">
         <div class="container">
-            <div class="services-grid" id="servicesGrid">
-                </div>
+            <div class="services-grid" id="servicesGrid"></div>
         </div>
     </section>
 
