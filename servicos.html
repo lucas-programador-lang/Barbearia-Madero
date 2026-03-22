@@ -6,21 +6,40 @@
     <title>Serviços | Barbearia Madero</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=4.0">
+    <link rel="stylesheet" href="style.css?v=5.1">
+    <style>
+        .page-header {
+            padding: 140px 0 60px;
+            text-align: center;
+            background: linear-gradient(rgba(5,7,6,0.8), rgba(5,7,6,0.95)), url('hero-bg.jpg');
+            background-size: cover;
+        }
+        /* Ajuste fino para o modal no mobile */
+        @media (max-width: 480px) {
+            .modal-content { padding: 15px; width: 98%; }
+            .time-grid { grid-template-columns: repeat(2, 1fr); }
+            .day-item { min-width: 55px; height: 70px; }
+        }
+    </style>
 </head>
 <body>
 
     <header>
         <div class="container header-flex">
             <a href="index.html" class="logo-container">
-                <img src="logo.png" alt="Madero Logo" class="logo-img"> 
-                <span class="logo-text">MADERO</span>
+                <i class="fas fa-cut logo-icon"></i>
+                <div style="display: flex; flex-direction: column;">
+                    <span class="logo-madero">MADERO</span>
+                    <span class="logo-barbearia">Barbearia Premium</span>
+                </div>
             </a>
+            
             <nav class="nav-desktop">
                 <a href="index.html">Início</a>
                 <a href="servicos.html" class="active">Serviços</a>
                 <a href="profissionais.html">Profissionais</a>
             </nav>
+
             <div class="social-top">
                 <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -30,8 +49,8 @@
 
     <section class="page-header">
         <div class="container">
-            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem;">Cardápio de Serviços</h2>
-            <p>Selecione o serviço desejado para prosseguir com o agendamento.</p>
+            <h2 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 2.5rem; letter-spacing: 2px;">Cardápio de Serviços</h2>
+            <p style="opacity: 0.8; max-width: 600px; margin: 15px auto 0;">Excelência em cada detalhe. Escolha o cuidado que você merece.</p>
         </div>
     </section>
 
@@ -45,14 +64,13 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeBooking()">&times;</span>
             
-            <div class="booking-header">
-                <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold);">Serviço</h3>
-                <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">MARÇO / ABRIL 2026</p>
+            <div class="booking-header" style="text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 15px;">
+                <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem;">Serviço</h3>
+                <p style="font-size: 0.7rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px;">Porto Velho | Março 2026</p>
             </div>
 
-            <div class="calendar-wrapper" style="display: flex; align-items: center; gap: 8px; margin: 20px 0;">
+            <div class="calendar-wrapper">
                 <button class="nav-arrow" onclick="scrollDays('left')"><i class="fas fa-chevron-left"></i></button>
-                
                 <div class="days-container" id="daysContainer">
                     <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
                     <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
@@ -62,29 +80,28 @@
                     <div class="day-item" onclick="selectDay(this, '03/04')"><span>Sex</span><strong>03</strong></div>
                     <div class="day-item" onclick="selectDay(this, '04/04')"><span>Sáb</span><strong>04</strong></div>
                 </div>
-
                 <button class="nav-arrow" onclick="scrollDays('right')"><i class="fas fa-chevron-right"></i></button>
             </div>
 
-            <h4 style="font-size: 0.8rem; text-align: center; margin: 15px 0 10px; opacity: 0.8;">Escolha o Profissional</h4>
+            <h4 style="font-size: 0.8rem; text-align: center; margin: 20px 0 15px; color: var(--gold); text-transform: uppercase;">Escolha o Profissional</h4>
             
             <div class="prof-circles">
-                <div class="prof-item" id="prof-joao" onclick="selectProf(this, 'João')">
+                <div class="prof-item" onclick="selectProf(this, 'João')">
                     <img src="joao.jpg" alt="João">
                     <span>João</span>
                 </div>
-                <div class="prof-item" id="prof-ruan" onclick="selectProf(this, 'Ruan')">
+                <div class="prof-item" onclick="selectProf(this, 'Ruan')">
                     <img src="ruan.jpg" alt="Ruan">
                     <span>Ruan</span>
                 </div>
-                <div class="prof-item" id="prof-vanclei" onclick="selectProf(this, 'Vanclei')">
+                <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
                     <img src="vanclei.jpg" alt="Vanclei">
                     <span>Vanclei</span>
                 </div>
             </div>
 
             <div id="timeSelection" style="display:none; margin-top: 20px; border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px;">
-                <h4 style="font-size: 0.8rem; text-align: center; margin-bottom: 15px;">Horários Disponíveis</h4>
+                <h4 style="font-size: 0.8rem; text-align: center; margin-bottom: 15px; color: #fff;">Horários Disponíveis</h4>
                 <div class="time-grid">
                     <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
                     <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
@@ -94,23 +111,22 @@
                     <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
                     <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
                     <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
-                    <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
                 </div>
             </div>
 
             <div class="booking-footer" id="bookingInstruction" style="margin-top: 20px; text-align: center;">
-                <p style="font-size: 0.8rem; opacity: 0.5;"><i class="far fa-user"></i> Selecione um barbeiro para ver horários</p>
+                <p style="font-size: 0.8rem; opacity: 0.6;"><i class="fas fa-info-circle" style="color: var(--gold);"></i> Selecione um barbeiro para ver horários</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="container">
-            <div class="social-icons" style="margin-bottom: 20px;">
+        <div class="container" style="text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+            <div style="margin-bottom: 20px; font-size: 1.5rem; display: flex; justify-content: center; gap: 20px;">
                 <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p style="opacity: 0.6; font-size: 0.8rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
+            <p style="opacity: 0.5; font-size: 0.75rem;">© 2026 Barbearia Madero | Porto Velho - RO</p>
         </div>
     </footer>
 
@@ -129,13 +145,9 @@
             { nome: "Corte + Hidratação", preco: "65,00", tempo: "75 min" },
             { nome: "Corte + Sobrancelha", preco: "50,00", tempo: "45 min" },
             { nome: "Hidratação", preco: "25,00", tempo: "30 min" },
-            { nome: "Pacote 165", preco: "165,00", tempo: "60 min", obs: "A partir de" },
             { nome: "Penteado", preco: "25,00", tempo: "30 min" },
-            { nome: "Penteado + Pezinho", preco: "35,00", tempo: "30 min" },
             { nome: "Pezinho da Barba", preco: "15,00", tempo: "15 min" },
-            { nome: "Pezinho do Cabelo", preco: "10,00", tempo: "15 min" },
             { nome: "Raspar na Lâmina", preco: "30,00", tempo: "30 min" },
-            { nome: "Raspar na Máquina", preco: "20,00", tempo: "15 min" },
             { nome: "Selagem", preco: "80,00", tempo: "60 min", obs: "A partir de" }
         ];
 
@@ -146,10 +158,10 @@
             card.innerHTML = `
                 <div class="service-info">
                     <h3>${s.nome}</h3>
-                    <span class="price">${s.obs ? '<small style="font-size:0.6rem; display:block">'+s.obs+'</small>' : ''} R$ ${s.preco}</span>
+                    <span class="price">${s.obs ? '<small style="font-size:0.6rem; display:block; opacity:0.6">'+s.obs+'</small>' : ''} R$ ${s.preco}</span>
                     <span class="time"><i class="far fa-clock"></i> ${s.tempo}</span>
                 </div>
-                <button class="btn-book" onclick="openBooking('${s.nome}')">Agendar</button>
+                <button class="btn-book" onclick="openBooking('${s.nome}')">Agendar Horário</button>
             `;
             grid.appendChild(card);
         });
@@ -173,11 +185,7 @@
         function scrollDays(direction) {
             const container = document.getElementById('daysContainer');
             const scrollAmount = 150;
-            if (direction === 'left') {
-                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
+            container.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
         }
 
         function selectDay(el, data) {
@@ -196,7 +204,7 @@
 
         function finishBooking(hora) {
             agendamento.hora = hora;
-            const msg = `Olá! Gostaria de agendar um horário na Madero:%0A%0A✂️ *Serviço:* ${agendamento.servico}%0A👤 *Barbeiro:* ${agendamento.prof}%0A📅 *Data:* ${agendamento.data}%0A⏰ *Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
+            const msg = `Olá! Gostaria de agendar na Madero:%0A%0A✂️ *Serviço:* ${agendamento.servico}%0A👤 *Barbeiro:* ${agendamento.prof}%0A📅 *Data:* ${agendamento.data}%0A⏰ *Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
             window.open(`https://api.whatsapp.com/send?phone=5569993609069&text=${msg}`, '_blank');
             closeBooking();
         }
@@ -206,7 +214,6 @@
             document.getElementById('bookingInstruction').style.display = 'block';
             document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
             agendamento.prof = '';
-            agendamento.hora = '';
         }
 
         window.onclick = (e) => { if(e.target == modal) closeBooking(); }
