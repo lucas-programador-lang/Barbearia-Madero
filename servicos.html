@@ -6,7 +6,7 @@
     <title>Serviços | Barbearia Madero</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=3.0">
+    <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
 
@@ -48,37 +48,36 @@
             
             <div class="booking-header">
                 <h3 id="selectedServiceName">Serviço</h3>
-                <p id="currentMonthYear">MARÇO / ABRIL 2026</p>
+                <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">MARÇO / ABRIL 2026</p>
             </div>
 
-            <div class="calendar-strip">
-                <div class="days-container" id="daysContainer">
-                    <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
-                    <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '31/03')"><span>Ter</span><strong>31</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '01/04')"><span>Qua</span><strong>01</strong></div>
-                    <div class="day-item" onclick="selectDay(this, '02/04')"><span>Qui</span><strong>02</strong></div>
+            <div class="days-container" id="daysContainer">
+                <div class="day-item" onclick="selectDay(this, '29/03')"><span>Dom</span><strong>29</strong></div>
+                <div class="day-item active" onclick="selectDay(this, '30/03')"><span>Seg</span><strong>30</strong></div>
+                <div class="day-item" onclick="selectDay(this, '31/03')"><span>Ter</span><strong>31</strong></div>
+                <div class="day-item" onclick="selectDay(this, '01/04')"><span>Qua</span><strong>01</strong></div>
+                <div class="day-item" onclick="selectDay(this, '02/04')"><span>Qui</span><strong>02</strong></div>
+                <div class="day-item" onclick="selectDay(this, '03/04')"><span>Sex</span><strong>03</strong></div>
+            </div>
+
+            <h4 style="font-size: 0.8rem; text-align: center; margin: 15px 0 10px; opacity: 0.8;">Escolha o Profissional</h4>
+            
+            <div class="prof-circles">
+                <div class="prof-item" id="prof-joao" onclick="selectProf(this, 'João')">
+                    <img src="joao.jpg" alt="João">
+                    <span>João</span>
+                </div>
+                <div class="prof-item" id="prof-ruan" onclick="selectProf(this, 'Ruan')">
+                    <img src="ruan.jpg" alt="Ruan">
+                    <span>Ruan</span>
+                </div>
+                <div class="prof-item" id="prof-vanclei" onclick="selectProf(this, 'Vanclei')">
+                    <img src="vanclei.jpg" alt="Vanclei">
+                    <span>Vanclei</span>
                 </div>
             </div>
 
-            <div class="prof-selection">
-                <div class="prof-circles">
-                    <div class="prof-item" onclick="selectProf(this, 'João')">
-                        <img src="joao.jpg" alt="João">
-                        <span>João</span>
-                    </div>
-                    <div class="prof-item" onclick="selectProf(this, 'Ruan')">
-                        <img src="ruan.jpg" alt="Ruan">
-                        <span>Ruan</span>
-                    </div>
-                    <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
-                        <img src="vanclei.jpg" alt="Vanclei">
-                        <span>Vanclei</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="timeSelection" style="display:none; margin-top: 20px;">
+            <div id="timeSelection" style="display:none; margin-top: 20px; border-top: 1px solid rgba(212,175,55,0.1); padding-top: 20px;">
                 <h4 style="font-size: 0.8rem; text-align: center; margin-bottom: 15px;">Horários Disponíveis</h4>
                 <div class="time-grid">
                     <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
@@ -87,11 +86,14 @@
                     <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
                     <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
                     <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
+                    <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
+                    <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
+                    <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
                 </div>
             </div>
 
-            <div class="booking-footer" id="bookingInstruction">
-                <p><i class="far fa-user"></i> Selecione um profissional para ver horários</p>
+            <div class="booking-footer" id="bookingInstruction" style="margin-top: 20px; text-align: center;">
+                <p style="font-size: 0.8rem; opacity: 0.5;"><i class="far fa-user"></i> Selecione um barbeiro para ver horários</p>
             </div>
         </div>
     </div>
@@ -107,7 +109,6 @@
     </footer>
 
     <script>
-        // Banco de Dados de Serviços
         const listaServicos = [
             { nome: "Barba", preco: "25,00", tempo: "30 min" },
             { nome: "Barba + Pezinho", preco: "35,00", tempo: "30 min" },
@@ -132,7 +133,6 @@
             { nome: "Selagem", preco: "80,00", tempo: "60 min", obs: "A partir de" }
         ];
 
-        // Renderizar Serviços
         const grid = document.getElementById('servicesGrid');
         listaServicos.forEach(s => {
             const card = document.createElement('div');
@@ -148,7 +148,6 @@
             grid.appendChild(card);
         });
 
-        // Lógica do Modal e Agendamento
         let agendamento = { servico: '', prof: '', data: '30/03', hora: '' };
         const modal = document.getElementById('bookingModal');
 
@@ -156,10 +155,12 @@
             agendamento.servico = serviceName;
             document.getElementById('selectedServiceName').innerText = serviceName;
             modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Impede scroll no fundo
         }
 
         function closeBooking() {
             modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
             resetModal();
         }
 
@@ -179,7 +180,7 @@
 
         function finishBooking(hora) {
             agendamento.hora = hora;
-            const msg = `Olá! Gostaria de agendar:%0A%0A*Serviço:* ${agendamento.servico}%0A*Profissional:* ${agendamento.prof}%0A*Data:* ${agendamento.data}%0A*Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
+            const msg = `Olá! Gostaria de agendar um horário na Madero:%0A%0A✂️ *Serviço:* ${agendamento.servico}%0A👤 *Barbeiro:* ${agendamento.prof}%0A📅 *Data:* ${agendamento.data}%0A⏰ *Horário:* ${agendamento.hora}%0A%0AConfirmar disponibilidade?`;
             window.open(`https://api.whatsapp.com/send?phone=5569993609069&text=${msg}`, '_blank');
             closeBooking();
         }
@@ -188,6 +189,8 @@
             document.getElementById('timeSelection').style.display = 'none';
             document.getElementById('bookingInstruction').style.display = 'block';
             document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
+            agendamento.prof = '';
+            agendamento.hora = '';
         }
 
         window.onclick = (e) => { if(e.target == modal) closeBooking(); }
