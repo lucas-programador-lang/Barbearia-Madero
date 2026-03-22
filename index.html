@@ -5,203 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbearia Madero | Excelência em Porto Velho</title>
     
+    <link rel="stylesheet" href="style.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <style>
-        :root {
-            --gold: #d4af37;
-            --gold-dark: #aa891d;
-            --madero-green: #0a241a;
-            --bg-black: #050706;
-            --bg-card: #0d1210;
-            --text-gold: #e5c158;
-            --text-light: #f1f1f1;
-            --transition: all 0.3s ease-in-out;
-        }
-
-        /* Reset e Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-black);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        a { text-decoration: none; color: inherit; }
-
-        /* --- Header Profissional --- */
-        header {
-            position: fixed;
-            top: 0; width: 100%; height: 90px;
-            background: rgba(5, 7, 6, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo {
-            font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            color: var(--gold);
-            font-weight: 700;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* --- Hero Section Impactante --- */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(5, 7, 6, 1)), 
-                        url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop') center/cover;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            padding-top: 90px;
-        }
-
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            color: var(--gold);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            color: #ccc;
-        }
-
-        /* --- Botões --- */
-        .btn-main {
-            background: linear-gradient(45deg, var(--gold-dark), var(--gold));
-            color: #000;
-            padding: 16px 40px;
-            border-radius: 50px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-main:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
-            filter: brightness(1.1);
-        }
-
-        /* --- Seção de Serviços --- */
-        .services { padding: 100px 0; background: var(--bg-black); }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-family: 'Cinzel', serif; font-size: 2.5rem; color: var(--gold); }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .service-card:hover {
-            border-color: var(--gold);
-            background: #121a16;
-            transform: scale(1.02);
-        }
-
-        .service-info h3 { font-size: 1.1rem; color: var(--text-light); margin-bottom: 5px; }
-        .service-info .price { color: var(--gold); font-weight: 700; font-size: 1.2rem; display: block; }
-        .service-info .time { font-size: 0.8rem; color: #666; }
-
-        .btn-book {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .btn-book:hover {
-            background: var(--gold);
-            color: #000;
-        }
-
-        /* --- Mapa e Localização --- */
-        .location { padding: 80px 0; background: var(--madero-green); }
-        .location-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .map-box {
-            height: 400px;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .map-box iframe { width: 100%; height: 100%; border: none; filter: grayscale(1) invert(1) opacity(0.8); }
-
-        .location-text h2 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px; }
-        .location-item { margin-bottom: 20px; display: flex; gap: 15px; font-size: 1.1rem; }
-        .location-item i { color: var(--gold); font-size: 1.4rem; }
-
-        /* --- Footer --- */
-        footer {
-            padding: 50px 0;
-            text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            background: #000;
-        }
-
-        .social-icons { margin-top: 20px; }
-        .social-icons a { font-size: 1.5rem; margin: 0 15px; color: var(--gold); transition: var(--transition); }
-        .social-icons a:hover { transform: translateY(-5px); color: #fff; }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .location-wrapper { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 3rem; }
-            header .logo { font-size: 1.2rem; }
-        }
-    </style>
 </head>
 <body>
 
@@ -210,16 +20,17 @@
             <div class="logo">
                 <i class="fas fa-scissors"></i> MADERO
             </div>
-            <div class="social-top">
-                <a href="https://wa.me/5569993609069" style="color: var(--gold); font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
-            </div>
+            <nav class="social-top">
+                <a href="https://wa.me/5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/barbearia_madero/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </nav>
         </div>
     </header>
 
     <section class="hero">
         <div class="container">
             <h1 class="animate__animated animate__fadeInDown">Barbearia Madero</h1>
-            <p class="animate__animated animate__fadeInUp animate__delay-1s">A experiência de corte mais exclusiva de Porto Velho, agora ao seu alcance.</p>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Tradição, Estilo e Excelência no coração de Porto Velho.</p>
             <a href="#agendar" class="btn-main animate__animated animate__zoomIn animate__delay-2s">Ver Serviços e Agendar</a>
         </div>
     </section>
@@ -228,7 +39,7 @@
         <div class="container">
             <div class="section-header">
                 <h2>Nossos Serviços</h2>
-                <p>Selecione o serviço desejado para agendar via WhatsApp</p>
+                <p>Escolha o serviço ideal e agende agora pelo WhatsApp</p>
             </div>
 
             <div class="services-grid">
@@ -238,7 +49,25 @@
                         <span class="price">R$ 40,00</span>
                         <span class="time"><i class="far fa-clock"></i> 45 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Quero+agendar+um+Corte" class="btn-book">AGENDAR</a>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar um Corte (Degradê/Social)." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Corte Máquina (2 pentes)</h3>
+                        <span class="price">R$ 35,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar um Corte na Máquina." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Barba</h3>
+                        <span class="price">R$ 25,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar apenas Barba." class="btn-book">AGENDAR</a>
                 </div>
 
                 <div class="service-card">
@@ -247,7 +76,7 @@
                         <span class="price">R$ 35,00</span>
                         <span class="time"><i class="far fa-clock"></i> 30 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Quero+agendar+Barba+e+Pezinho" class="btn-book">AGENDAR</a>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar Barba + Pezinho." class="btn-book">AGENDAR</a>
                 </div>
 
                 <div class="service-card">
@@ -256,38 +85,93 @@
                         <span class="price">R$ 65,00</span>
                         <span class="time"><i class="far fa-clock"></i> 60 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Quero+agendar+Corte+e+Barba" class="btn-book">AGENDAR</a>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar o Combo Corte e Barba." class="btn-book">AGENDAR</a>
                 </div>
 
                 <div class="service-card">
                     <div class="service-info">
-                        <h3>Black Mask (Limpeza)</h3>
-                        <span class="price">R$ 25,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Quero+agendar+uma+Limpeza+Facial" class="btn-book">AGENDAR</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Combo Full (Corte+Barba+Sobrancelha)</h3>
+                        <h3>Corte + Barba + Sobrancelha</h3>
                         <span class="price">R$ 75,00</span>
                         <span class="time"><i class="far fa-clock"></i> 60 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Quero+agendar+o+Combo+Full" class="btn-book">AGENDAR</a>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar Corte, Barba e Sobrancelha." class="btn-book">AGENDAR</a>
                 </div>
 
                 <div class="service-card">
                     <div class="service-info">
-                        <h3>Selagem Capilar</h3>
+                        <h3>Corte + Sobrancelha</h3>
+                        <span class="price">R$ 50,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 45 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar Corte e Sobrancelha." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Black Mask (Limpeza Facial)</h3>
+                        <span class="price">R$ 25,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar uma Black Mask." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Corte + Hidratação</h3>
+                        <span class="price">R$ 65,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 75 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar Corte e Hidratação." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Selagem</h3>
                         <span class="price">A partir R$ 80,00</span>
                         <span class="time"><i class="far fa-clock"></i> 60 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Quero+agendar+uma+Selagem" class="btn-book">AGENDAR</a>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar uma Selagem." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Pacote Completo 165</h3>
+                        <span class="price">R$ 165,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 60 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar o Pacote 165." class="btn-book">AGENDAR</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-info">
+                        <h3>Pezinho do Cabelo</h3>
+                        <span class="price">R$ 10,00</span>
+                        <span class="time"><i class="far fa-clock"></i> 15 min</span>
+                    </div>
+                    <a href="https://wa.me/5569993609069?text=Olá! Quero agendar o Pezinho do Cabelo." class="btn-book">AGENDAR</a>
+                </div>
+                
+                </div>
+        </div>
+    </section>
+
+    <section class="professionals">
+        <div class="container">
+            <div class="section-header">
+                <h2>Especialistas</h2>
+            </div>
+            <div class="prof-grid">
+                <div class="prof-card">
+                    <div class="prof-img-box"><i class="fas fa-user-tie"></i></div>
+                    <h3>Profissional 1</h3>
+                    <p>Especialista em Degradê</p>
+                </div>
+                <div class="prof-card">
+                    <div class="prof-img-box"><i class="fas fa-user-tie"></i></div>
+                    <h3>Profissional 2</h3>
+                    <p>Mestre das Barbas</p>
                 </div>
             </div>
-            
-            <p style="text-align:center; margin-top:30px; color:var(--gold)">+ 15 serviços disponíveis no nosso WhatsApp</p>
         </div>
     </section>
 
@@ -301,16 +185,12 @@
                         <p>Rua Alexandre Guimarães, 1189<br>Bairro Areal, Porto Velho - RO</p>
                     </div>
                     <div class="location-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>(69) 99360-9069</p>
-                    </div>
-                    <div class="location-item">
                         <i class="fas fa-clock"></i>
                         <p>Segunda a Sábado: 09h às 19h</p>
                     </div>
                 </div>
                 <div class="map-box">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.846564619472!2d-63.8951869!3d-8.7723924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325cc7889e477f%3A0x6a0c0b396e98799a!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Areal%2C%20Porto%20Velho%20-%20RO%2C%2076804-373!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.668700238122!2d-63.8938914!3d-8.770281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325ce259063717%3A0xc49666c8f6575727!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Areal%2C%20Porto%20Velho%20-%20RO!5e0!3m2!1spt-BR!2sbr!4v1710000000000" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -318,27 +198,16 @@
 
     <footer>
         <div class="container">
-            <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+            <div class="logo">
                 <i class="fas fa-scissors"></i> MADERO
             </div>
-            <p>© 2026 Barbearia Madero - Porto Velho. Todos os direitos reservados.</p>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/5569993609069"><i class="fab fa-whatsapp"></i></a>
-            </div>
+            <p>© 2026 Barbearia Madero. Todos os direitos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Animações ao rolar a página
-        ScrollReveal().reveal('.service-card', { 
-            delay: 200, 
-            distance: '30px', 
-            interval: 100,
-            origin: 'bottom' 
-        });
-        ScrollReveal().reveal('.location-text', { delay: 300, origin: 'left', distance: '50px' });
-        ScrollReveal().reveal('.map-box', { delay: 300, origin: 'right', distance: '50px' });
+        ScrollReveal().reveal('.service-card', { delay: 100, interval: 50, origin: 'bottom', distance: '20px' });
+        ScrollReveal().reveal('.prof-card', { delay: 200, interval: 100, origin: 'scale' });
     </script>
 </body>
 </html>
