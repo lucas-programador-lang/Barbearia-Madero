@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serviços | Barbearia Madero</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3.0">
 </head>
 <body>
 
     <header>
-        <div class="container">
+        <div class="container header-flex">
             <a href="index.html" class="logo-container">
                 <img src="logo.png" alt="Madero Logo" class="logo-img"> 
                 <span class="logo-text">MADERO</span>
@@ -36,193 +35,70 @@
         </div>
     </section>
 
-    <section class="services" style="padding: 80px 0;">
+    <section class="services" style="padding: 60px 0;">
         <div class="container">
             <div class="services-grid">
-
                 <div class="service-card highlight">
                     <div class="service-info">
                         <h3>Corte + Barba + Selagem + Sobrancelha</h3>
                         <span class="price">R$ 155,00</span>
                         <span class="time"><i class="far fa-clock"></i> 120 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte+Barba+Selagem+Sobrancelha" class="btn-book">Agendar</a>
+                    <button class="btn-book" onclick="openBooking('Corte + Barba + Selagem + Sobrancelha')">Agendar</button>
                 </div>
-
-                <div class="service-card highlight">
-                    <div class="service-info">
-                        <h3>Corte + Barba + Selagem</h3>
-                        <span class="price">R$ 145,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 120 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte+Barba+Selagem" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card highlight">
-                    <div class="service-info">
-                        <h3>Pacote 165</h3>
-                        <span class="price">A partir de R$ 165,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 60 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+saber+mais+sobre+o+Pacote+165" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Corte + Barba + Sobrancelha</h3>
-                        <span class="price">R$ 75,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 60 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte+Barba+Sobrancelha" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Corte + Barba</h3>
-                        <span class="price">R$ 65,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 60 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte+Barba" class="btn-book">Agendar</a>
-                </div>
-
+                
                 <div class="service-card">
                     <div class="service-info">
                         <h3>Corte (Degradê/Social)</h3>
                         <span class="price">R$ 40,00</span>
                         <span class="time"><i class="far fa-clock"></i> 45 min</span>
                     </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte" class="btn-book">Agendar</a>
+                    <button class="btn-book" onclick="openBooking('Corte')">Agendar</button>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Barba</h3>
-                        <span class="price">R$ 25,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Barba" class="btn-book">Agendar</a>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Barba + Pezinho</h3>
-                        <span class="price">R$ 35,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Barba+Pezinho" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Selagem</h3>
-                        <span class="price">A partir de R$ 80,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 60 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Selagem" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Coloração</h3>
-                        <span class="price">R$ 40,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 45 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Coloração" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Hidratação</h3>
-                        <span class="price">R$ 25,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Hidratação" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Black Mask (Limpeza Facial)</h3>
-                        <span class="price">R$ 25,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Black+Mask" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Corte Máquina (2 pentes)</h3>
-                        <span class="price">R$ 35,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte+Maquina" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Raspar na Lâmina</h3>
-                        <span class="price">R$ 30,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Raspar+na+Lamina" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Raspar na Máquina</h3>
-                        <span class="price">R$ 20,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 15 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Raspar+na+Maquina" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Pezinho da Barba</h3>
-                        <span class="price">R$ 15,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 15 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Pezinho+da+Barba" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Pezinho do Cabelo</h3>
-                        <span class="price">R$ 10,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 15 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Pezinho+Cabelo" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Penteado + Pezinho</h3>
-                        <span class="price">R$ 35,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Penteado+Pezinho" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Penteado</h3>
-                        <span class="price">R$ 25,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 30 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Penteado" class="btn-book">Agendar</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-info">
-                        <h3>Corte + Sobrancelha</h3>
-                        <span class="price">R$ 50,00</span>
-                        <span class="time"><i class="far fa-clock"></i> 45 min</span>
-                    </div>
-                    <a href="https://wa.me/5569993609069?text=Olá!+Quero+agendar+Corte+Sobrancelha" class="btn-book">Agendar</a>
-                </div>
-
-            </div>
         </div>
     </section>
+
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeBooking()">&times;</span>
+            
+            <div class="booking-header">
+                <h3 id="selectedServiceName">Serviço</h3>
+                <p id="currentMonthYear">Março/Abril 2026</p>
+            </div>
+
+            <div class="calendar-strip">
+                <button class="cal-nav"><i class="fas fa-chevron-left"></i></button>
+                <div class="days-container">
+                    <div class="day-item"><span>Dom</span><strong>29</strong></div>
+                    <div class="day-item active"><span>Seg</span><strong>30</strong></div>
+                    <div class="day-item"><span>Ter</span><strong>31</strong></div>
+                    <div class="day-item"><span>Qua</span><strong>01</strong></div>
+                    <div class="day-item"><span>Qui</span><strong>02</strong></div>
+                </div>
+                <button class="cal-nav"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="prof-selection">
+                <h4>Selecione um profissional</h4>
+                <div class="prof-circles">
+                    <div class="prof-item" onclick="selectProf(this)">
+                        <img src="joao.jpg" alt="João">
+                        <span>João</span>
+                    </div>
+                    <div class="prof-item" onclick="selectProf(this)">
+                        <img src="ruan.jpg" alt="Ruan">
+                        <span>Ruan</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-footer">
+                <p><i class="far fa-clock"></i> Escolha um profissional para ver horários</p>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
@@ -234,5 +110,18 @@
         </div>
     </footer>
 
+    <script>
+        function openBooking(serviceName) {
+            document.getElementById('selectedServiceName').innerText = serviceName;
+            document.getElementById('bookingModal').style.display = 'flex';
+        }
+        function closeBooking() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+        function selectProf(element) {
+            document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
 </body>
 </html>
