@@ -1,6 +1,5 @@
 /**
  * Barbearia Madero - Core Script 2026
- * Responsável por: Renderização de serviços, Calendário Automático e WhatsApp
  */
 
 let dadosAgendamento = {
@@ -69,14 +68,13 @@ function renderizarCalendario() {
     let diasRenderizados = 0;
     let i = 0;
 
-    // Gera 7 dias úteis (Pula domingos)
     while (diasRenderizados < 7) {
         const dataCopia = new Date(hoje);
         dataCopia.setDate(hoje.getDate() + i);
         
         const diaIndex = dataCopia.getDay();
         
-        if (diaIndex !== 0) { // Se não for Domingo
+        if (diaIndex !== 0) { // Pula Domingo
             const diaNome = diasSemana[diaIndex];
             const diaMes = dataCopia.getDate();
             const mes = (dataCopia.getMonth() + 1).toString().padStart(2, '0');
@@ -133,7 +131,6 @@ window.selectProf = function(el, nome) {
     if (timeSelection) timeSelection.style.display = 'block';
     if (instruction) instruction.style.display = 'none';
 
-    // Scroll suave até os horários
     setTimeout(() => {
         timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
@@ -172,7 +169,6 @@ function resetModal() {
     if (instruction) instruction.style.display = 'block';
     
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-    // Mantém a data mas reseta o estado visual se necessário
 }
 
 window.onclick = function(event) {
