@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Madero | Porto Velho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    
+    <style>
+        :root {
+            --primary: #c5a059; /* Dourado */
+            --secondary: #0a2a1e; /* Verde Escuro Madero */
+            --bg-dark: #050f0b;
+            --text-light: #f4f4f4;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Nav */
+        header {
+            background: rgba(5, 15, 11, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--primary); text-decoration: none; font-weight: bold; }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&q=80&w=1920') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--primary); margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; }
+        .badge-kids { background: var(--primary); color: var(--bg-dark); padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px; display: inline-block; }
+
+        .btn {
+            background: var(--primary);
+            color: var(--bg-dark);
+            padding: 15px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+        .btn:hover { transform: scale(1.05); background: #b08d4a; }
+
+        /* Services Section */
+        .services { padding: 100px 10%; background: var(--secondary); }
+        .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary); margin-bottom: 50px; }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .price-item {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-left: 3px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-item.vip { background: rgba(197, 160, 89, 0.1); border: 1px solid var(--primary); }
+
+        /* Info Grid (Horário e Local) */
+        .info-section { padding: 100px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .info-card { background: #0c1a15; padding: 40px; border-radius: 10px; }
+        .info-card h3 { color: var(--primary); margin-bottom: 20px; border-bottom: 1px solid var(--primary); padding-bottom: 10px; }
+        .hours-row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+
+        /* Testimonials */
+        .testimonials { padding: 80px 10%; text-align: center; }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .testi-card { background: #111; padding: 30px; border-radius: 15px; font-style: italic; }
+        .stars { color: #f1c40f; margin-bottom: 15px; }
+
+        /* Footer */
+        footer { padding: 50px 10%; background: #000; text-align: center; border-top: 1px solid var(--primary); }
+        .social-links a { color: var(--text-light); font-size: 1.5rem; margin: 0 15px; transition: var(--transition); }
+        .social-links a:hover { color: var(--primary); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .info-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">BARBEARIA MADERO</a>
+        <div class="social-links">
+            <a href="https://www.instagram.com/barbearia_madero/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <span class="badge-kids">✂️ ATENDEMOS CRIANÇAS</span>
+        <h1>Barbearia Madero</h1>
+        <p>A experiência premium que você merece em Porto Velho. Estilo, conforto e tradição.</p>
+        <a href="https://api.whatsapp.com/send?phone=5569993609069" class="btn">Agendar Horário</a>
+    </section>
+
+    <section class="services">
+        <h2 class="section-title">Nossos Valores</h2>
+        <div class="price-grid">
+            <div class="price-item"><span>Corte</span> <strong>R$ 40,00</strong></div>
+            <div class="price-item"><span>Barba</span> <strong>R$ 25,00</strong></div>
+            <div class="price-item vip"><span>Corte c/ Vanclei Santos</span> <strong>R$ 50,00</strong></div>
+            <div class="price-item"><span>Selagem</span> <strong>R$ 80,00</strong></div>
+            <div class="price-item"><span>Penteado</span> <strong>R$ 25,00</strong></div>
+            <div class="price-item"><span>Hidratação</span> <strong>R$ 20,00</strong></div>
+            <div class="price-item"><span>Sobrancelha</span> <strong>R$ 10,00</strong></div>
+            <div class="price-item"><span>Pezinho</span> <strong>R$ 10,00</strong></div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-card">
+            <h3><i class="fas fa-clock"></i> Horários</h3>
+            <div class="hours-row"><span>Segunda</span> <span>09:00 - 12:00 | 13:30 - 19:00</span></div>
+            <div class="hours-row"><span>Terça</span> <span>09:00 - 12:00 | 13:30 - 20:00</span></div>
+            <div class="hours-row"><span>Quarta</span> <span>09:00 - 12:00 | 13:30 - 19:00</span></div>
+            <div class="hours-row"><span>Quinta</span> <span>09:00 - 12:00 | 13:30 - 19:00</span></div>
+            <div class="hours-row"><span>Sexta</span> <span>09:00 - 12:00 | 13:30 - 19:00</span></div>
+            <div class="hours-row"><span>Sábado</span> <span>09:00 - 12:00 | 13:00 - 19:00</span></div>
+        </div>
+        <div class="info-card">
+            <h3><i class="fas fa-map-marker-alt"></i> Localização</h3>
+            <p>Rua Alexandre Guimarães, 1189</p>
+            <p>Areal - Porto Velho/RO</p>
+            <p>CEP: 76804-311</p>
+            <div style="margin-top: 20px;">
+                <h4>Pagamento:</h4>
+                <p><i class="fas fa-credit-card"></i> Cartões, PIX e Dinheiro</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">O que dizem nossos clientes</h2>
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"Melhor barbearia de PVH. O atendimento é impecável e o ambiente muito agradável."</p>
+                <small>- João Silva</small>
+            </div>
+            <div class="testi-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"Levo meu filho e ele adora. Profissionais muito pacientes e habilidosos."</p>
+                <small>- Marcos Oliveira</small>
+            </div>
+            <div class="testi-card">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>"O Vanclei é fera! Corte sempre na régua."</p>
+                <small>- Ricardo Lima</small>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Barbearia Madero. Todos os direitos reservados.</p>
+        <div class="social-links" style="margin-top: 20px;">
+            <a href="https://www.instagram.com/barbearia_madero/"><i class="fab fa-instagram"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=5569993609069"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Animações
+        ScrollReveal().reveal('.hero h1', { delay: 200, origin: 'top', distance: '50px' });
+        ScrollReveal().reveal('.price-item', { interval: 100, origin: 'bottom', distance: '30px' });
+        ScrollReveal().reveal('.info-card', { delay: 300, origin: 'left', distance: '50px' });
+        ScrollReveal().reveal('.testi-card', { interval: 200, scale: 0.85 });
+    </script>
+</body>
+</html>
