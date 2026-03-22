@@ -1,12 +1,12 @@
 /* BARBEARIA MADERO - PROFESSIONAL STYLESHEET 2026
     Design: Premium Dark & Gold | Porto Velho, RO
-    Status: FINAL COMPILATION (Anti-Purple Fix, Modal & Grid)
+    Status: FINAL COMPILATION (Anti-Purple Fix, Logo Vetorial & Modal)
 */
 
 :root {
     --gold: #d4af37;
     --gold-dark: #aa891d;
-    --gold-glow: rgba(212, 175, 55, 0.3);
+    --gold-glow: rgba(212, 175, 55, 0.4);
     --bg-black: #050706;
     --bg-card: #0d1210;
     --text-gold: #e5c158;
@@ -36,10 +36,11 @@ body {
     padding: 0 25px; 
 }
 
-/* ANTI-PURPLE FIX: Garante que links clicados não fiquem roxos */
-a, a:visited, a:active {
-    text-decoration: none;
-    color: inherit;
+/* ANTI-PURPLE FIX: Garante que links clicados NUNCA fiquem roxos */
+a, a:visited, a:active, a:focus {
+    text-decoration: none !important;
+    color: inherit !important;
+    outline: none;
 }
 
 /* --- HEADER & NAVIGATION --- */
@@ -48,12 +49,12 @@ header {
     top: 0; 
     width: 100%; 
     height: 90px;
-    background: rgba(5, 7, 6, 0.9); 
+    background: rgba(5, 7, 6, 0.95); 
     backdrop-filter: blur(15px);
     z-index: 1000; 
     display: flex; 
     align-items: center;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .header-flex { 
@@ -63,19 +64,53 @@ header {
     width: 100%; 
 }
 
-.logo-text { 
-    font-family: 'Cinzel', serif; 
-    font-size: 1.6rem; 
-    color: var(--gold); 
-    font-weight: 700; 
-    letter-spacing: 2px; 
+/* --- NOVA LOGO MADERO (PREMIUM & CLEAN) --- */
+.logo-container {
+    text-decoration: none !important;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    padding: 5px 0;
 }
 
-.logo-img { 
-    height: 55px; 
-    animation: logoPulse 3s infinite ease-in-out; 
+/* O ícone sofisticado (Substitui a logo pixelada) */
+.logo-icon {
+    font-size: 2rem;
+    color: var(--gold) !important;
+    transition: var(--transition);
+    animation: iconGlow 3s infinite ease-in-out;
 }
 
+/* O texto "MADERO" elegante */
+.logo-madero {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--gold) !important;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1;
+}
+
+/* O texto secundário "BARBEARIA" */
+.logo-barbearia {
+    font-size: 0.65rem;
+    color: #fff !important;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+@keyframes iconGlow {
+    0%, 100% { filter: drop-shadow(0 0 2px var(--gold)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 12px var(--gold-glow)); transform: scale(1.05); }
+}
+
+.logo-container:hover .logo-icon { transform: rotate(-10deg); }
+
+/* --- NAV MENU --- */
 .nav-desktop a {
     margin-left: 25px;
     font-weight: 600;
@@ -89,9 +124,13 @@ header {
     color: var(--gold) !important;
 }
 
-@keyframes logoPulse {
-    0%, 100% { filter: drop-shadow(0 0 2px var(--gold)); }
-    50% { filter: drop-shadow(0 0 10px var(--gold)); }
+.social-top a i {
+    font-size: 1.3rem;
+    transition: 0.3s;
+}
+
+.social-top a:hover i {
+    color: var(--gold) !important;
 }
 
 /* --- SERVICES GRID --- */
@@ -107,61 +146,15 @@ header {
     border: 1px solid rgba(212, 175, 55, 0.1);
     padding: 25px;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     transition: var(--transition);
-    position: relative;
-    overflow: hidden;
 }
 
 .service-card:hover {
     border-color: var(--gold);
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 
-.service-card.highlight {
-    border: 1px solid var(--gold);
-    background: linear-gradient(145deg, #0d1210 0%, #1a1f1d 100%);
-}
-
-.service-card.highlight::before {
-    content: "RECOMENDADO";
-    position: absolute;
-    top: 10px;
-    right: -30px;
-    background: var(--gold);
-    color: #000;
-    font-size: 0.6rem;
-    font-weight: 800;
-    padding: 5px 40px;
-    transform: rotate(45deg);
-}
-
-.service-info h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.service-info .price {
-    display: block;
-    color: var(--gold);
-    font-weight: 800;
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-}
-
-.service-info .time {
-    display: block;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    margin-bottom: 20px;
-}
-
-/* --- BOOKING MODAL --- */
+/* --- BOOKING MODAL & CALENDAR FIX --- */
 .modal {
     display: none; 
     position: fixed; 
@@ -183,185 +176,43 @@ header {
     max-width: 440px; 
     padding: 25px; 
     border-radius: 20px;
-    position: relative; 
     animation: fadeInUp 0.4s ease;
-    max-height: 95vh; 
-    overflow-y: auto;
-}
-
-.close-modal { 
-    position: absolute; 
-    right: 20px; 
-    top: 15px; 
-    color: #fff; 
-    font-size: 24px; 
-    cursor: pointer; 
-    opacity: 0.5; 
-}
-
-/* Calendar within Modal */
-.calendar-wrapper {
-    display: flex; 
-    align-items: center; 
-    gap: 5px; 
-    margin: 20px 0;
-}
-
-.nav-arrow {
-    background: rgba(255, 255, 255, 0.05); 
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    color: var(--gold); 
-    width: 32px; 
-    height: 32px; 
-    border-radius: 50%;
-    cursor: pointer; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    transition: 0.3s;
-}
-
-.nav-arrow:hover { 
-    background: var(--gold); 
-    color: #000; 
-}
-
-.days-container {
-    display: flex; 
-    gap: 10px; 
-    overflow-x: auto; 
-    padding: 5px 0;
-    scrollbar-width: none; 
-    scroll-behavior: smooth;
-}
-.days-container::-webkit-scrollbar { display: none; }
-
-.day-item {
-    min-width: 65px; 
-    height: 80px; 
-    text-align: center;
-    background: #1a1f1d; 
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 12px; 
-    display: flex; 
-    flex-direction: column;
-    justify-content: center; 
-    cursor: pointer; 
-    transition: 0.3s;
 }
 
 .day-item.active { 
-    background: var(--gold); 
-    color: #000; 
-    border-color: var(--gold); 
+    background: var(--gold) !important; 
+    color: #000 !important; 
     font-weight: 800; 
 }
 
-/* Professionals within Modal */
-.prof-circles { 
-    display: flex; 
-    justify-content: center; 
-    gap: 15px; 
-    margin: 25px 0; 
-}
-
-.prof-item { 
-    text-align: center; 
-    cursor: pointer; 
-    transition: 0.3s; 
-    width: 80px; 
-}
-
-.prof-item img { 
-    width: 70px; 
-    height: 70px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    margin-bottom: 8px; 
-    filter: grayscale(100%); 
-    border: 2px solid transparent;
-}
-
-.prof-item.active img { 
-    filter: grayscale(0%); 
-    border-color: var(--gold); 
-    box-shadow: 0 0 15px var(--gold-glow); 
-}
-
-.prof-item span { 
-    font-size: 0.75rem; 
-    color: #fff; 
-    font-weight: 600; 
-}
-
-/* Time Grid within Modal */
-.time-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 10px; 
-    margin-top: 15px; 
-}
-
-.time-slot {
-    background: #1a1f1d; 
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 12px 5px; 
-    border-radius: 8px; 
-    text-align: center; 
-    cursor: pointer; 
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-
-.time-slot:hover { 
-    background: var(--gold); 
-    color: #000; 
-}
-
-/* --- BUTTONS --- */
-.btn-book, .btn-book:visited {
+/* Botão de Agendamento */
+.btn-book {
     width: 100%;
-    background: var(--gold);
-    color: #000 !important; /* Força o preto sobre o dourado */
+    background: var(--gold) !important;
+    color: #000 !important;
     border: none;
-    padding: 12px;
+    padding: 14px;
     border-radius: 8px;
     font-weight: 800;
     cursor: pointer;
     text-transform: uppercase;
     transition: 0.3s;
-    text-align: center;
-    display: inline-block;
 }
 
 .btn-book:hover {
-    background: #fff;
+    background: #fff !important;
     box-shadow: 0 0 15px var(--gold-glow);
 }
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
     header { height: 75px; }
-    
-    .logo-img { height: 45px; }
-    .logo-text { font-size: 1.2rem; }
-
-    .nav-desktop { display: none; } /* Oculta menu desktop no mobile */
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .page-header h2 {
-        font-size: 2rem;
-    }
-
-    .time-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .logo-madero { font-size: 1.4rem; }
+    .logo-icon { font-size: 1.6rem; }
+    .nav-desktop { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
 }
 
-/* --- ANIMATIONS --- */
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(20px); } 
     to { opacity: 1; transform: translateY(0); } 
