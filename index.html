@@ -31,38 +31,21 @@
 
         .btn-main {
             display: inline-block;
-            background: var(--gold);
+            background: #d4af37; /* Dourado mais fechado e luxuoso */
             color: #000 !important;
             padding: 16px 45px;
             border-radius: 8px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            transition: var(--transition);
-            border: 2px solid var(--gold);
+            transition: 0.3s;
+            border: 2px solid #d4af37;
         }
 
         .btn-main:hover {
             background: transparent;
-            color: var(--gold) !important;
-            box-shadow: 0 0 25px var(--gold-glow);
-        }
-
-        .btn-outline {
-            display: inline-block;
-            border: 2px solid var(--gold);
-            color: var(--gold) !important;
-            padding: 16px 45px;
-            border-radius: 8px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: var(--transition);
-        }
-
-        .btn-outline:hover {
-            background: var(--gold);
-            color: #000 !important;
+            color: #d4af37 !important;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
         }
 
         /* Seção Localização */
@@ -70,74 +53,88 @@
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 60px;
-            align-items: center; 
-            background: var(--bg-card);
+            align-items: start; 
+            background: rgba(26, 31, 29, 0.6);
             padding: 50px; 
-            border-radius: 25px; 
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 30px; 
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            backdrop-filter: blur(10px);
             margin-bottom: 80px;
         }
 
         .map-box { 
-            height: 400px; 
+            height: 450px; 
             border-radius: 20px; 
             overflow: hidden; 
-            border: 1px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        /* PAGAMENTOS - VERSÃO CORRIGIDA E BONITA */
+        /* PAGAMENTOS - DESIGN PROFISSIONAL */
         .payment-section {
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 1px dashed rgba(212,175,55,0.2);
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212,175,55,0.15);
         }
 
         .payment-label {
-            color: var(--gold);
-            font-size: 0.75rem;
+            color: #d4af37;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-weight: 700;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            opacity: 0.8;
         }
 
         .payment-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
 
         .payment-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.03);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .payment-item:hover {
-            border-color: var(--gold);
-            background: rgba(212,175,55,0.05);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-5px);
         }
 
         .payment-item i {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
         }
 
         .payment-item span {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 992px) {
-            .location-wrapper { grid-template-columns: 1fr; padding: 30px; gap: 40px; }
-            .hero-content h1 { font-size: 3rem; }
+            .location-wrapper { 
+                grid-template-columns: 1fr; 
+                padding: 30px; 
+                gap: 40px;
+                border-radius: 0;
+            }
+            .hero-content h1 { font-size: 3.2rem; }
+            .payment-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 480px) {
             .payment-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -169,12 +166,12 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px;">
+            <h1 style="font-family: 'Cinzel', serif; color: #d4af37; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px;">
                 ESTILO &<br>TRADIÇÃO
             </h1>
-            <div style="width: 100px; height: 4px; background: var(--gold); margin: 20px auto 30px;"></div>
-            <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 45px; font-weight: 300; letter-spacing: 1px;">
-                A experiência premium que Porto Velho merece.<br>Cortes precisos, barba clássica e ambiente exclusivo.
+            <div style="width: 100px; height: 3px; background: #d4af37; margin: 20px auto 30px; opacity: 0.6;"></div>
+            <p style="font-size: 1.1rem; opacity: 0.8; margin-bottom: 45px; font-weight: 300; letter-spacing: 1.5px; line-height: 1.6;">
+                A experiência premium que Porto Velho merece.<br>Cortes precisos e ambiente exclusivo.
             </p>
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
                 <a href="servicos.html" class="btn-main">Agendar Agora</a>
@@ -183,20 +180,20 @@
         </div>
     </section>
 
-    <section class="location" style="padding: 100px 0;">
+    <section class="location" style="padding: 100px 0; background: #050706;">
         <div class="container">
             <div class="location-wrapper">
                 <div class="location-text">
-                    <span style="color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 700;">Onde estamos</span>
-                    <h2 style="font-family: 'Cinzel', serif; color: #fff; font-size: 3rem; margin: 15px 0 25px;">Visite-nos</h2>
-                    <p style="margin-bottom: 25px; opacity: 0.8; font-size: 1.1rem; line-height: 1.8;">
-                        Rua Alexandre Guimarães, 1189<br>
-                        Bairro Areal - Porto Velho, RO<br>
-                        <strong>Segunda a Sábado: 09h às 20h</strong>
+                    <span style="color: #d4af37; text-transform: uppercase; letter-spacing: 4px; font-size: 0.75rem; font-weight: 700;">Localização</span>
+                    <h2 style="font-family: 'Cinzel', serif; color: #fff; font-size: 2.8rem; margin: 10px 0 25px;">Onde estamos</h2>
+                    <p style="margin-bottom: 30px; opacity: 0.7; font-size: 1.05rem; line-height: 1.8; font-weight: 300;">
+                        <i class="fas fa-map-marker-alt" style="color: #d4af37; margin-right: 10px;"></i> Rua Alexandre Guimarães, 1189<br>
+                        Bairro Areal - Porto Velho, RO<br><br>
+                        <i class="far fa-clock" style="color: #d4af37; margin-right: 10px;"></i> <strong>Segunda a Sábado: 09h às 20h</strong>
                     </p>
                     
                     <div class="payment-section">
-                        <span class="payment-label">Aceitamos</span>
+                        <span class="payment-label">Métodos de Pagamento</span>
                         <div class="payment-grid">
                             <div class="payment-item">
                                 <i class="fas fa-qrcode" style="color: #32BCAD;"></i>
@@ -219,20 +216,20 @@
                 </div>
 
                 <div class="map-box">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.8727196024344!2d-63.893121!3d-8.77583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDYnMzMuMCJTIDYzwrA1MyczNS4yIlc!5e0!3m2!1spt-BR!2sbr!4v1650000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.5!2d-63.9!3d-8.76!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDUnNDQuOCJTIDYzwrA1NCc0MC4wIlc!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 80px 0; background: #000; border-top: 1px solid rgba(212,175,55,0.15);">
+    <footer style="text-align: center; padding: 60px 0; background: #000; border-top: 1px solid rgba(212,175,55,0.1);">
         <div class="container">
-            <div class="logo-madero" style="font-size: 1.2rem; margin-bottom: 30px;">MADERO</div>
-            <div style="margin-bottom: 30px; font-size: 1.8rem; display: flex; justify-content: center; gap: 30px;">
-                <a href="https://www.instagram.com/barbearia_madero" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <div class="logo-madero" style="font-size: 1.1rem; margin-bottom: 25px; letter-spacing: 5px;">MADERO</div>
+            <div style="margin-bottom: 25px; font-size: 1.5rem; display: flex; justify-content: center; gap: 25px;">
+                <a href="https://www.instagram.com/barbearia_madero" target="_blank" style="color: rgba(255,255,255,0.5); transition: 0.3s;"><i class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send?phone=5569993609069" target="_blank" style="color: rgba(255,255,255,0.5); transition: 0.3s;"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p style="opacity: 0.5; font-size: 0.8rem; letter-spacing: 1px;">
+            <p style="opacity: 0.4; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;">
                 © 2026 Barbearia Madero | Porto Velho - RO
             </p>
         </div>
