@@ -41,7 +41,7 @@ body {
 
 /* --- Header & Navegação --- */
 header {
-    background: rgba(5, 5, 5, 0.85);
+    background: rgba(5, 5, 5, 0.95);
     border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     position: fixed;
     top: 0; width: 100%; z-index: 1000;
@@ -402,7 +402,7 @@ header {
 /* --- Localização e Pagamento --- */
 .location { padding: 100px 0; background: var(--black); }
 .location-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-.contact-info p { margin-bottom: 15px; font-size: 1rem; color: var(--text-muted); }
+.contact-info p { margin-bottom: 15px; font-size: 1rem; color: #fff !important; }
 .contact-info i { color: var(--gold); margin-right: 10px; }
 
 .payment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 25px; }
@@ -413,9 +413,10 @@ header {
 }
 .payment-item i { color: var(--gold); margin-right: 10px; }
 
+/* MAPA CORRIGIDO: Removido filtro invert que bugava visibilidade mobile */
 .map-box { 
     height: 400px; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.2); 
-    overflow: hidden; filter: grayscale(1) invert(0.9) contrast(1.1); 
+    overflow: hidden; filter: grayscale(0.5) contrast(1.1); 
 }
 
 /* --- Responsividade Premium (Ajustada para Mobile) --- */
@@ -424,7 +425,7 @@ header {
         height: auto; 
         padding: 20px 0; 
         flex-direction: column; 
-        gap: 15px; 
+        gap: 20px; 
     }
 
     .nav-desktop { 
@@ -432,10 +433,11 @@ header {
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px; 
+        width: 100%;
     }
 
     .nav-desktop a { 
-        margin: 0; 
+        margin: 0 5px; 
         font-size: 0.7rem; 
         letter-spacing: 1px;
     }
@@ -492,12 +494,19 @@ header {
     }
 
     .location-wrapper { grid-template-columns: 1fr; gap: 40px; }
-    .map-box { height: 300px; }
+    
+    /* Mapa Mobile Corrigido */
+    .map-box { 
+        height: 300px; 
+        width: 100%;
+        filter: none; /* Remove filtros no mobile para máxima compatibilidade */
+    }
+    
     .payment-grid { grid-template-columns: 1fr; }
 }
 
 /* Ajuste para telas muito pequenas */
 @media (max-width: 380px) {
     .hero-title { font-size: 2.3rem; }
-    .nav-desktop a { font-size: 0.6rem; }
+    .nav-desktop a { font-size: 0.6rem; margin: 0 3px; }
 }
