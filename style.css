@@ -1,5 +1,5 @@
 /* BARBEARIA MADERO - PREMIUM 2026 
-    DESIGN: DARK & GOLD REFINED
+   DESIGN: DARK & GOLD REFINED
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap');
@@ -269,9 +269,36 @@ header {
 .booking-steps h4 i { color: var(--gold); }
 
 /* Calendário no Modal */
-.days-container {
-    display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px;
+.calendar-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
+
+/* Seta animada para o scroll do calendário */
+.calendar-wrapper::after {
+    content: '\f061';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: -10px;
+    color: var(--gold);
+    animation: bounceRight 2s infinite;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+@keyframes bounceRight {
+    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+    40% {transform: translateX(-5px);}
+    60% {transform: translateX(-3px);}
+}
+
+.days-container {
+    display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none;
+}
+.days-container::-webkit-scrollbar { display: none; }
+
 .day-card {
     min-width: 75px; padding: 15px;
     background: rgba(255,255,255,0.03);
@@ -283,10 +310,19 @@ header {
 /* Profissionais no Modal */
 .prof-circles { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 .prof-item { cursor: pointer; text-align: center; transition: var(--transition); width: 100px; }
+
 .prof-img-wrapper {
     width: 70px; height: 70px; border-radius: 50%; overflow: hidden;
     margin: 0 auto 10px; border: 2px solid transparent; transition: var(--transition);
 }
+
+.prof-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .prof-item:hover .prof-img-wrapper, .prof-item.selected .prof-img-wrapper {
     border-color: var(--gold); box-shadow: 0 0 15px var(--gold-glow);
 }
