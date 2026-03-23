@@ -1,5 +1,5 @@
 /* BARBEARIA MADERO - PREMIUM 2026 
-   DESIGN: DARK & GOLD REFINED
+   DESIGN: DARK & GOLD REFINED (COMPLETE & RESPONSIVE)
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap');
@@ -113,7 +113,6 @@ header {
 .nav-desktop a:hover::after, .nav-desktop a.active::after { width: 100%; }
 .nav-desktop a:hover, .nav-desktop a.active { color: var(--gold); }
 
-/* --- Ícones Sociais (WhatsApp & Instagram) --- */
 .social-top {
     display: flex;
     align-items: center;
@@ -419,15 +418,86 @@ header {
     overflow: hidden; filter: grayscale(1) invert(0.9) contrast(1.1); 
 }
 
-/* --- Responsividade --- */
+/* --- Responsividade Premium (Ajustada para Mobile) --- */
 @media (max-width: 768px) {
-    .header-flex { height: auto; padding: 20px 0; flex-direction: column; gap: 15px; }
-    .nav-desktop { flex-direction: column; gap: 10px; }
-    .nav-desktop a { margin: 0; font-size: 0.75rem; }
-    .social-top { margin-left: 0; margin-top: 15px; gap: 25px; }
-    .location-wrapper { grid-template-columns: 1fr; }
-    .hero-title { font-size: 3rem; }
-    .time-grid { grid-template-columns: repeat(2, 1fr); }
-    .prof-circles { gap: 15px; }
-    .modal-content { padding: 30px 20px; }
+    .header-flex { 
+        height: auto; 
+        padding: 20px 0; 
+        flex-direction: column; 
+        gap: 15px; 
+    }
+
+    .nav-desktop { 
+        flex-direction: row; 
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px; 
+    }
+
+    .nav-desktop a { 
+        margin: 0; 
+        font-size: 0.7rem; 
+        letter-spacing: 1px;
+    }
+
+    .social-top { 
+        margin-left: 0; 
+        margin-top: 5px; 
+        gap: 25px; 
+    }
+
+    .social-top a {
+        font-size: 1.4rem;
+    }
+
+    .hero-title { font-size: 2.8rem; }
+    .hero-subtitle { font-size: 0.9rem; padding: 0 10px; }
+
+    .modal-content { 
+        width: 95%; 
+        margin: 5% auto;
+        padding: 30px 15px; 
+    }
+
+    /* Ativa scroll lateral suave no calendário */
+    .days-container {
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .days-container::-webkit-scrollbar { display: none; }
+
+    .day-card {
+        min-width: 75px;
+        padding: 15px 5px;
+    }
+
+    .time-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 10px;
+    }
+
+    .prof-circles { 
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px; 
+    }
+    
+    .prof-item { width: 100%; }
+    
+    .prof-img-wrapper {
+        width: 65px;
+        height: 65px;
+    }
+
+    .location-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .map-box { height: 300px; }
+    .payment-grid { grid-template-columns: 1fr; }
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 380px) {
+    .hero-title { font-size: 2.3rem; }
+    .nav-desktop a { font-size: 0.6rem; }
 }
