@@ -9,6 +9,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Ajuste específico para garantir que as fotos preencham o círculo */
+        .prof-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Efeito de seta para indicar scroll no calendário mobile */
+        @media (max-width: 768px) {
+            .calendar-wrapper { position: relative; }
+            .calendar-wrapper::after {
+                content: '\f061';
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--gold);
+                font-size: 0.8rem;
+                opacity: 0.5;
+                animation: nudge 2s infinite;
+            }
+        }
+        @keyframes nudge {
+            0%, 100% { transform: translate(0, -50%); }
+            50% { transform: translate(5px, -50%); }
+        }
+    </style>
 </head>
 <body class="services-page">
 
@@ -32,10 +63,10 @@
     <main>
         <section class="page-header" style="padding-top: 150px; text-align: center;">
             <div class="container" data-aos="fade-down">
-                <span class="section-tag">Nossos Serviços</span>
-                <h2 class="section-title">Menu de Experiências</h2>
+                <span class="section-tag" style="color: var(--gold); letter-spacing: 3px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">Nossos Serviços</span>
+                <h2 class="section-title" style="font-family: 'Cinzel', serif; font-size: 3rem; margin: 10px 0;">Menu de Experiências</h2>
                 <div class="gold-divider"></div>
-                <p class="section-desc">Cuidado impecável para o homem moderno em Porto Velho.</p>
+                <p class="section-desc" style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Cuidado impecável para o homem moderno em Porto Velho.</p>
             </div>
         </section>
 
@@ -58,7 +89,8 @@
                 <div class="step">
                     <h4><i class="fas fa-calendar-day"></i> 1. ESCOLHA O DIA</h4>
                     <div class="calendar-wrapper">
-                        <div class="days-container" id="daysContainer"></div>
+                        <div class="days-container" id="daysContainer">
+                            </div>
                     </div>
                 </div>
 
@@ -67,19 +99,19 @@
                     <div class="prof-circles">
                         <div class="prof-item" onclick="selectProf(this, 'João')">
                             <div class="prof-img-wrapper">
-                                <img src="joao.jpg" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=J'" alt="João">
+                                <img src="joao.jpg" alt="João" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=J'">
                             </div>
                             <span>João</span>
                         </div>
                         <div class="prof-item" onclick="selectProf(this, 'Ruan')">
                             <div class="prof-img-wrapper">
-                                <img src="ruan.jpg" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=R'" alt="Ruan">
+                                <img src="ruan.jpg" alt="Ruan" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=R'">
                             </div>
                             <span>Ruan</span>
                         </div>
                         <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
                             <div class="prof-img-wrapper">
-                                <img src="vanclei.jpg" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=V'" alt="Vanclei">
+                                <img src="vanclei.jpg" alt="Vanclei" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=V'">
                             </div>
                             <span>Vanclei</span>
                         </div>
@@ -94,7 +126,9 @@
                         <div class="time-slot" onclick="finishBooking('11:00')">11:00</div>
                         <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
                         <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
+                        <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
                         <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
+                        <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
                         <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
                     </div>
                 </div>
