@@ -72,7 +72,7 @@ function renderizarCalendario() {
     let diasRenderizados = 0;
     let i = 0;
 
-    while (diasRenderizados < 14) { // Aumentado para 14 dias para justificar as setas
+    while (diasRenderizados < 14) { 
         const dataCopia = new Date(hoje);
         dataCopia.setDate(hoje.getDate() + i);
         
@@ -85,12 +85,14 @@ function renderizarCalendario() {
             const dayDiv = document.createElement('div');
             dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
+            // Define a data inicial (hoje) por padrão
             if (diasRenderizados === 0) dadosAgendamento.data = dataParaAgendamento;
 
             dayDiv.onclick = function() { 
                 document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
                 this.classList.add('active');
                 dadosAgendamento.data = dataParaAgendamento;
+                console.log("Data selecionada:", dadosAgendamento.data);
             };
 
             dayDiv.innerHTML = `<span>${diaNome}</span><br><strong>${diaMes}</strong>`;
@@ -101,11 +103,10 @@ function renderizarCalendario() {
     }
 }
 
-// FUNÇÃO DE NAVEGAÇÃO PROFISSIONAL (IDA E VOLTA)
+// NAVEGAÇÃO DO CALENDÁRIO (Setas)
 window.scrollCalendar = function(direcao) {
     const container = document.getElementById('daysContainer');
     if (container) {
-        // direcao 1 = direita, direcao -1 = esquerda
         const scrollAmount = 160; 
         container.scrollBy({ 
             left: scrollAmount * direcao, 
@@ -144,37 +145,51 @@ window.selectProf = function(el, nome) {
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) {
         timeSelection.style.display = 'block';
-        // Scroll suave até os horários
+        // Scroll suave para os horários após selecionar profissional
         setTimeout(() => {
             timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
+        }, 200);
     }
 };
 
 // ENVIO PARA WHATSAPP
 window.finishBooking = function(hora) {
     if (!dadosAgendamento.prof) {
-        alert("Por favor, selecione um especialista!");
+        alert("Por favor, selecione um profissional primeiro!");
         return;
     }
 
     dadosAgendamento.hora = hora;
     const numeroWhatsApp = "5569993609069"; 
+    
+    // Formatação da mensagem para o WhatsApp
     const mensagem = `Olá! Gostaria de agendar na *Barbearia Madero*:%0A%0A` +
                      `✂️ *Serviço:* ${dadosAgendamento.servico}%0A` +
                      `👤 *Barbeiro:* ${dadosAgendamento.prof}%0A` +
                      `📅 *Data:* ${dadosAgendamento.data}/2026%0A` +
                      `⏰ *Horário:* ${dadosAgendamento.hora}%0A%0A` +
-                     `_Favor confirmar agendamento._`;
+                     `_Favor confirmar disponibilidade._`;
 
     window.open(`https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`, '_blank');
     closeBooking();
 };
 
+// RESET DO MODAL (Limpa seleções ao fechar)
 function resetModal() {
     dadosAgendamento.prof = '';
     dadosAgendamento.hora = '';
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) timeSelection.style.display = 'none';
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
+    
+    // Resetar para o primeiro dia do calendário visualmente
+    renderizarCalendario();
 }
+
+// Fechar modal ao clicar fora dele
+window.onclick = function(event) {
+    const modal = document.getElementById('bookingModal');
+    if (event.target == modal) {
+        closeBooking();
+    }
+};
