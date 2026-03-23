@@ -72,7 +72,7 @@ function renderizarCalendario() {
     let diasRenderizados = 0;
     let i = 0;
 
-    while (diasRenderizados < 7) {
+    while (diasRenderizados < 14) { // Aumentado para 14 dias para justificar as setas
         const dataCopia = new Date(hoje);
         dataCopia.setDate(hoje.getDate() + i);
         
@@ -101,11 +101,16 @@ function renderizarCalendario() {
     }
 }
 
-// FUNÇÃO DA SETA: Rola o calendário para a direita
-window.scrollCalendar = function() {
+// FUNÇÃO DE NAVEGAÇÃO PROFISSIONAL (IDA E VOLTA)
+window.scrollCalendar = function(direcao) {
     const container = document.getElementById('daysContainer');
     if (container) {
-        container.scrollBy({ left: 120, behavior: 'smooth' });
+        // direcao 1 = direita, direcao -1 = esquerda
+        const scrollAmount = 160; 
+        container.scrollBy({ 
+            left: scrollAmount * direcao, 
+            behavior: 'smooth' 
+        });
     }
 };
 
