@@ -1,5 +1,5 @@
 /* BARBEARIA MADERO - JAVASCRIPT ENGINE 2026
-   Lógica de Agendamento & Interface Dinâmica
+    Lógica de Agendamento & Interface Dinâmica
 */
 
 let dadosAgendamento = {
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializa o calendário
     renderizarCalendario();
 
-    // Banco de Dados de Serviços Completo
+    // Banco de Dados de Serviços
     const listaServicos = [
         { nome: "Corte (Degradê/Social)", preco: "40,00", tempo: "45 min", destaque: true },
         { nome: "Corte + Barba", preco: "65,00", tempo: "60 min", destaque: true },
@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         listaServicos.forEach(s => {
             const card = document.createElement('div');
             card.className = `service-card`;
-            // Se for destaque, podemos adicionar um estilo via JS ou CSS
             if(s.destaque) card.style.borderColor = "var(--gold)";
             
             card.innerHTML = `
@@ -88,6 +87,7 @@ function renderizarCalendario() {
             const dayDiv = document.createElement('div');
             dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
+            // Define o primeiro dia útil como padrão
             if (diasRenderizados === 0) {
                 dadosAgendamento.data = dataParaAgendamento;
             }
@@ -115,7 +115,7 @@ window.openBooking = function(serviceName) {
     if(titleEl) titleEl.innerText = serviceName.toUpperCase();
     
     if (modal) {
-        modal.style.display = 'block'; // 'block' para o display:none do CSS
+        modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
 };
@@ -131,34 +131,43 @@ window.closeBooking = function() {
 
 // SELEÇÃO DE PROFISSIONAL
 window.selectProf = function(el, nome) {
+    // Remove a classe de todos os itens e adiciona apenas no clicado
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
     el.classList.add('selected');
+    
     dadosAgendamento.prof = nome;
     
+    // Mostra a seção de horários com uma transição suave
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) {
         timeSelection.style.display = 'block';
+        timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 };
 
 // ENVIO PARA WHATSAPP
 window.finishBooking = function(hora) {
     if (!dadosAgendamento.prof) {
-        alert("Por favor, selecione um barbeiro!");
+        alert("Por favor, selecione um especialista!");
         return;
     }
 
     dadosAgendamento.hora = hora;
     
+    // Número oficial da Barbearia Madero
     const numeroWhatsApp = "5569993609069"; 
+    
+    // Montagem da URL de mensagem
     const mensagem = `Olá! Gostaria de agendar na *Barbearia Madero*:%0A%0A` +
                      `✂️ *Serviço:* ${dadosAgendamento.servico}%0A` +
                      `👤 *Barbeiro:* ${dadosAgendamento.prof}%0A` +
                      `📅 *Data:* ${dadosAgendamento.data}/2026%0A` +
                      `⏰ *Horário:* ${dadosAgendamento.hora}%0A%0A` +
-                     `_Confirmar agendamento?_`;
+                     `_Favor confirmar disponibilidade._`;
 
-    window.open(`https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`, '_blank');
+    const url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`;
+    
+    window.open(url, '_blank');
     closeBooking();
 };
 
