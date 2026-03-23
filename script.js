@@ -44,9 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = '';
         listaServicos.forEach(s => {
             const card = document.createElement('div');
-            card.className = `service-card ${s.destaque ? 'highlight' : ''}`;
+            card.className = `service-card`;
+            // Se for destaque, podemos adicionar um estilo via JS ou CSS
+            if(s.destaque) card.style.borderColor = "var(--gold)";
             
-            // Estrutura otimizada para manter botões alinhados na base do card
             card.innerHTML = `
                 <div class="service-info">
                     <h3>${s.nome}</h3>
@@ -85,19 +86,19 @@ function renderizarCalendario() {
             const dataParaAgendamento = `${diaMes}/${mesNum}`;
 
             const dayDiv = document.createElement('div');
-            dayDiv.className = `day-item ${diasRenderizados === 0 ? 'active' : ''}`;
+            dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
             if (diasRenderizados === 0) {
                 dadosAgendamento.data = dataParaAgendamento;
             }
 
             dayDiv.onclick = function() { 
-                document.querySelectorAll('.day-item').forEach(d => d.classList.remove('active'));
+                document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
                 this.classList.add('active');
                 dadosAgendamento.data = dataParaAgendamento;
             };
 
-            dayDiv.innerHTML = `<span>${diaNome}</span><strong>${diaMes}</strong>`;
+            dayDiv.innerHTML = `<span>${diaNome}</span><br><strong>${diaMes}</strong>`;
             container.appendChild(dayDiv);
             diasRenderizados++;
         }
@@ -114,7 +115,7 @@ window.openBooking = function(serviceName) {
     if(titleEl) titleEl.innerText = serviceName.toUpperCase();
     
     if (modal) {
-        modal.style.display = 'flex';
+        modal.style.display = 'block'; // 'block' para o display:none do CSS
         document.body.style.overflow = 'hidden';
     }
 };
@@ -130,14 +131,13 @@ window.closeBooking = function() {
 
 // SELEÇÃO DE PROFISSIONAL
 window.selectProf = function(el, nome) {
-    document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
+    document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
+    el.classList.add('selected');
     dadosAgendamento.prof = nome;
     
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) {
         timeSelection.style.display = 'block';
-        timeSelection.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
 };
 
@@ -167,5 +167,5 @@ function resetModal() {
     dadosAgendamento.hora = '';
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) timeSelection.style.display = 'none';
-    document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
 }
