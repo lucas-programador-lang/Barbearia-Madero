@@ -18,27 +18,45 @@
             object-fit: cover;
             display: block;
         }
-        /* Efeito de seta para indicar scroll no calendário mobile */
-        @media (max-width: 768px) {
-            .calendar-wrapper { position: relative; }
-            .calendar-wrapper::after {
-                content: '\f061';
-                font-family: 'Font Awesome 6 Free';
-                font-weight: 900;
-                position: absolute;
-                right: 0;
-                top: 50%;
-                transform: translateY(-50%);
-                color: var(--gold);
-                font-size: 0.8rem;
-                opacity: 0.5;
-                animation: nudge 2s infinite;
-            }
+
+        /* Container do calendário com suporte a clique para scroll */
+        .calendar-wrapper { 
+            position: relative; 
+            cursor: pointer;
+            user-select: none; /* Evita selecionar texto ao clicar na seta */
         }
+
+        /* Efeito de seta para indicar scroll lateral (Desktop e Mobile) */
+        .calendar-wrapper::after {
+            content: '\f061';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: nudge 2s infinite;
+            pointer-events: none; /* Clique passa através da seta para o container */
+        }
+
         @keyframes nudge {
             0%, 100% { transform: translate(0, -50%); }
-            50% { transform: translate(5px, -50%); }
+            50% { transform: translate(8px, -50%); }
         }
+
+        /* Garantir que o container de dias não quebre linha */
+        .days-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 10px;
+            padding-bottom: 10px;
+            scrollbar-width: none; /* Firefox */
+        }
+        .days-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
     </style>
 </head>
 <body class="services-page">
@@ -72,8 +90,7 @@
 
         <section class="services-content">
             <div class="container">
-                <div class="services-grid" id="servicesGrid">
-                    </div>
+                <div class="services-grid" id="servicesGrid"></div>
             </div>
         </section>
     </main>
@@ -88,7 +105,7 @@
             <div class="booking-steps">
                 <div class="step">
                     <h4><i class="fas fa-calendar-day"></i> 1. ESCOLHA O DIA</h4>
-                    <div class="calendar-wrapper">
+                    <div class="calendar-wrapper" onclick="scrollCalendar()">
                         <div class="days-container" id="daysContainer">
                             </div>
                     </div>
