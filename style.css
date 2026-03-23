@@ -88,6 +88,11 @@ header {
     filter: drop-shadow(0 0 5px var(--gold-glow)); 
 }
 
+.nav-desktop {
+    display: flex;
+    align-items: center;
+}
+
 .nav-desktop a {
     color: #fff; 
     text-decoration: none; 
@@ -107,6 +112,29 @@ header {
 
 .nav-desktop a:hover::after, .nav-desktop a.active::after { width: 100%; }
 .nav-desktop a:hover, .nav-desktop a.active { color: var(--gold); }
+
+/* --- Ícones Sociais (WhatsApp & Instagram) --- */
+.social-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.social-top a {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.social-top a:hover i {
+    color: var(--gold);
+    filter: drop-shadow(0 0 8px var(--gold-glow));
+    transform: translateY(-2px);
+}
 
 /* --- Hero Section --- */
 .hero {
@@ -302,7 +330,7 @@ header {
     flex: 1;
     display: flex; 
     gap: 12px; 
-    overflow-x: hidden; /* Esconde a scrollbar para usar as setas */
+    overflow-x: hidden; 
     padding: 10px 0;
     scroll-behavior: smooth;
 }
@@ -394,7 +422,9 @@ header {
 /* --- Responsividade --- */
 @media (max-width: 768px) {
     .header-flex { height: auto; padding: 20px 0; flex-direction: column; gap: 15px; }
-    .nav-desktop a { margin: 0 10px; font-size: 0.7rem; }
+    .nav-desktop { flex-direction: column; gap: 10px; }
+    .nav-desktop a { margin: 0; font-size: 0.75rem; }
+    .social-top { margin-left: 0; margin-top: 15px; gap: 25px; }
     .location-wrapper { grid-template-columns: 1fr; }
     .hero-title { font-size: 3rem; }
     .time-grid { grid-template-columns: repeat(2, 1fr); }
