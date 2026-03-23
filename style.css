@@ -154,12 +154,12 @@ header {
     transition: var(--transition); 
     text-decoration: none;
     letter-spacing: 2px;
+    border: none;
 }
 
 .btn-main {
     background: var(--gold-linear); 
     color: #000;
-    border: none;
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
 }
 
@@ -268,52 +268,77 @@ header {
 }
 .booking-steps h4 i { color: var(--gold); }
 
-/* Calendário no Modal */
-.calendar-wrapper {
-    position: relative;
+/* --- Novo Calendário com Navegação --- */
+.calendar-navigation {
     display: flex;
     align-items: center;
+    position: relative;
+    gap: 10px;
+    margin-top: 15px;
 }
 
-/* Seta animada para o scroll do calendário */
-.calendar-wrapper::after {
-    content: '\f061';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    right: -10px;
+.nav-btn {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--gold);
     color: var(--gold);
-    animation: bounceRight 2s infinite;
-    font-size: 0.8rem;
-    opacity: 0.7;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 10;
 }
 
-@keyframes bounceRight {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
-    40% {transform: translateX(-5px);}
-    60% {transform: translateX(-3px);}
+.nav-btn:hover {
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 0 15px var(--gold-glow);
 }
 
 .days-container {
-    display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; scrollbar-width: none;
+    flex: 1;
+    display: flex; 
+    gap: 12px; 
+    overflow-x: hidden; /* Esconde a scrollbar para usar as setas */
+    padding: 10px 0;
+    scroll-behavior: smooth;
 }
-.days-container::-webkit-scrollbar { display: none; }
 
 .day-card {
-    min-width: 75px; padding: 15px;
+    min-width: 85px; 
+    padding: 18px 10px;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(212, 175, 55, 0.1);
-    text-align: center; cursor: pointer; transition: var(--transition);
+    text-align: center; 
+    cursor: pointer; 
+    transition: var(--transition);
+    border-radius: 4px;
 }
-.day-card.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+
+.day-card span { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
+.day-card strong { font-size: 1.2rem; display: block; margin-top: 5px; }
+
+.day-card:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+
+.day-card.active { 
+    background: var(--gold-linear); 
+    color: #000; 
+    border-color: var(--gold); 
+    font-weight: 700; 
+    box-shadow: 0 5px 15px var(--gold-glow);
+}
 
 /* Profissionais no Modal */
-.prof-circles { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.prof-item { cursor: pointer; text-align: center; transition: var(--transition); width: 100px; }
+.prof-circles { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.prof-item { cursor: pointer; text-align: center; transition: var(--transition); width: 90px; }
 
 .prof-img-wrapper {
-    width: 70px; height: 70px; border-radius: 50%; overflow: hidden;
-    margin: 0 auto 10px; border: 2px solid transparent; transition: var(--transition);
+    width: 80px; height: 80px; border-radius: 50%; overflow: hidden;
+    margin: 0 auto 12px; border: 2px solid rgba(212, 175, 55, 0.1); transition: var(--transition);
+    position: relative;
 }
 
 .prof-img-wrapper img {
@@ -324,19 +349,28 @@ header {
 }
 
 .prof-item:hover .prof-img-wrapper, .prof-item.selected .prof-img-wrapper {
-    border-color: var(--gold); box-shadow: 0 0 15px var(--gold-glow);
+    border-color: var(--gold); 
+    box-shadow: 0 0 20px var(--gold-glow);
+    transform: scale(1.05);
 }
-.prof-item span { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
-.prof-item.selected span { color: var(--gold); }
+
+.prof-item span { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: var(--transition); }
+.prof-item.selected span { color: var(--gold); font-weight: 800; }
 
 /* Horários no Modal */
-.time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 15px; }
 .time-slot {
-    padding: 12px; background: rgba(255,255,255,0.05);
+    padding: 15px; background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1); text-align: center;
-    cursor: pointer; font-weight: 700; transition: var(--transition); font-size: 0.9rem;
+    cursor: pointer; font-weight: 700; transition: var(--transition); font-size: 0.95rem;
+    border-radius: 4px;
 }
-.time-slot:hover { border-color: var(--gold); color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+.time-slot:hover { 
+    border-color: var(--gold); 
+    color: var(--gold); 
+    background: rgba(212, 175, 55, 0.08); 
+    transform: translateY(-2px);
+}
 
 /* --- Localização e Pagamento --- */
 .location { padding: 100px 0; background: var(--black); }
@@ -364,4 +398,6 @@ header {
     .location-wrapper { grid-template-columns: 1fr; }
     .hero-title { font-size: 3rem; }
     .time-grid { grid-template-columns: repeat(2, 1fr); }
+    .prof-circles { gap: 15px; }
+    .modal-content { padding: 30px 20px; }
 }
