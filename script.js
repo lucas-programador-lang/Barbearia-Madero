@@ -1,5 +1,5 @@
 /* BARBEARIA MADERO - JAVASCRIPT ENGINE 2026
-    Lógica de Agendamento & Interface Dinâmica
+   Lógica de Agendamento & Interface Dinâmica
 */
 
 let dadosAgendamento = {
@@ -10,7 +10,6 @@ let dadosAgendamento = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa o calendário
     renderizarCalendario();
 
     // Banco de Dados de Serviços
@@ -39,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const grid = document.getElementById('servicesGrid');
-    
     if (grid) {
         grid.innerHTML = '';
         listaServicos.forEach(s => {
@@ -87,10 +85,7 @@ function renderizarCalendario() {
             const dayDiv = document.createElement('div');
             dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
-            // Define o primeiro dia útil como padrão
-            if (diasRenderizados === 0) {
-                dadosAgendamento.data = dataParaAgendamento;
-            }
+            if (diasRenderizados === 0) dadosAgendamento.data = dataParaAgendamento;
 
             dayDiv.onclick = function() { 
                 document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
@@ -106,13 +101,19 @@ function renderizarCalendario() {
     }
 }
 
+// FUNÇÃO DA SETA: Rola o calendário para a direita
+window.scrollCalendar = function() {
+    const container = document.getElementById('daysContainer');
+    if (container) {
+        container.scrollBy({ left: 120, behavior: 'smooth' });
+    }
+};
+
 // CONTROLE DO MODAL
 window.openBooking = function(serviceName) {
     const modal = document.getElementById('bookingModal');
     dadosAgendamento.servico = serviceName;
-    
-    const titleEl = document.getElementById('selectedServiceName');
-    if(titleEl) titleEl.innerText = serviceName.toUpperCase();
+    document.getElementById('selectedServiceName').innerText = serviceName.toUpperCase();
     
     if (modal) {
         modal.style.display = 'block';
@@ -131,17 +132,17 @@ window.closeBooking = function() {
 
 // SELEÇÃO DE PROFISSIONAL
 window.selectProf = function(el, nome) {
-    // Remove a classe de todos os itens e adiciona apenas no clicado
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
     el.classList.add('selected');
-    
     dadosAgendamento.prof = nome;
     
-    // Mostra a seção de horários com uma transição suave
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) {
         timeSelection.style.display = 'block';
-        timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Scroll suave até os horários
+        setTimeout(() => {
+            timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
     }
 };
 
@@ -153,21 +154,15 @@ window.finishBooking = function(hora) {
     }
 
     dadosAgendamento.hora = hora;
-    
-    // Número oficial da Barbearia Madero
     const numeroWhatsApp = "5569993609069"; 
-    
-    // Montagem da URL de mensagem
     const mensagem = `Olá! Gostaria de agendar na *Barbearia Madero*:%0A%0A` +
                      `✂️ *Serviço:* ${dadosAgendamento.servico}%0A` +
                      `👤 *Barbeiro:* ${dadosAgendamento.prof}%0A` +
                      `📅 *Data:* ${dadosAgendamento.data}/2026%0A` +
                      `⏰ *Horário:* ${dadosAgendamento.hora}%0A%0A` +
-                     `_Favor confirmar disponibilidade._`;
+                     `_Favor confirmar agendamento._`;
 
-    const url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`;
-    
-    window.open(url, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagem}`, '_blank');
     closeBooking();
 };
 
