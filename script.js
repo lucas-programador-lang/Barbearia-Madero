@@ -5,7 +5,7 @@
 let dadosAgendamento = {
     servico: '',
     prof: '',
-    data: '',
+    data: '', // Armazenará a data completa (Ex: 24 de Março de 2026)
     hora: ''
 };
 
@@ -61,13 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// GERA OS DIAS DO CALENDÁRIO (Pula domingos)
+// GERA OS DIAS DO CALENDÁRIO COM DATA COMPLETA (Pula domingos)
 function renderizarCalendario() {
     const container = document.getElementById('daysContainer');
     if (!container) return;
     
     container.innerHTML = '';
     const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const mesesNomes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+    
     const hoje = new Date();
     let diasRenderizados = 0;
     let i = 0;
@@ -79,23 +81,31 @@ function renderizarCalendario() {
         if (dataCopia.getDay() !== 0) { 
             const diaNome = diasSemana[dataCopia.getDay()];
             const diaMes = dataCopia.getDate();
-            const mesNum = (dataCopia.getMonth() + 1).toString().padStart(2, '0');
-            const dataParaAgendamento = `${diaMes}/${mesNum}`;
+            const mesNome = mesesNomes[dataCopia.getMonth()];
+            const anoAtual = dataCopia.getFullYear();
+            
+            // String formatada para exibição e mensagem
+            const dataCompleta = `${diaMes} de ${mesNome} de ${anoAtual}`;
 
             const dayDiv = document.createElement('div');
             dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
             // Define a data inicial (hoje) por padrão
-            if (diasRenderizados === 0) dadosAgendamento.data = dataParaAgendamento;
+            if (diasRenderizados === 0) dadosAgendamento.data = dataCompleta;
 
             dayDiv.onclick = function() { 
                 document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
                 this.classList.add('active');
-                dadosAgendamento.data = dataParaAgendamento;
+                dadosAgendamento.data = dataCompleta;
                 console.log("Data selecionada:", dadosAgendamento.data);
             };
 
-            dayDiv.innerHTML = `<span>${diaNome}</span><br><strong>${diaMes}</strong>`;
+            // HTML interno com layout de data completa
+            dayDiv.innerHTML = `
+                <span>${diaNome}</span><br>
+                <strong>${diaMes}</strong><br>
+                <small style="font-size:0.6rem; opacity:0.7; text-transform:uppercase;">${mesNome.substring(0,3)}</small>
+            `;
             container.appendChild(dayDiv);
             diasRenderizados++;
         }
@@ -145,14 +155,13 @@ window.selectProf = function(el, nome) {
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) {
         timeSelection.style.display = 'block';
-        // Scroll suave para os horários após selecionar profissional
         setTimeout(() => {
             timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 200);
     }
 };
 
-// ENVIO PARA WHATSAPP
+// ENVIO PARA WHATSAPP COM DATA COMPLETA
 window.finishBooking = function(hora) {
     if (!dadosAgendamento.prof) {
         alert("Por favor, selecione um profissional primeiro!");
@@ -162,11 +171,11 @@ window.finishBooking = function(hora) {
     dadosAgendamento.hora = hora;
     const numeroWhatsApp = "5569993609069"; 
     
-    // Formatação da mensagem para o WhatsApp
+    // Formatação da mensagem otimizada com Dia, Mês e Ano
     const mensagem = `Olá! Gostaria de agendar na *Barbearia Madero*:%0A%0A` +
                      `✂️ *Serviço:* ${dadosAgendamento.servico}%0A` +
                      `👤 *Barbeiro:* ${dadosAgendamento.prof}%0A` +
-                     `📅 *Data:* ${dadosAgendamento.data}/2026%0A` +
+                     `📅 *Data:* ${dadosAgendamento.data}%0A` +
                      `⏰ *Horário:* ${dadosAgendamento.hora}%0A%0A` +
                      `_Favor confirmar disponibilidade._`;
 
@@ -174,7 +183,7 @@ window.finishBooking = function(hora) {
     closeBooking();
 };
 
-// RESET DO MODAL (Limpa seleções ao fechar)
+// RESET DO MODAL
 function resetModal() {
     dadosAgendamento.prof = '';
     dadosAgendamento.hora = '';
