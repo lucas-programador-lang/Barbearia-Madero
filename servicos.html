@@ -7,16 +7,63 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Estilos adicionais para o calendário com data completa */
+        .calendar-header-info {
+            text-align: center;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .day-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 70px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .day-item.selected {
+            background: var(--gold-linear);
+            border-color: var(--gold);
+            color: #000 !important;
+        }
+
+        .day-item span.day-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        .day-item span.day-month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .day-item span.day-year {
+            font-size: 0.6rem;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body class="services-page">
 
     <header id="navbar" class="header-minimal">
         <div class="container header-flex">
-            <a href="index.html" class="logo-container">
+            <a href="index.html" class="logo-container" style="text-decoration: none;">
                 <i class="fas fa-cut logo-icon"></i>
                 <div class="logo-text">
                     <span class="logo-madero">MADERO</span>
@@ -36,12 +83,12 @@
             <div class="container" data-aos="fade-down">
                 <span class="section-tag" style="color: var(--gold); letter-spacing: 3px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">Nossos Serviços</span>
                 <h2 class="section-title" style="font-family: 'Cinzel', serif; font-size: 3rem; margin: 10px 0;">Menu de Experiências</h2>
-                <div class="gold-divider"></div>
-                <p class="section-desc" style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Cuidado impecável para o homem moderno em Porto Velho.</p>
+                <div class="gold-divider" style="width: 60px; height: 2px; background: var(--gold); margin: 15px auto;"></div>
+                <p class="section-desc" style="color: #888; max-width: 600px; margin: 0 auto;">Cuidado impecável para o homem moderno em Porto Velho.</p>
             </div>
         </section>
 
-        <section class="services-content">
+        <section class="services-content" style="padding: 60px 0;">
             <div class="container">
                 <div class="services-grid" id="servicesGrid">
                     </div>
@@ -52,63 +99,65 @@
     <div id="bookingModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="selectedServiceName">AGENDAR SERVIÇO</h3>
-                <span class="close-modal" onclick="closeBooking()">&times;</span>
+                <h3 id="selectedServiceName" style="font-family: 'Cinzel', serif; color: var(--gold);">AGENDAR SERVIÇO</h3>
+                <span class="close-modal" onclick="closeBooking()" style="cursor:pointer; font-size: 2rem;">&times;</span>
             </div>
 
             <div class="booking-steps">
                 <div class="step">
                     <h4><i class="fas fa-calendar-day"></i> 1. ESCOLHA O DIA</h4>
-                    <div class="calendar-navigation">
-                        <button class="nav-btn prev" onclick="scrollCalendar(-1)">
+                    <div id="currentMonthYear" class="calendar-header-info">
+                        </div>
+                    
+                    <div class="calendar-navigation" style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                        <button class="nav-btn prev" onclick="scrollCalendar(-1)" style="background: none; border: 1px solid var(--gold); color: var(--gold); padding: 10px; border-radius: 50%;">
                             <i class="fas fa-chevron-left"></i>
                         </button>
                         
-                        <div class="days-container" id="daysContainer">
+                        <div class="days-container" id="daysContainer" style="display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; scroll-behavior: smooth;">
                             </div>
 
-                        <button class="nav-btn next" onclick="scrollCalendar(1)">
+                        <button class="nav-btn next" onclick="scrollCalendar(1)" style="background: none; border: 1px solid var(--gold); color: var(--gold); padding: 10px; border-radius: 50%;">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
 
-                <div class="step">
+                <div class="step" style="margin-top: 30px;">
                     <h4><i class="fas fa-user-tie"></i> 2. SELECIONE O ESPECIALISTA</h4>
-                    <div class="prof-circles">
-                        <div class="prof-item" onclick="selectProf(this, 'João')">
-                            <div class="prof-img-wrapper">
-                                <img src="joao.jpg" alt="João" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=J'">
+                    <div class="prof-circles" style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                        <div class="prof-item" onclick="selectProf(this, 'João')" style="text-align: center; cursor: pointer;">
+                            <div class="prof-img-wrapper" style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; transition: 0.3s;">
+                                <img src="joao.jpg" alt="João" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=J'">
                             </div>
-                            <span>João</span>
+                            <span style="display: block; margin-top: 8px; font-size: 0.9rem;">João</span>
                         </div>
-                        <div class="prof-item" onclick="selectProf(this, 'Ruan')">
-                            <div class="prof-img-wrapper">
-                                <img src="ruan.jpg" alt="Ruan" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=R'">
+                        <div class="prof-item" onclick="selectProf(this, 'Ruan')" style="text-align: center; cursor: pointer;">
+                            <div class="prof-img-wrapper" style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; transition: 0.3s;">
+                                <img src="ruan.jpg" alt="Ruan" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=R'">
                             </div>
-                            <span>Ruan</span>
+                            <span style="display: block; margin-top: 8px; font-size: 0.9rem;">Ruan</span>
                         </div>
-                        <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
-                            <div class="prof-img-wrapper">
-                                <img src="vanclei.jpg" alt="Vanclei" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=V'">
+                        <div class="prof-item" onclick="selectProf(this, 'Vanclei')" style="text-align: center; cursor: pointer;">
+                            <div class="prof-img-wrapper" style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; transition: 0.3s;">
+                                <img src="vanclei.jpg" alt="Vanclei" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=V'">
                             </div>
-                            <span>Vanclei</span>
+                            <span style="display: block; margin-top: 8px; font-size: 0.9rem;">Vanclei</span>
                         </div>
                     </div>
                 </div>
 
-                <div id="timeSelection" class="step" style="display:none;">
+                <div id="timeSelection" class="step" style="display:none; margin-top: 30px;">
                     <h4><i class="far fa-clock"></i> 3. HORÁRIOS DISPONÍVEIS</h4>
-                    <div class="time-grid">
-                        <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
-                        <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
-                        <div class="time-slot" onclick="finishBooking('11:00')">11:00</div>
-                        <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
-                        <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
-                        <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
-                        <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
-                        <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
-                        <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
+                    <div class="time-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 15px;">
+                        <div class="time-slot" onclick="finishBooking('09:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">09:00</div>
+                        <div class="time-slot" onclick="finishBooking('10:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">10:00</div>
+                        <div class="time-slot" onclick="finishBooking('11:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">11:00</div>
+                        <div class="time-slot" onclick="finishBooking('14:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">14:00</div>
+                        <div class="time-slot" onclick="finishBooking('15:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">15:00</div>
+                        <div class="time-slot" onclick="finishBooking('16:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">16:00</div>
+                        <div class="time-slot" onclick="finishBooking('17:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">17:00</div>
+                        <div class="time-slot" onclick="finishBooking('18:00')" style="border: 1px solid rgba(212,175,55,0.3); padding: 10px; text-align: center; cursor: pointer; border-radius: 4px;">18:00</div>
                     </div>
                 </div>
             </div>
@@ -116,7 +165,61 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>AOS.init({ duration: 800, once: true });</script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Função para gerar os dias com Data Completa
+        function generateDays() {
+            const container = document.getElementById('daysContainer');
+            const headerInfo = document.getElementById('currentMonthYear');
+            const today = new Date();
+            const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+            
+            // Define o cabeçalho com Mês/Ano atual
+            headerInfo.innerText = `${months[today.getMonth()]} ${today.getFullYear()}`;
+
+            for (let i = 0; i < 14; i++) {
+                const date = new Date();
+                date.setDate(today.getDate() + i);
+                
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'day-item';
+                dayDiv.onclick = function() {
+                    document.querySelectorAll('.day-item').forEach(d => d.classList.remove('selected'));
+                    this.classList.add('selected');
+                    document.getElementById('timeSelection').style.display = 'block';
+                };
+
+                dayDiv.innerHTML = `
+                    <span class="day-number">${date.getDate()}</span>
+                    <span class="day-month">${months[date.getMonth()]}</span>
+                    <span class="day-year">${date.getFullYear()}</span>
+                `;
+                container.appendChild(dayDiv);
+            }
+        }
+
+        window.onload = generateDays;
+
+        function scrollCalendar(direction) {
+            const container = document.getElementById('daysContainer');
+            container.scrollBy({ left: direction * 150, behavior: 'smooth' });
+        }
+
+        function closeBooking() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        function selectProf(element, name) {
+            document.querySelectorAll('.prof-img-wrapper').forEach(p => p.style.borderColor = 'transparent');
+            element.querySelector('.prof-img-wrapper').style.borderColor = '#d4af37';
+        }
+
+        function finishBooking(time) {
+            alert("Agendamento solicitado para às " + time);
+            closeBooking();
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
