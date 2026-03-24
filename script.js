@@ -1,6 +1,4 @@
-/* BARBEARIA MADERO - JAVASCRIPT ENGINE 2026
-   Lógica de Agendamento & Interface Dinâmica - CORRIGIDA
-*/
+/* BARBEARIA MADERO - JAVASCRIPT ENGINE 2026 */
 
 let dadosAgendamento = {
     servico: '',
@@ -11,8 +9,10 @@ let dadosAgendamento = {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarCalendario();
+    renderizarServicos();
+});
 
-    // Banco de Dados de Serviços
+function renderizarServicos() {
     const listaServicos = [
         { nome: "Corte (Degradê/Social)", preco: "40,00", tempo: "45 min", destaque: true },
         { nome: "Corte + Barba", preco: "65,00", tempo: "60 min", destaque: true },
@@ -59,11 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
             grid.appendChild(card);
         });
     }
-});
+}
 
-// GERA OS DIAS DO CALENDÁRIO SEM DUPLICAR MESES
 function renderizarCalendario() {
     const container = document.getElementById('daysContainer');
+    const headerInfo = document.getElementById('currentMonthYear');
     if (!container) return;
     
     container.innerHTML = '';
@@ -71,15 +71,16 @@ function renderizarCalendario() {
     const mesesNomes = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     
     const hoje = new Date();
+    // Define o mês inicial no cabeçalho
+    headerInfo.innerText = `${mesesNomes[hoje.getMonth()]} ${hoje.getFullYear()}`;
+
     let diasRenderizados = 0;
     let contador = 0;
 
     while (diasRenderizados < 14) { 
-        // Cria uma nova data baseada no 'hoje' somando o contador de dias
         const dataCopia = new Date();
         dataCopia.setDate(hoje.getDate() + contador);
         
-        // Pula os domingos
         if (dataCopia.getDay() !== 0) { 
             const diaSemanaNome = diasSemana[dataCopia.getDay()];
             const diaMesNum = dataCopia.getDate();
@@ -89,7 +90,6 @@ function renderizarCalendario() {
             const dataTextoMensagem = `${diaMesNum} de ${mesNome} de ${anoAtual}`;
 
             const dayDiv = document.createElement('div');
-            // O primeiro dia útil encontrado fica ativo por padrão
             dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
             if (diasRenderizados === 0) dadosAgendamento.data = dataTextoMensagem;
@@ -98,12 +98,14 @@ function renderizarCalendario() {
                 document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
                 this.classList.add('active');
                 dadosAgendamento.data = dataTextoMensagem;
+                // Atualiza o cabeçalho se o usuário clicar em um dia de outro mês
+                headerInfo.innerText = `${mesNome} ${anoAtual}`;
             };
 
             dayDiv.innerHTML = `
-                <span>${diaSemanaNome}</span><br>
-                <strong>${diaMesNum}</strong><br>
-                <small style="font-size:0.6rem; opacity:0.7; text-transform:uppercase;">${mesNome.substring(0,3)}</small>
+                <span>${diaSemanaNome}</span>
+                <strong>${diaMesNum}</strong>
+                <small>${mesNome.substring(0,3)}</small>
             `;
             container.appendChild(dayDiv);
             diasRenderizados++;
@@ -112,7 +114,6 @@ function renderizarCalendario() {
     }
 }
 
-// NAVEGAÇÃO DO CALENDÁRIO
 window.scrollCalendar = function(direcao) {
     const container = document.getElementById('daysContainer');
     if (container) {
@@ -121,7 +122,6 @@ window.scrollCalendar = function(direcao) {
     }
 };
 
-// CONTROLE DO MODAL
 window.openBooking = function(serviceName) {
     const modal = document.getElementById('bookingModal');
     dadosAgendamento.servico = serviceName;
@@ -142,7 +142,6 @@ window.closeBooking = function() {
     }
 };
 
-// SELEÇÃO DE PROFISSIONAL
 window.selectProf = function(el, nome) {
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
     el.classList.add('selected');
@@ -157,7 +156,6 @@ window.selectProf = function(el, nome) {
     }
 };
 
-// ENVIO PARA WHATSAPP
 window.finishBooking = function(hora) {
     if (!dadosAgendamento.prof) {
         alert("Por favor, selecione um profissional primeiro!");
@@ -178,7 +176,6 @@ window.finishBooking = function(hora) {
     closeBooking();
 };
 
-// RESET DO MODAL
 function resetModal() {
     dadosAgendamento.prof = '';
     dadosAgendamento.hora = '';
