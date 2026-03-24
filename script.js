@@ -1,11 +1,11 @@
 /* BARBEARIA MADERO - JAVASCRIPT ENGINE 2026
-   Lógica de Agendamento & Interface Dinâmica
+   Lógica de Agendamento & Interface Dinâmica - CORRIGIDA
 */
 
 let dadosAgendamento = {
     servico: '',
     prof: '',
-    data: '', // Armazenará a data completa (Ex: 24 de Março de 2026)
+    data: '', 
     hora: ''
 };
 
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// GERA OS DIAS DO CALENDÁRIO COM DATA COMPLETA (Pula domingos)
+// GERA OS DIAS DO CALENDÁRIO SEM DUPLICAR MESES
 function renderizarCalendario() {
     const container = document.getElementById('daysContainer');
     if (!container) return;
@@ -72,56 +72,52 @@ function renderizarCalendario() {
     
     const hoje = new Date();
     let diasRenderizados = 0;
-    let i = 0;
+    let contador = 0;
 
     while (diasRenderizados < 14) { 
-        const dataCopia = new Date(hoje);
-        dataCopia.setDate(hoje.getDate() + i);
+        // Cria uma nova data baseada no 'hoje' somando o contador de dias
+        const dataCopia = new Date();
+        dataCopia.setDate(hoje.getDate() + contador);
         
+        // Pula os domingos
         if (dataCopia.getDay() !== 0) { 
-            const diaNome = diasSemana[dataCopia.getDay()];
-            const diaMes = dataCopia.getDate();
+            const diaSemanaNome = diasSemana[dataCopia.getDay()];
+            const diaMesNum = dataCopia.getDate();
             const mesNome = mesesNomes[dataCopia.getMonth()];
             const anoAtual = dataCopia.getFullYear();
             
-            // String formatada para exibição e mensagem
-            const dataCompleta = `${diaMes} de ${mesNome} de ${anoAtual}`;
+            const dataTextoMensagem = `${diaMesNum} de ${mesNome} de ${anoAtual}`;
 
             const dayDiv = document.createElement('div');
+            // O primeiro dia útil encontrado fica ativo por padrão
             dayDiv.className = `day-card ${diasRenderizados === 0 ? 'active' : ''}`;
             
-            // Define a data inicial (hoje) por padrão
-            if (diasRenderizados === 0) dadosAgendamento.data = dataCompleta;
+            if (diasRenderizados === 0) dadosAgendamento.data = dataTextoMensagem;
 
             dayDiv.onclick = function() { 
                 document.querySelectorAll('.day-card').forEach(d => d.classList.remove('active'));
                 this.classList.add('active');
-                dadosAgendamento.data = dataCompleta;
-                console.log("Data selecionada:", dadosAgendamento.data);
+                dadosAgendamento.data = dataTextoMensagem;
             };
 
-            // HTML interno com layout de data completa
             dayDiv.innerHTML = `
-                <span>${diaNome}</span><br>
-                <strong>${diaMes}</strong><br>
+                <span>${diaSemanaNome}</span><br>
+                <strong>${diaMesNum}</strong><br>
                 <small style="font-size:0.6rem; opacity:0.7; text-transform:uppercase;">${mesNome.substring(0,3)}</small>
             `;
             container.appendChild(dayDiv);
             diasRenderizados++;
         }
-        i++;
+        contador++;
     }
 }
 
-// NAVEGAÇÃO DO CALENDÁRIO (Setas)
+// NAVEGAÇÃO DO CALENDÁRIO
 window.scrollCalendar = function(direcao) {
     const container = document.getElementById('daysContainer');
     if (container) {
         const scrollAmount = 160; 
-        container.scrollBy({ 
-            left: scrollAmount * direcao, 
-            behavior: 'smooth' 
-        });
+        container.scrollBy({ left: scrollAmount * direcao, behavior: 'smooth' });
     }
 };
 
@@ -161,7 +157,7 @@ window.selectProf = function(el, nome) {
     }
 };
 
-// ENVIO PARA WHATSAPP COM DATA COMPLETA
+// ENVIO PARA WHATSAPP
 window.finishBooking = function(hora) {
     if (!dadosAgendamento.prof) {
         alert("Por favor, selecione um profissional primeiro!");
@@ -171,7 +167,6 @@ window.finishBooking = function(hora) {
     dadosAgendamento.hora = hora;
     const numeroWhatsApp = "5569993609069"; 
     
-    // Formatação da mensagem otimizada com Dia, Mês e Ano
     const mensagem = `Olá! Gostaria de agendar na *Barbearia Madero*:%0A%0A` +
                      `✂️ *Serviço:* ${dadosAgendamento.servico}%0A` +
                      `👤 *Barbeiro:* ${dadosAgendamento.prof}%0A` +
@@ -190,15 +185,10 @@ function resetModal() {
     const timeSelection = document.getElementById('timeSelection');
     if(timeSelection) timeSelection.style.display = 'none';
     document.querySelectorAll('.prof-item').forEach(p => p.classList.remove('selected'));
-    
-    // Resetar para o primeiro dia do calendário visualmente
     renderizarCalendario();
 }
 
-// Fechar modal ao clicar fora dele
 window.onclick = function(event) {
     const modal = document.getElementById('bookingModal');
-    if (event.target == modal) {
-        closeBooking();
-    }
+    if (event.target == modal) closeBooking();
 };
