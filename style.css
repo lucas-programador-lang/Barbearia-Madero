@@ -1,6 +1,7 @@
 /* BARBEARIA MADERO - PREMIUM 2026 
    DESIGN: DARK & GOLD REFINED (COMPLETE & RESPONSIVE)
    ATUALIZADO: SUPORTE PARA DATA COMPLETA (DIA/MÊS/ANO)
+   CORREÇÃO: NAVBAR CENTRALIZADO 
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap');
@@ -40,12 +41,14 @@ body {
     padding: 0 25px; 
 }
 
-/* --- Header & Navegação --- */
+/* --- Header & Navegação (CORRIGIDO) --- */
 header {
     background: rgba(5, 5, 5, 0.95);
     border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     position: fixed;
-    top: 0; width: 100%; z-index: 1000;
+    top: 0; 
+    width: 100%; 
+    z-index: 1000;
     backdrop-filter: blur(15px);
     transition: var(--transition);
 }
@@ -55,6 +58,17 @@ header {
     justify-content: space-between; 
     align-items: center; 
     height: 100px; 
+}
+
+/* Ajuste nas laterais para garantir o centro do menu */
+.logo-container, .social-top {
+    flex: 1; /* Faz as duas laterais ocuparem o mesmo espaço */
+}
+
+.social-top {
+    display: flex;
+    justify-content: flex-end; /* Alinha ícones na direita */
+    gap: 15px;
 }
 
 .logo-container { 
@@ -92,18 +106,21 @@ header {
 .nav-desktop {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex: 2; /* Dá mais espaço para o menu central */
 }
 
 .nav-desktop a {
     color: #fff; 
     text-decoration: none; 
-    margin-left: 30px;
+    margin: 0 15px; /* Margem lateral igualada */
     font-size: 0.8rem; 
     font-weight: 700; 
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: var(--transition);
     position: relative;
+    white-space: nowrap;
 }
 
 .nav-desktop a::after {
@@ -113,13 +130,6 @@ header {
 
 .nav-desktop a:hover::after, .nav-desktop a.active::after { width: 100%; }
 .nav-desktop a:hover, .nav-desktop a.active { color: var(--gold); }
-
-.social-top {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-left: 30px;
-}
 
 .social-top a {
     color: var(--text-light);
@@ -208,7 +218,7 @@ header {
     color: #000;
 }
 
-/* --- SEÇÃO DE DOWNLOAD APK (UNIFICADA) --- */
+/* --- SEÇÃO DE DOWNLOAD APK --- */
 #download { 
     padding: 100px 0; 
     background-color: var(--black); 
@@ -350,7 +360,7 @@ header {
 }
 .booking-steps h4 i { color: var(--gold); }
 
-/* --- Calendário com Suporte a Data Completa --- */
+/* --- Calendário --- */
 .calendar-navigation {
     display: flex;
     align-items: center;
@@ -489,9 +499,16 @@ header {
 
 /* --- Responsividade Premium --- */
 @media (max-width: 768px) {
-    .header-flex { height: auto; padding: 20px 0; flex-direction: column; gap: 20px; }
-    .nav-desktop { justify-content: center; gap: 10px; width: 100%; }
-    .nav-desktop a { margin: 0 5px; font-size: 0.7rem; letter-spacing: 1px; }
+    .header-flex { height: auto; padding: 15px 0; flex-direction: column; gap: 15px; }
+    
+    .logo-container, .social-top, .nav-desktop {
+        flex: none;
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+    }
+
+    .nav-desktop a { margin: 0 8px; font-size: 0.7rem; letter-spacing: 1px; }
 
     .modal-content { 
         width: 98%; 
@@ -514,5 +531,5 @@ header {
 
 @media (max-width: 380px) {
     .hero-title { font-size: 2.3rem; }
-    .nav-desktop a { font-size: 0.6rem; } /* <-- CORRIGIDO AQUI */
+    .nav-desktop a { font-size: 0.6rem; margin: 0 5px; }
 }
