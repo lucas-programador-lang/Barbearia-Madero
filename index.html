@@ -43,14 +43,23 @@
             background: linear-gradient(145deg, #0a0a0a, #050505);
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
+
+        /* Ajuste para a imagem da logo no cabeçalho */
+        .logo-img {
+            height: 50px;
+            width: auto;
+            margin-right: 15px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body class="home-page">
 
     <header id="navbar">
         <div class="container header-flex">
-            <a href="index.html" class="logo-container">
-                <i class="fas fa-cut logo-icon"></i>
+            <a href="index.html" class="logo-container" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="logo_barbearia.png" alt="Logo Barbearia Madero" class="logo-img">
+                
                 <div class="logo-text">
                     <span class="logo-madero">MADERO</span>
                     <span class="logo-barbearia">Barbearia Premium</span>
@@ -111,7 +120,7 @@
                         </div>
 
                         <div style="width: 100%; display: flex; justify-content: center;">
-                            <a href="https://www.google.com/maps/search/?api=1&query=Barbearia+Madero+Porto+Velho" target="_blank" class="btn-outline" style="text-decoration: none; padding: 12px 35px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600;">
+                            <a href="https://www.google.com/maps/search/?api=1&query=R.+Alexandre+Guimarães,+1189+-+Porto+Velho" target="_blank" class="btn-outline" style="text-decoration: none; padding: 12px 35px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600;">
                                 <i class="fas fa-directions"></i> ABRIR NO GPS
                             </a>
                         </div>
@@ -119,7 +128,7 @@
 
                     <div class="map-box" style="flex: 1.5; min-width: 300px; height: 450px; border: 1px solid #aa771c; border-radius: 4px; overflow: hidden; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.4354245781447!2d-63.9113643!3d-8.7610486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x92325ce42f888061%3A0x868e4a9e527f311!2sR.%20Alexandre%20Guimar%C3%A3es%2C%201189%20-%20Baixa%20da%20Uni%C3%A3o%2C%20Porto%20Velho%20-%20RO!5e0!3m2!1spt-BR!2sbr!4v1711565000000!5m2!1spt-BR!2sbr" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.864703816688!2d-63.9015!3d-8.7668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNDYnMDAuNSJTIDYzwrA1NCc0NS40Ilc!5e0!3m2!1spt-BR!2sbr!4v1650000000000!5m2!1spt-BR!2sbr" 
                             width="100%" 
                             height="100%" 
                             style="border:0; filter: grayscale(0.5) contrast(1.2) brightness(0.8);" 
@@ -188,6 +197,5 @@
         });
     </script>
    
-</body>
 </body>
 </html>
