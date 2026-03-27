@@ -1,7 +1,7 @@
 /* BARBEARIA MADERO - PREMIUM 2026 
-   DESIGN: DARK & GOLD REFINED (COMPLETE & RESPONSIVE)
-   ATUALIZADO: SUPORTE PARA DATA COMPLETA (DIA/MÊS/ANO)
-   CORREÇÃO: NAVBAR CENTRALIZADO 
+    DESIGN: DARK & GOLD REFINED (COMPLETE & RESPONSIVE)
+    ATUALIZADO: SUPORTE PARA DATA COMPLETA (DIA/MÊS/ANO)
+    CORREÇÃO: NAVBAR E LOGO CENTRALIZADOS NO MOBILE
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;700;800&display=swap');
@@ -41,7 +41,7 @@ body {
     padding: 0 25px; 
 }
 
-/* --- Header & Navegação (CORRIGIDO) --- */
+/* --- Header & Navegação --- */
 header {
     background: rgba(5, 5, 5, 0.95);
     border-bottom: 1px solid rgba(212, 175, 55, 0.15);
@@ -60,14 +60,14 @@ header {
     height: 100px; 
 }
 
-/* Ajuste nas laterais para garantir o centro do menu */
+/* Ajuste nas laterais para garantir o centro do menu em Desktop */
 .logo-container, .social-top {
-    flex: 1; /* Faz as duas laterais ocuparem o mesmo espaço */
+    flex: 1; 
 }
 
 .social-top {
     display: flex;
-    justify-content: flex-end; /* Alinha ícones na direita */
+    justify-content: flex-end; 
     gap: 15px;
 }
 
@@ -76,6 +76,13 @@ header {
     align-items: center; 
     gap: 15px; 
     text-decoration: none; 
+}
+
+/* Estilo para imagem da logo se houver */
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo-madero { 
@@ -107,13 +114,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 2; /* Dá mais espaço para o menu central */
+    flex: 2; 
 }
 
 .nav-desktop a {
     color: #fff; 
     text-decoration: none; 
-    margin: 0 15px; /* Margem lateral igualada */
+    margin: 0 15px; 
     font-size: 0.8rem; 
     font-weight: 700; 
     text-transform: uppercase;
@@ -497,18 +504,45 @@ header {
     overflow: hidden; filter: grayscale(0.5) contrast(1.1); 
 }
 
-/* --- Responsividade Premium --- */
+/* --- Responsividade Premium (REVISADA) --- */
 @media (max-width: 768px) {
-    .header-flex { height: auto; padding: 15px 0; flex-direction: column; gap: 15px; }
+    .header-flex { 
+        height: auto; 
+        padding: 20px 0; 
+        flex-direction: column; 
+        gap: 15px; 
+    }
     
-    .logo-container, .social-top, .nav-desktop {
+    /* Centralização forçada dos elementos do header */
+    .logo-container {
         flex: none;
         width: 100%;
         justify-content: center;
-        margin-left: 0;
+        flex-direction: column; /* Coloca o ícone acima do texto se preferir */
+        text-align: center;
+        gap: 8px;
     }
 
-    .nav-desktop a { margin: 0 8px; font-size: 0.7rem; letter-spacing: 1px; }
+    .nav-desktop {
+        flex: none;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .social-top {
+        flex: none;
+        width: 100%;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .nav-desktop a { 
+        margin: 0 8px; 
+        font-size: 0.75rem; 
+        letter-spacing: 1px; 
+    }
 
     .modal-content { 
         width: 98%; 
@@ -531,5 +565,6 @@ header {
 
 @media (max-width: 380px) {
     .hero-title { font-size: 2.3rem; }
-    .nav-desktop a { font-size: 0.6rem; margin: 0 5px; }
+    .nav-desktop a { font-size: 0.65rem; margin: 0 5px; }
+    .logo-madero { font-size: 1.5rem; }
 }
