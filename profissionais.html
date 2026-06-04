@@ -4,105 +4,497 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipe | Barbearia Madero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=2026.final">
-    
+
     <style>
-        .page-header {
-            padding: 160px 0 80px;
-            text-align: center;
-            background: linear-gradient(rgba(5,7,6,0.92), rgba(5,7,6,1)), url('barber-bg.jpg');
-            background-size: cover;
-            background-position: center;
+        /* ════════════════════════════════════════════
+           VARIÁVEIS LOCAIS (completa as do style.css)
+           ════════════════════════════════════════════ */
+        :root {
+            --gold:        #D4AF37;
+            --gold-light:  #F0D060;
+            --gold-dark:   #A08020;
+            --gold-glow:   rgba(212,175,55,0.35);
+            --gold-linear: linear-gradient(135deg, #BF9B30 0%, #F0D060 38%, #D4AF37 62%, #A07820 100%);
+            --bg-card:     rgba(12,12,10,0.88);
+            --bg-card-h:   rgba(18,17,13,0.96);
+            --text-cream:  #F5EDD6;
+            --text-muted:  #7A6A4A;
         }
 
+        /* ════════════════════════════════════════════
+           PARTÍCULAS FLUTUANTES
+           ════════════════════════════════════════════ */
+        #particles-field {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .pt {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0;
+            animation: rise linear infinite;
+        }
+        @keyframes rise {
+            0%   { opacity: 0;   transform: translateY(0)       scale(0.4); }
+            12%  { opacity: 0.6; }
+            88%  { opacity: 0.15; }
+            100% { opacity: 0;   transform: translateY(-100vh)  scale(1.6); }
+        }
+
+        /* ════════════════════════════════════════════
+           PAGE HEADER
+           ════════════════════════════════════════════ */
+        .page-header {
+            position: relative;
+            padding: 190px 0 110px;
+            text-align: center;
+            background:
+                linear-gradient(180deg, rgba(4,5,3,0.05) 0%, rgba(4,5,3,0.98) 100%),
+                radial-gradient(ellipse 90% 55% at 50% -5%, rgba(212,175,55,0.14) 0%, transparent 68%),
+                linear-gradient(rgba(5,7,6,0.93), rgba(5,7,6,1)),
+                url('barber-bg.jpg') center/cover no-repeat;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Grade sutil */
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg,   transparent, transparent 59px, rgba(212,175,55,0.035) 60px),
+                repeating-linear-gradient(90deg,  transparent, transparent 59px, rgba(212,175,55,0.035) 60px);
+            pointer-events: none;
+        }
+
+        /* Linha dourada na base */
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 8%; right: 8%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), rgba(212,175,55,0.4), var(--gold), transparent);
+            animation: line-pulse 3.5s ease-in-out infinite;
+        }
+        @keyframes line-pulse {
+            0%, 100% { opacity: 0.35; transform: scaleX(0.8); }
+            50%       { opacity: 1;   transform: scaleX(1); }
+        }
+
+        /* Eyebrow */
+        .header-eyebrow {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.55em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeUp 0.9s 0.2s forwards ease-out;
+        }
+
+        /* Título principal */
+        .page-header .hero-title {
+            font-family: 'Cinzel', serif !important;
+            font-size: clamp(2.4rem, 7vw, 4.8rem) !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            line-height: 1.1 !important;
+            margin: 0 !important;
+            background: var(--gold-linear);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeUp 1s 0.42s forwards ease-out;
+        }
+
+        /* Divisor */
+        .gold-divider {
+            width: 80px;
+            height: 1px;
+            background: var(--gold-linear);
+            margin: 28px auto 26px !important;
+            position: relative;
+            opacity: 0;
+            animation: fadeUp 0.9s 0.62s forwards ease-out;
+        }
+        .gold-divider::before,
+        .gold-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 6px; height: 6px;
+            background: var(--gold);
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .gold-divider::before { left: -14px; }
+        .gold-divider::after  { right: -14px; }
+
+        /* Subtítulo */
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 1.1rem !important;
+            font-style: italic !important;
+            color: var(--text-muted) !important;
+            letter-spacing: 0.06em !important;
+            opacity: 0 !important;
+            animation: fadeUp 0.9s 0.8s forwards ease-out !important;
+        }
+
+        /* Ornamento final */
+        .header-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 28px;
+            opacity: 0;
+            animation: fadeUp 0.9s 1s forwards ease-out;
+        }
+        .header-ornament hr {
+            flex: none;
+            width: 50px; height: 1px;
+            border: none;
+            background: linear-gradient(90deg, transparent, var(--gold));
+            margin: 0;
+        }
+        .header-ornament hr:last-child {
+            background: linear-gradient(270deg, transparent, var(--gold));
+        }
+        .header-ornament i {
+            font-size: 0.7rem;
+            color: var(--gold);
+            opacity: 0.7;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(26px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ════════════════════════════════════════════
+           SECTION LABEL
+           ════════════════════════════════════════════ */
+        .section-eyebrow {
+            font-family: 'Cinzel', serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.55em;
+            color: var(--gold);
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 64px;
+            opacity: 0.7;
+        }
+
+        /* ════════════════════════════════════════════
+           GRID
+           ════════════════════════════════════════════ */
         .prof-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+            gap: 38px;
+            margin-top: 0;
         }
 
+        /* ════════════════════════════════════════════
+           CARD
+           ════════════════════════════════════════════ */
         .prof-card {
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 50px 30px;
-            text-align: center;
-            border-radius: 15px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            background: var(--bg-card);
+            border: 1px solid rgba(212,175,55,0.11);
+            padding: 58px 38px 46px;
+            text-align: center;
+            border-radius: 2px;
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            transition:
+                transform      0.55s cubic-bezier(0.23,1,0.32,1),
+                box-shadow     0.55s ease,
+                border-color   0.4s  ease,
+                background     0.4s  ease;
+            animation: cardIn 0.85s both ease-out;
         }
 
+        .prof-card:nth-child(1) { animation-delay: 0.12s; }
+        .prof-card:nth-child(2) { animation-delay: 0.28s; }
+        .prof-card:nth-child(3) { animation-delay: 0.44s; }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(44px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0)    scale(1); }
+        }
+
+        /* Barra topo dourada */
         .prof-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
+            top: 0; left: 0; width: 100%; height: 2px;
             background: var(--gold-linear);
             transform: scaleX(0);
-            transition: 0.4s;
+            transform-origin: left;
+            transition: transform 0.65s cubic-bezier(0.23,1,0.32,1);
+        }
+
+        /* Radial glow hover */
+        .prof-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 65% 45% at 50% 0%, rgba(212,175,55,0.075) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
         .prof-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-15px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            background: rgba(25, 25, 25, 0.8);
+            border-color: rgba(212,175,55,0.42);
+            transform: translateY(-16px) scale(1.018);
+            box-shadow:
+                0 34px 72px rgba(0,0,0,0.75),
+                0 0  65px rgba(212,175,55,0.07),
+                inset 0 1px 0 rgba(212,175,55,0.14);
+            background: var(--bg-card-h);
+        }
+        .prof-card:hover::before { transform: scaleX(1); }
+        .prof-card:hover::after  { opacity: 1; }
+
+        /* ── Cantos decorativos ── */
+        .prof-card .c {
+            position: absolute;
+            width: 13px; height: 13px;
+            border-color: rgba(212,175,55,0.28);
+            border-style: solid;
+            transition: border-color 0.4s, width 0.4s, height 0.4s;
+        }
+        .c.tl { top:10px; left:10px;   border-width: 1px 0 0 1px; }
+        .c.tr { top:10px; right:10px;  border-width: 1px 1px 0 0; }
+        .c.bl { bottom:10px; left:10px; border-width: 0 0 1px 1px; }
+        .c.br { bottom:10px; right:10px; border-width: 0 1px 1px 0; }
+        .prof-card:hover .c {
+            border-color: rgba(212,175,55,0.75);
+            width: 20px; height: 20px;
         }
 
-        .prof-card:hover::before { transform: scaleX(1); }
-
+        /* ════════════════════════════════════════════
+           IMAGEM
+           ════════════════════════════════════════════ */
         .prof-img-container {
             position: relative;
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 30px;
+            width: 152px; height: 152px;
+            margin: 0 auto 34px;
+        }
+
+        /* Anel giratório */
+        .prof-ring {
+            position: absolute;
+            inset: -9px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-top-color: var(--gold);
+            border-right-color: rgba(212,175,55,0.28);
+            animation: spinRing 9s linear infinite;
+        }
+        .prof-card:hover .prof-ring {
+            animation-duration: 2.8s;
+            border-top-color: var(--gold-light);
+            border-right-color: rgba(212,175,55,0.55);
+        }
+        @keyframes spinRing { to { transform: rotate(360deg); } }
+
+        /* Anel pontilhado estático */
+        .prof-img-container::before {
+            content: '';
+            position: absolute;
+            inset: -9px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212,175,55,0.16);
+            pointer-events: none;
         }
 
         .prof-img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--gold);
-            padding: 6px;
-            transition: 0.5s;
-            filter: grayscale(20%);
+            border: 2px solid var(--gold-dark);
+            padding: 5px;
+            background: #09090700;
+            filter: grayscale(28%) contrast(1.06);
+            transition:
+                filter    0.65s ease,
+                transform 0.65s cubic-bezier(0.23,1,0.32,1),
+                box-shadow 0.65s ease;
+            display: block;
+            position: relative;
+            z-index: 1;
         }
-
         .prof-card:hover .prof-img {
-            filter: grayscale(0%);
-            box-shadow: 0 0 30px var(--gold-glow);
-            transform: rotate(5deg) scale(1.1);
+            filter: grayscale(0%) contrast(1.12) brightness(1.06);
+            transform: scale(1.07);
+            box-shadow:
+                0 0 38px rgba(212,175,55,0.28),
+                0 0 78px rgba(212,175,55,0.10);
         }
 
+        /* Badge número */
+        .prof-badge {
+            position: absolute;
+            bottom: 4px; right: 1px;
+            width: 27px; height: 27px;
+            background: var(--gold-linear);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #080600;
+            z-index: 2;
+            box-shadow: 0 2px 14px rgba(0,0,0,0.7);
+        }
+
+        /* ════════════════════════════════════════════
+           TEXTOS DO CARD
+           ════════════════════════════════════════════ */
+        .prof-role {
+            font-family: 'Cinzel', serif !important;
+            font-size: 0.54rem !important;
+            letter-spacing: 0.48em !important;
+            color: var(--gold) !important;
+            text-transform: uppercase !important;
+            margin-bottom: 8px !important;
+            opacity: 0.82;
+        }
+
+        .prof-name {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-size: 2rem !important;
+            font-weight: 300 !important;
+            letter-spacing: 0.06em !important;
+            color: var(--text-cream) !important;
+            line-height: 1.15 !important;
+            margin-bottom: 5px !important;
+            transition: background 0.35s, -webkit-text-fill-color 0.35s;
+        }
+        .prof-card:hover .prof-name {
+            background: var(--gold-linear);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .prof-desc {
+            font-family: 'Montserrat', sans-serif !important;
+            font-size: 0.82rem !important;
+            color: #6a6050 !important;
+            line-height: 1.65 !important;
+            margin-bottom: 30px !important;
+        }
+
+        /* Estrelas */
+        .prof-stars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 26px;
+        }
+        .star {
+            width: 7px; height: 7px;
+            background: var(--gold);
+            clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+            opacity: 0.78;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .prof-card:hover .star { opacity: 1; transform: scale(1.3); }
+
+        /* Divisor */
+        .prof-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+            opacity: 0.38;
+        }
+        .prof-divider::before,
+        .prof-divider::after {
+            content: ''; flex: 1; height: 1px;
+        }
+        .prof-divider::before { background: linear-gradient(90deg, transparent, var(--gold)); }
+        .prof-divider::after  { background: linear-gradient(270deg, transparent, var(--gold)); }
+        .prof-divider span {
+            width: 5px; height: 5px;
+            display: block;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        /* ════════════════════════════════════════════
+           BOTÃO
+           ════════════════════════════════════════════ */
         .btn-prof {
             display: inline-block;
-            background: var(--gold-linear) !important;
-            color: #000 !important;
-            padding: 15px 35px;
-            border-radius: 5px;
-            font-weight: 800;
-            transition: 0.3s;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            border: none;
-            letter-spacing: 2px;
-            margin-top: 15px;
-            text-decoration: none;
+            position: relative;
+            background: transparent !important;
+            color: var(--gold) !important;
+            padding: 14px 42px;
+            border: 1px solid rgba(212,175,55,0.42);
+            border-radius: 1px;
+            font-family: 'Cinzel', serif !important;
+            font-weight: 600 !important;
+            font-size: 0.58rem !important;
+            letter-spacing: 0.38em !important;
+            text-transform: uppercase !important;
+            text-decoration: none !important;
+            overflow: hidden;
+            cursor: pointer;
+            margin-top: 0 !important;
+            transition:
+                color       0.42s ease,
+                border-color 0.42s ease,
+                transform   0.3s  ease,
+                box-shadow  0.42s ease;
         }
-
+        .btn-prof::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold-linear);
+            transform: translateX(-104%);
+            transition: transform 0.48s cubic-bezier(0.23,1,0.32,1);
+        }
         .btn-prof:hover {
-            filter: brightness(1.2);
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            color: #060400 !important;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(212,175,55,0.38);
+            filter: none !important;
         }
+        .btn-prof:hover::before { transform: translateX(0); }
+        .btn-prof span { position: relative; z-index: 1; }
+
+        /* ════════════════════════════════════════════
+           TEAM SECTION PADDING
+           ════════════════════════════════════════════ */
+        .team-section { padding: 80px 0 120px !important; }
     </style>
 </head>
 <body class="profissionais-page">
 
+    <!-- Partículas de fundo -->
+    <div id="particles-field"></div>
+
+    <!-- NAVBAR -->
     <header id="navbar">
         <div class="container header-flex">
             <a href="index.html" class="logo-container">
@@ -112,7 +504,7 @@
                     <span class="logo-barbearia">Barbearia Premium</span>
                 </div>
             </a>
-            
+
             <nav class="nav-desktop">
                 <a href="index.html">Início</a>
                 <a href="servicos.html">Serviços</a>
@@ -127,65 +519,148 @@
     </header>
 
     <main>
+
+        <!-- HEADER DA PÁGINA -->
         <section class="page-header">
             <div class="container">
-                <span class="logo-barbearia" style="letter-spacing: 5px; color: var(--gold); font-size: 0.8rem;">OS MELHORES DE PORTO VELHO</span>
-                <h2 class="hero-title" style="margin-top: 10px;">Mestres da Navalha</h2>
+                <span class="header-eyebrow">Os melhores de Porto Velho</span>
+                <h2 class="hero-title">Mestres da Navalha</h2>
                 <div class="gold-divider"></div>
-                <p class="hero-subtitle" style="max-width: 600px; margin: 0 auto;">Especialistas dedicados a elevar sua autoestima com técnicas clássicas e modernas.</p>
+                <p class="hero-subtitle" style="max-width:600px; margin:0 auto;">
+                    Especialistas dedicados a elevar sua autoestima com técnicas clássicas e modernas.
+                </p>
+                <div class="header-ornament">
+                    <hr>
+                    <i class="fas fa-cut"></i>
+                    <hr>
+                </div>
             </div>
         </section>
 
-        <section class="team-section" style="padding: 40px 0 100px;">
+        <!-- CARDS DOS PROFISSIONAIS -->
+        <section class="team-section">
             <div class="container">
+                <p class="section-eyebrow">Conheça o time</p>
+
                 <div class="prof-grid">
-                    
-                    <div class="prof-card" data-aos="fade-up">
+
+                    <!-- ── João ── -->
+                    <div class="prof-card">
+                        <div class="c tl"></div><div class="c tr"></div>
+                        <div class="c bl"></div><div class="c br"></div>
+
                         <div class="prof-img-container">
-                            <img src="joao.jpg" alt="Barbeiro João" class="prof-img" onerror="this.src='https://via.placeholder.com/160/222/d4af37?text=JOÃO'">
+                            <div class="prof-ring"></div>
+                            <img src="joao.jpg" alt="Barbeiro João" class="prof-img"
+                                 onerror="this.src='https://via.placeholder.com/160/0d0d0b/d4af37?text=J'">
+                            <div class="prof-badge">01</div>
                         </div>
-                        <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 5px; font-size: 1.6rem;">João</h3>
-                        <p style="color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">Barba & Toalha Quente</p>
-                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 30px; line-height: 1.6;">Especialista em barboterapia e cortes clássicos que nunca saem de moda.</p>
-                        <a href="servicos.html" class="btn-prof">Agendar Agora</a>
+
+                        <p class="prof-role">Barba &amp; Toalha Quente</p>
+                        <h3 class="prof-name">João</h3>
+
+                        <div class="prof-stars">
+                            <div class="star"></div><div class="star"></div><div class="star"></div>
+                            <div class="star"></div><div class="star"></div>
+                        </div>
+
+                        <p class="prof-desc">Especialista em barboterapia e cortes clássicos que nunca saem de moda.</p>
+
+                        <div class="prof-divider"><span></span></div>
+                        <a href="servicos.html" class="btn-prof"><span>Agendar Agora</span></a>
                     </div>
 
-                    <div class="prof-card" data-aos="fade-up" data-aos-delay="100">
+                    <!-- ── Ruan ── -->
+                    <div class="prof-card">
+                        <div class="c tl"></div><div class="c tr"></div>
+                        <div class="c bl"></div><div class="c br"></div>
+
                         <div class="prof-img-container">
-                            <img src="ruan.jpg" alt="Barbeiro Ruan" class="prof-img" onerror="this.src='https://via.placeholder.com/160/222/d4af37?text=RUAN'">
+                            <div class="prof-ring"></div>
+                            <img src="ruan.jpg" alt="Barbeiro Ruan" class="prof-img"
+                                 onerror="this.src='https://via.placeholder.com/160/0d0d0b/d4af37?text=R'">
+                            <div class="prof-badge">02</div>
                         </div>
-                        <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 5px; font-size: 1.6rem;">Ruan</h3>
-                        <p style="color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">Degradê e Freestyle</p>
-                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 30px; line-height: 1.6;">Referência em cortes modernos, degradês impecáveis e designs criativos.</p>
-                        <a href="servicos.html" class="btn-prof">Agendar Agora</a>
+
+                        <p class="prof-role">Degradê &amp; Freestyle</p>
+                        <h3 class="prof-name">Ruan</h3>
+
+                        <div class="prof-stars">
+                            <div class="star"></div><div class="star"></div><div class="star"></div>
+                            <div class="star"></div><div class="star"></div>
+                        </div>
+
+                        <p class="prof-desc">Referência em cortes modernos, degradês impecáveis e designs criativos.</p>
+
+                        <div class="prof-divider"><span></span></div>
+                        <a href="servicos.html" class="btn-prof"><span>Agendar Agora</span></a>
                     </div>
 
-                    <div class="prof-card" data-aos="fade-up" data-aos-delay="200">
+                    <!-- ── Vanclei ── -->
+                    <div class="prof-card">
+                        <div class="c tl"></div><div class="c tr"></div>
+                        <div class="c bl"></div><div class="c br"></div>
+
                         <div class="prof-img-container">
-                            <img src="vanclei.jpg" alt="Barbeiro Vanclei" class="prof-img" onerror="this.src='https://via.placeholder.com/160/222/d4af37?text=VANCLEI'">
+                            <div class="prof-ring"></div>
+                            <img src="vanclei.jpg" alt="Barbeiro Vanclei" class="prof-img"
+                                 onerror="this.src='https://via.placeholder.com/160/0d0d0b/d4af37?text=V'">
+                            <div class="prof-badge">03</div>
                         </div>
-                        <h3 style="font-family: 'Cinzel', serif; color: #fff; margin-bottom: 5px; font-size: 1.6rem;">Vanclei</h3>
-                        <p style="color: var(--gold); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px;">Visagismo e Clássicos</p>
-                        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 30px; line-height: 1.6;">Especialista em alinhar o corte de cabelo ao seu formato de rosto e estilo de vida.</p>
-                        <a href="servicos.html" class="btn-prof">Agendar Agora</a>
+
+                        <p class="prof-role">Visagismo &amp; Clássicos</p>
+                        <h3 class="prof-name">Vanclei</h3>
+
+                        <div class="prof-stars">
+                            <div class="star"></div><div class="star"></div><div class="star"></div>
+                            <div class="star"></div><div class="star"></div>
+                        </div>
+
+                        <p class="prof-desc">Especialista em alinhar o corte ao seu formato de rosto e estilo de vida.</p>
+
+                        <div class="prof-divider"><span></span></div>
+                        <a href="servicos.html" class="btn-prof"><span>Agendar Agora</span></a>
                     </div>
 
                 </div>
             </div>
         </section>
+
     </main>
 
-    <footer class="main-footer" style="background: #050505;">
+    <!-- FOOTER -->
+    <footer class="main-footer" style="background:#050503;">
         <div class="container">
-            <div class="gold-divider" style="opacity: 0.3;"></div>
-            <p style="padding: 40px 0; opacity: 0.5; font-size: 0.75rem; letter-spacing: 2px;">© 2026 BARBEARIA MADERO | EXCELÊNCIA EM PORTO VELHO</p>
+            <div class="gold-divider" style="opacity:0.25;"></div>
+            <p style="padding:40px 0; opacity:0.4; font-size:0.72rem; letter-spacing:2px; text-align:center;">
+                © 2026 BARBEARIA MADERO | EXCELÊNCIA EM PORTO VELHO
+            </p>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        /* AOS */
         document.addEventListener('DOMContentLoaded', () => {
-            if(window.AOS) AOS.init({ duration: 1000, once: true });
+            if (window.AOS) AOS.init({ duration: 1000, once: true });
+
+            /* Partículas douradas */
+            const field = document.getElementById('particles-field');
+            for (let i = 0; i < 32; i++) {
+                const p = document.createElement('div');
+                p.className = 'pt';
+                const sz = Math.random() * 2.4 + 0.8;
+                p.style.cssText = `
+                    left:${Math.random()*100}%;
+                    bottom:-6px;
+                    width:${sz}px;
+                    height:${sz}px;
+                    animation-duration:${Math.random()*16+11}s;
+                    animation-delay:${Math.random()*14}s;
+                `;
+                field.appendChild(p);
+            }
         });
     </script>
 </body>
