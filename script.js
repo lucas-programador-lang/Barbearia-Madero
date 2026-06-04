@@ -193,7 +193,14 @@ function resetModal() {
 }
 
 // Fecha o modal ao clicar fora dele
+// ... restante do seu código script.js acima
+
+// Fecha o modal ao clicar fora dele
 window.onclick = function(event) {
     const modal = document.getElementById('bookingModal');
     if (event.target == modal) closeBooking();
 };
+
+/* ⚠️ ATENÇÃO: Verifique se abaixo da linha acima NÃO existe mais nada. 
+  Se houver uma chave "}" sozinha na linha de baixo, apague-a imediatamente!
+*/
