@@ -104,7 +104,7 @@ html {
 /* ────────────────────────────────────────────────────────────
    [4] CURSOR CUSTOMIZADO
    ──────────────────────────────────────────────────────────── */
-*, a, button, [onclick], .day-card, .time-slot, .prof-item, .close-modal {
+a, button, [onclick], .day-card, .time-slot, .prof-item, .close-modal {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='6' cy='6' r='5' fill='%23d4af37' fill-opacity='0.85'/%3E%3Ccircle cx='6' cy='6' r='2.5' fill='%23f5d279'/%3E%3C/svg%3E") 6 6, auto;
 }
 
@@ -1390,7 +1390,7 @@ a {
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="selectedServiceName">AGENDAR SERVIÇO</h3>
-                <span class="close-modal" onclick="closeBooking()">&times;</span>
+                <span class="close-modal" onclick="typeof closeBooking === 'function' ? closeBooking() : this.closest('.modal').style.display='none'">&times;</span>
             </div>
 
             <div class="booking-steps">
@@ -1399,14 +1399,14 @@ a {
                     <div id="currentMonthYear" class="calendar-header-info"></div>
                     
                     <div class="calendar-navigation">
-                        <button class="nav-btn" onclick="scrollCalendar(-1)">
+                        <button class="nav-btn" onclick="if(typeof scrollCalendar === 'function') scrollCalendar(-1)">
                             <i class="fas fa-chevron-left"></i>
                         </button>
                         
                         <div class="days-container" id="daysContainer">
                             </div>
 
-                        <button class="nav-btn" onclick="scrollCalendar(1)">
+                        <button class="nav-btn" onclick="if(typeof scrollCalendar === 'function') scrollCalendar(1)">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
@@ -1415,19 +1415,19 @@ a {
                 <div class="step" style="margin-top: 30px;">
                     <h4><i class="fas fa-user-tie"></i> 2. SELECIONE O ESPECIALISTA</h4>
                     <div class="prof-circles">
-                        <div class="prof-item" onclick="selectProf(this, 'João')">
+                        <div class="prof-item" onclick="if(typeof selectProf === 'function') selectProf(this, 'João')">
                             <div class="prof-img-wrapper">
                                 <img src="joao.jpg" alt="João" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=J'">
                             </div>
                             <span>João</span>
                         </div>
-                        <div class="prof-item" onclick="selectProf(this, 'Ruan')">
+                        <div class="prof-item" onclick="if(typeof selectProf === 'function') selectProf(this, 'Ruan')">
                             <div class="prof-img-wrapper">
                                 <img src="ruan.jpg" alt="Ruan" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=R'">
                             </div>
                             <span>Ruan</span>
                         </div>
-                        <div class="prof-item" onclick="selectProf(this, 'Vanclei')">
+                        <div class="prof-item" onclick="if(typeof selectProf === 'function') selectProf(this, 'Vanclei')">
                             <div class="prof-img-wrapper">
                                 <img src="vanclei.jpg" alt="Vanclei" onerror="this.src='https://via.placeholder.com/80/111/d4af37?text=V'">
                             </div>
@@ -1439,20 +1439,27 @@ a {
                 <div id="timeSelection" class="step" style="display:none; margin-top: 30px;">
                     <h4><i class="far fa-clock"></i> 3. HORÁRIOS DISPONÍVEIS</h4>
                     <div class="time-grid">
-                        <div class="time-slot" onclick="finishBooking('09:00')">09:00</div>
-                        <div class="time-slot" onclick="finishBooking('10:00')">10:00</div>
-                        <div class="time-slot" onclick="finishBooking('11:00')">11:00</div>
-                        <div class="time-slot" onclick="finishBooking('14:00')">14:00</div>
-                        <div class="time-slot" onclick="finishBooking('15:00')">15:00</div>
-                        <div class="time-slot" onclick="finishBooking('16:00')">16:00</div>
-                        <div class="time-slot" onclick="finishBooking('17:00')">17:00</div>
-                        <div class="time-slot" onclick="finishBooking('18:00')">18:00</div>
-                        <div class="time-slot" onclick="finishBooking('19:00')">19:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('09:00')">09:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('10:00')">10:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('11:00')">11:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('14:00')">14:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('15:00')">15:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('16:00')">16:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('17:00')">17:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('18:00')">18:00</div>
+                        <div class="time-slot" onclick="if(typeof finishBooking === 'function') finishBooking('19:00')">19:00</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        window.scrollCalendar = window.scrollCalendar || function(){};
+        window.selectProf = window.selectProf || function(el){ el.classList.toggle('active'); };
+        window.finishBooking = window.finishBooking || function(){};
+        window.closeBooking = window.closeBooking || function(){ document.getElementById('bookingModal').style.display='none'; };
+    </script>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
